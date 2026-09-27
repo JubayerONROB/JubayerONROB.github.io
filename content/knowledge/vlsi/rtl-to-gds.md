@@ -22,5 +22,5 @@ Sign-off quality is judged on DRC cleanliness and timing slack (WNS/TNS on setup
 
 Related:
 
-→ [[projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]] — full RTL-to-GDS run in 45 nm GPDK045, DRC-clean, positive WNS on setup and hold
-→ [[projects/vlsi-pd-handbook|Physical Design Optimization Handbook]] — full reference documentation of this flow
+→ [[work/projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]] — full RTL-to-GDS run in 45 nm GPDK045, DRC-clean, positive WNS on setup and hold
+→ [[work/projects/vlsi-pd-handbook|Physical Design Optimization Handbook]] — full reference documentation of this flow

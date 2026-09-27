@@ -11,7 +11,15 @@
 }
 
 :root[saved-theme="dark"] {
-  --cluster-ai: #5fe0ac;
+  // kept a shade off the theme's --secondary/--tertiary accent so an AI-tagged
+  // node in the graph never reads as "current page" by pure color coincidence
+  --cluster-ai: #3ecf94;
   --cluster-robotics: #7fa8ef;
   --cluster-hardware: #e0a35f;
+}
+
+// Dedicated /graph page: the local-graph canvas is normally a small 250px
+// sidebar widget. Here it's the main content, so it gets full-page height.
+body[data-slug="graph"] .graph > .graph-outer {
+  height: 70vh;
 }

@@ -49,19 +49,7 @@ flowchart TD
 
 ## Experiment log
 
-**Hypothesis:** splitting interruption detection from hint generation into two stages — a cheap always-on detector gating an expensive generator — cuts unnecessary generator calls and latency without sacrificing hint quality, provided persistent user-memory context is preserved.
-
-**Setup:** 28,058 decision points, 8B generator, ablation removing persistent user-memory context, and a compact 1B-parameter decoder sharing one adapter between both stages.
-
-**Result:**
-
-| Run | Metric | Result |
-|---|---|---|
-| Two-stage vs. always-on generator | Generator call reduction | 7.62× |
-| Two-stage vs. always-on generator | Wall-clock speedup | up to 4.39× |
-| User-memory context ablation | Exact-match drop when removed | 24.7 points |
-| Shared-adapter 1B decoder vs. two-model pipeline | Resident weights | 1.05 GB |
-| Shared-adapter 1B decoder vs. two-model pipeline | Compute reduction | 1.3–1.8× |
+Full hypothesis / method / result writeup: [[work/experiments/exp-001-proactive-conversation-two-stage-pipeline|EXP-001]]
 
 ## Future work
 
@@ -69,4 +57,5 @@ Extending the shared-adapter decoder to more interruption categories and testing
 
 ## Related
 
-[[projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]] — similar two-stage, cost-aware routing philosophy applied to LLM task delegation.
+[[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]] — similar two-stage, cost-aware routing philosophy applied to LLM task delegation.
+[[knowledge/ai-ml/model-optimization|Model Optimization]] · [[knowledge/ai-ml/lora|LoRA]]

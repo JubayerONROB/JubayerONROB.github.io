@@ -14,21 +14,21 @@ Major in Communication and Signal Processing (CSP) · CGPA: 3.83/4.00
 
 ## Thesis & Ongoing Research
 
-**[[research/proactive-conversation-assistant|Proactive Conversation Assistant: LLM Pipeline]]** — NLP, Edge AI · Feb 2025 – Present
+**[[work/research/proactive-conversation-assistant|Proactive Conversation Assistant: LLM Pipeline]]** — NLP, Edge AI · Feb 2025 – Present
 - Real-time wearable assistant deciding when to interrupt a conversation and what to say, using a two-stage LLM pipeline evaluated on 28,058 decision points; reduced unnecessary generator calls by 7.62× and achieved up to 4.39× lower wall-clock time with an 8B generator.
 - Found persistent user-memory context to be the strongest contributor to hint quality (24.7-point drop in exact match when removed); designed a compact 1B-parameter decoder sharing one adapter between interruption detection and response generation, reducing resident weights to 1.05 GB with 1.3–1.8× lower compute.
 
 ## Projects
 
-See the full [[projects|project archive]] for details on:
-- [[projects/autonomous-rescue-drone|Autonomous Rescue Drone for Locating Survivors]]
-- [[projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]]
-- [[projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]]
-- [[projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]]
-- [[projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]]
-- [[projects/brain-tumor-detection-mri|Brain Tumor Detection on MRI Images]]
-- [[projects/vlsi-pd-handbook|Physical Design Optimization Handbook]]
-- [[projects/icml2026-agent-repro|ICML 2026 Agent Reproducibility Challenge]]
+See the full [[work/projects/index|project archive]] for details on:
+- [[work/projects/autonomous-rescue-drone|Autonomous Rescue Drone for Locating Survivors]]
+- [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]]
+- [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]]
+- [[work/projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]]
+- [[work/projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]]
+- [[work/projects/brain-tumor-detection-mri|Brain Tumor Detection on MRI Images]]
+- [[work/projects/vlsi-pd-handbook|Physical Design Optimization Handbook]]
+- [[work/projects/icml2026-agent-repro|ICML 2026 Agent Reproducibility Challenge]]
 
 ## Technical Skills
 

@@ -16,6 +16,7 @@ Model optimization for edge/wearable deployment usually trades a small amount of
 
 Related:
 
-→ [[research/proactive-conversation-assistant|Proactive Conversation Assistant]] — shared-adapter 1B decoder, 1.05 GB resident weights
-→ [[projects/hybrid-router-vinci-monsoon|Hybrid Router]] — Q4_K_M quantized local classifier
-→ [[notes/llm-routing|LLM Routing]]
+→ [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]] — shared-adapter 1B decoder, 1.05 GB resident weights
+→ [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router]] — Q4_K_M quantized local classifier
+→ [[knowledge/ai-ml/llm-routing|LLM Routing]]
+→ [[knowledge/ai-ml/lora|LoRA]] — a different lever (training-time cost) on the same optimization problem

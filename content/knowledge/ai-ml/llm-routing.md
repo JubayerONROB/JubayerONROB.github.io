@@ -15,6 +15,6 @@ The efficiency gain comes from the fact that most real-world queries are easy �
 
 Related:
 
-→ [[projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]]
-→ [[research/proactive-conversation-assistant|Proactive Conversation Assistant]]
-→ [[notes/model-optimization|Model Optimization]]
+→ [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]]
+→ [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]]
+→ [[knowledge/ai-ml/model-optimization|Model Optimization]]
