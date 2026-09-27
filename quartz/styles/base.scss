@@ -5,6 +5,7 @@
 @use "./callouts.scss";
 
 html {
+  font-size: 15px;
   scroll-behavior: smooth;
   text-size-adjust: none;
   overflow-x: hidden;
@@ -88,7 +89,7 @@ a {
     background-color: var(--highlight);
     padding: 0 0.1rem;
     border-radius: 5px;
-    line-height: 1.4rem;
+    line-height: 1.4;
 
     &.broken {
       color: var(--secondary);
@@ -417,7 +418,7 @@ h6 {
 figure[data-rehype-pretty-code-figure] {
   margin: 0;
   position: relative;
-  line-height: 1.6rem;
+  line-height: 1.6;
   position: relative;
 
   & > [data-rehype-pretty-code-title] {
@@ -506,7 +507,24 @@ code {
 tbody,
 li,
 p {
-  line-height: 1.6rem;
+  line-height: 1.6;
+}
+
+article {
+  ul,
+  ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin: 0.25rem 0;
+  }
+
+  li > ul,
+  li > ol {
+    margin: 0.25rem 0;
+  }
 }
 
 .table-container {
@@ -523,7 +541,7 @@ p {
     }
 
     & > * {
-      line-height: 2rem;
+      line-height: 2;
     }
   }
 }
