@@ -26,6 +26,14 @@ My ongoing thesis builds a real-time wearable assistant that decides *when* to i
 
 I'm currently exploring LLM routing (cheap local models handling easy queries, escalating only hard ones to larger remote models) and compact adapter-sharing decoders for on-device inference — see [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router]] and [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]].
 
+## Achievements
+
+| Award | Event |
+|---|---|
+| 1st Runner Up (Int'l), IEEE-IAS Humanitarian Contest | IEEE IAS Annual Meeting 2025 |
+| 1st Runner Up, IEEE-WIE Robotics for Climate Change | WIE BD Summit 2024 |
+| 2nd Runner Up, Project Showcasing | Intra BUET Robo Challenge |
+
 ## More
 
 [[about/experience|Experience]] · [[about/education|Education]] · [[resume|Resume]]

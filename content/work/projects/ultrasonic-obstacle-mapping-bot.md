@@ -64,4 +64,3 @@ Extending from a single rotating sensor to a small sensor array or SLAM-style po
 ## Related
 
 [[work/projects/autonomous-rescue-drone|Autonomous Rescue Drone]] — shares the autonomous-navigation theme, aerial vs. ground-based.
-[[notes/slam|What is SLAM?]] · [[notes/pid-control|PID Control]] · [[notes/mosfet-basics|MOSFET Basics]]

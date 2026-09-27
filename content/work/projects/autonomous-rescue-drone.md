@@ -62,4 +62,3 @@ Testing against varied terrain and lighting conditions, and extending detection 
 ## Related
 
 [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]] — another autonomous-navigation project, ground-based instead of aerial.
-[[notes/yolo|YOLO]] · [[notes/pixhawk-communication|Pixhawk Communication]]
