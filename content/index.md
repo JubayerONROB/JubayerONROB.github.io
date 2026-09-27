@@ -3,7 +3,7 @@ title: Home
 ---
 
 ```text
-JUBAYER TALUKDER
+A. J. A. JUBAYER TALUKDER
 EEE · AI/ML · ROBOTICS · RESEARCH
 ```
 
@@ -18,7 +18,7 @@ Dhaka, Bangladesh
 **[FOCUS]**
 AI × Robotics × Embedded Systems × VLSI
 
-This site is a running log of [[work/research/index|research]], [[work/projects/index|projects]], and [[knowledge/index|notes]] — a lab notebook, not a resume.
+This site is a running log of [[work/research/index|research]], [[work/projects/index|projects]], and [[notes/index|notes]] — a notebook, not a resume.
 
 Start here → [[about/index|About]] · [[work/projects/index|Projects]] · [[work/research/proactive-conversation-assistant|Research]] · [[graph|Graph View]] · [[timeline|Timeline]] · [[resume|Resume]]
 

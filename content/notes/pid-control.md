@@ -14,4 +14,4 @@ A PID controller drives a system's error (setpoint minus measured value) toward 
 Related:
 
 → [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]]
-→ [[knowledge/control-systems/kalman-filter|Kalman Filtering]]
+→ [[notes/kalman-filter|Kalman Filtering]]

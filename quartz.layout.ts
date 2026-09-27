@@ -16,7 +16,7 @@ const explorerOptions = {
     a: { isFolder: boolean; slugSegment: string; displayName: string },
     b: { isFolder: boolean; slugSegment: string; displayName: string },
   ) => {
-    const topLevelOrder = ["about", "work", "knowledge"]
+    const topLevelOrder = ["about", "work", "notes"]
     if (a.isFolder && b.isFolder) {
       const ai = topLevelOrder.indexOf(a.slugSegment)
       const bi = topLevelOrder.indexOf(b.slugSegment)

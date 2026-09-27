@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Jubayer — Digital Lab",
+    pageTitle: "A. J. A. Jubayer Talukder — Portfolio",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -21,7 +21,12 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Space Mono",
+        // Departure Mono (Plastic Labs' heading font) isn't distributed via
+        // Google Fonts and this build environment can't reach any host that
+        // serves it, so it can't be vendored here — Martian Mono is used
+        // instead as a real, working substitute with a similarly blocky,
+        // technical display character.
+        header: "Martian Mono",
         body: "Roboto Mono",
         code: "Ubuntu Mono",
       },

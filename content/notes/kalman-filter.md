@@ -13,6 +13,6 @@ A Kalman filter estimates the hidden state of a system (e.g. true altitude) from
 
 Related:
 
-→ [[knowledge/robotics/sensor-fusion|Sensor Fusion]]
-→ [[knowledge/computer-vision/optical-flow|Optical Flow]]
-→ [[knowledge/robotics/slam|What is SLAM?]]
+→ [[notes/sensor-fusion|Sensor Fusion]]
+→ [[notes/optical-flow|Optical Flow]]
+→ [[notes/slam|What is SLAM?]]

@@ -12,5 +12,5 @@ A MOSFET is a voltage-controlled switch: applying a voltage at the gate creates 
 
 Related:
 
-→ [[knowledge/embedded-systems/bjt-basics|BJT Basics]]
+→ [[notes/bjt-basics|BJT Basics]]
 → [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]]

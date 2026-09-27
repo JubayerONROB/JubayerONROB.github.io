@@ -15,5 +15,5 @@ CLIP's image encoder is a ViT variant, which is why ViT and CLIP show up togethe
 
 Related:
 
-→ [[knowledge/ai-ml/clip|CLIP]]
+→ [[notes/clip|CLIP]]
 → [[work/projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]]

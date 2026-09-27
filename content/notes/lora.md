@@ -15,5 +15,5 @@ It's a different lever from the shared-adapter approach in the [[work/research/p
 
 Related:
 
-→ [[knowledge/ai-ml/model-optimization|Model Optimization]]
+→ [[notes/model-optimization|Model Optimization]]
 → [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]]

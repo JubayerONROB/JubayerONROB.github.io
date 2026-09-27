@@ -12,4 +12,4 @@ A Bipolar Junction Transistor is a current-controlled device: a small current in
 
 Related:
 
-→ [[knowledge/embedded-systems/mosfet-basics|MOSFET Basics]]
+→ [[notes/mosfet-basics|MOSFET Basics]]

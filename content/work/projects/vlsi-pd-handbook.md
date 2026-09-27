@@ -42,7 +42,7 @@ flowchart TD
 
 ## Experiments
 
-No standalone lab-notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
+No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
 
 ## Results
 
@@ -65,4 +65,4 @@ Not documented yet.
 ## Related
 
 [[work/projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]] — an applied RTL-to-GDS project using the same flow this handbook documents.
-[[knowledge/vlsi/rtl-to-gds|RTL-to-GDS]]
+[[notes/rtl-to-gds|RTL-to-GDS]]

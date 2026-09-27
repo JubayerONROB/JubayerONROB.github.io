@@ -13,5 +13,5 @@ Optical flow estimates the apparent motion of brightness patterns between consec
 
 Related:
 
-→ [[knowledge/robotics/sensor-fusion|Sensor Fusion]]
-→ [[knowledge/control-systems/kalman-filter|Kalman Filter]]
+→ [[notes/sensor-fusion|Sensor Fusion]]
+→ [[notes/kalman-filter|Kalman Filter]]

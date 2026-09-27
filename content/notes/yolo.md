@@ -15,6 +15,6 @@ In the [[work/projects/autonomous-rescue-drone|Autonomous Rescue Drone]], YOLOv8
 
 Related:
 
-→ [[knowledge/computer-vision/optical-flow|Optical Flow]]
-→ [[knowledge/robotics/slam|SLAM]]
+→ [[notes/optical-flow|Optical Flow]]
+→ [[notes/slam|SLAM]]
 → [[work/projects/autonomous-rescue-drone|Autonomous Rescue Drone]]

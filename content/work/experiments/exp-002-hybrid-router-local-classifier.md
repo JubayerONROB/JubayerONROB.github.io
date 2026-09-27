@@ -37,4 +37,4 @@ COMPLETE (AMD Hackathon ACT II, Track 1)
 Related:
 
 → [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router]]
-→ [[knowledge/ai-ml/llm-routing|LLM Routing]]
+→ [[notes/llm-routing|LLM Routing]]

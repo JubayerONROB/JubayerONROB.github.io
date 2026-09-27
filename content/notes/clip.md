@@ -13,5 +13,5 @@ CLIP (Contrastive Language-Image Pretraining) trains an image encoder and a text
 
 Related:
 
-→ [[knowledge/ai-ml/vision-transformers|Vision Transformers]]
+→ [[notes/vision-transformers|Vision Transformers]]
 → [[work/projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]]

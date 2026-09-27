@@ -13,5 +13,5 @@ ROS (Robot Operating System) is a middleware framework, not an OS in the kernel 
 
 Related:
 
-→ [[knowledge/robotics/index|Robotics]]
-→ [[knowledge/uav/pixhawk-communication|Pixhawk Communication]]
+→ [[notes/sensor-fusion|Sensor Fusion]]
+→ [[notes/pixhawk-communication|Pixhawk Communication]]

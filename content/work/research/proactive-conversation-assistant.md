@@ -58,4 +58,4 @@ Extending the shared-adapter decoder to more interruption categories and testing
 ## Related
 
 [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]] — similar two-stage, cost-aware routing philosophy applied to LLM task delegation.
-[[knowledge/ai-ml/model-optimization|Model Optimization]] · [[knowledge/ai-ml/lora|LoRA]]
+[[notes/model-optimization|Model Optimization]] · [[notes/lora|LoRA]]

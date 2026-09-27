@@ -6,7 +6,7 @@ tags:
 
 ## Who I am
 
-I'm A. J. A. Jubayer Talukder, an undergraduate in Electrical and Electronics Engineering (Communication and Signal Processing) at Bangladesh University of Engineering and Technology (BUET), Dhaka. I work across the stack from silicon to software — VLSI/RTL design, embedded systems and robotics, up through computer vision and large language models.
+I'm A. J. A. Jubayer Talukder, a recent graduate in Electrical and Electronics Engineering (Communication and Signal Processing) from Bangladesh University of Engineering and Technology (BUET), Dhaka. I've worked across the stack from silicon to software — VLSI/RTL design, embedded systems and robotics, up through computer vision and large language models.
 
 ## What I work on
 

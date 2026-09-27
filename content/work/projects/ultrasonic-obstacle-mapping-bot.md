@@ -45,7 +45,7 @@ flowchart TD
 
 ## Experiments
 
-No standalone lab-notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
+No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
 
 ## Results
 
@@ -68,4 +68,4 @@ Extending from a single rotating sensor to a small sensor array or SLAM-style po
 ## Related
 
 [[work/projects/autonomous-rescue-drone|Autonomous Rescue Drone]] — shares the autonomous-navigation theme, aerial vs. ground-based.
-[[knowledge/robotics/slam|What is SLAM?]] · [[knowledge/control-systems/pid-control|PID Control]] · [[knowledge/embedded-systems/mosfet-basics|MOSFET Basics]]
+[[notes/slam|What is SLAM?]] · [[notes/pid-control|PID Control]] · [[notes/mosfet-basics|MOSFET Basics]]
