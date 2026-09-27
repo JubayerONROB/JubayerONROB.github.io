@@ -43,10 +43,6 @@ flowchart TD
 - Docker — CPU-only inference pipeline
 - pytest — offline evaluation harness
 
-## Experiments
-
-Full hypothesis / method / result writeup: [[work/experiments/exp-002-hybrid-router-local-classifier|EXP-002]]
-
 ## Results
 
 - Grammar-constrained local classification keeps routing decisions structured and cheap.

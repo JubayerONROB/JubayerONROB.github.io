@@ -35,10 +35,6 @@ flowchart TD
 
 - OpenCLIP-ViT, PyTorch
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 | Metric | Result |

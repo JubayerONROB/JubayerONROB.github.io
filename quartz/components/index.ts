@@ -23,7 +23,6 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
-import Hero from "./Hero"
 import LabConsole from "./LabConsole"
 
 export {
@@ -52,6 +51,5 @@ export {
   Comments,
   Flex,
   ConditionalRender,
-  Hero,
   LabConsole,
 }

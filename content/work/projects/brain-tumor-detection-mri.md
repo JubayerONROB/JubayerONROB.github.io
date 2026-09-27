@@ -35,10 +35,6 @@ flowchart TD
 
 - MATLAB, digital image processing pipelines
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 Achieved high sensitivity and specificity in tumor detection on clinical MRI data.
