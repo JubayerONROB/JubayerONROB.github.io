@@ -23,8 +23,10 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug !== "index",
     }),
     Component.ArticleTitle(),
+    Component.Hero(),
     Component.ContentMeta(),
     Component.TagList(),
+    Component.LabConsole(),
   ],
   left: [
     Component.PageTitle(),
@@ -42,7 +44,13 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer({ title: "Explorer" }),
   ],
   right: [
-    Component.Graph(),
+    Component.Graph({
+      globalGraph: {
+        repelForce: 0.8,
+        centerForce: 0.15,
+        linkDistance: 40,
+      },
+    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],

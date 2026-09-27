@@ -26,16 +26,12 @@ An AI-powered drone for search and rescue, built to locate survivors in disaster
 
 ## Architecture
 
-```
-RGB Camera
-    ↓
-YOLOv8 Human Detection
-    ↓
-GPS-tagged Detection Coordinates
-    ↓
-ArduPilot Flight Controller (DroneKit)
-    ↓
-Autonomous Area-Coverage Flight Plan
+```mermaid
+flowchart TD
+    A[RGB Camera] --> B[YOLOv8 Human Detection]
+    B --> C[GPS-tagged Detection Coordinates]
+    C --> D[ArduPilot Flight Controller / DroneKit]
+    D --> E[Autonomous Area-Coverage Flight Plan]
 ```
 
 ## Key contributions

@@ -8,7 +8,7 @@ title: Home
 
 I build intelligent systems at the intersection of large language models, computer vision, robotics, and embedded/VLSI hardware. This site is a running log of my [[research]], [[projects]], and [[notes]] — treat it as a lab notebook rather than a resume.
 
-Start here → [[about|About]] · [[projects|Projects]] · [[research/proactive-conversation-assistant|Research]] · [[resume|Resume]]
+Start here → [[about|About]] · [[projects|Projects]] · [[research/proactive-conversation-assistant|Research]] · [[timeline|Timeline]] · [[resume|Resume]]
 
 ---
 

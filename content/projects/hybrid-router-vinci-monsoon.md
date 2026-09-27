@@ -27,17 +27,21 @@ A token-efficient LLM routing agent built for AMD Hackathon ACT II (Track 1). A 
 
 ## Architecture
 
+```mermaid
+flowchart TD
+    A[Incoming Query] --> B[Local GGUF Classifier<br/>Qwen2.5-3B, Q4_K_M]
+    B --> C{Difficulty?}
+    C -- Shallow, 8 intent categories --> D[Resolve locally<br/>zero API cost]
+    C -- High-difficulty --> E[Escalate to Fireworks<br/>remote backend]
 ```
-Incoming Query
-    ↓
-Local GGUF Classifier (Qwen2.5-3B, Q4_K_M)
-    ↓
-  ┌─────────────┴─────────────┐
-  │                           │
-Shallow (8 intent          High-difficulty
-categories) → resolve      → escalate
-locally, zero API cost       to Fireworks remote backend
-```
+
+## Experiment log
+
+**Hypothesis:** a small, grammar-constrained local classifier can resolve most incoming queries without ever calling a remote LLM, cutting API cost with no correctness regression on the harder queries that still get escalated.
+
+**Setup:** 8 intent categories, CPU-only grading VM (4 GB RAM, no GPU, linux/amd64), 25s per-request timeout, offline pytest harness enforcing zero hardcoded values so results reflect the classifier's real output rather than fixture data.
+
+**Result:** the classifier reliably separated shallow from high-difficulty queries under the offline harness, escalating only the latter to the Fireworks backend and holding to the CPU/memory/timeout budget of the grading VM throughout.
 
 ## Key contributions
 

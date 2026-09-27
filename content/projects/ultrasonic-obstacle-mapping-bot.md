@@ -25,16 +25,14 @@ A low-cost (under $50) autonomous mapping robot. An HC-SR04 ultrasonic sensor mo
 
 ## Architecture
 
-```
-HC-SR04 (180° servo scan)
-    ↓
-Polar → Cartesian conversion
-    ↓
-NodeMCU ESP8266 ── Wi-Fi ──→ Live Web Interface (map plot)
-    ↓
-Closed-loop obstacle avoidance
-    ↓
-L298N Motor Driver → Dual DC Motors (+ wheel encoders)
+```mermaid
+flowchart TD
+    A[HC-SR04, 180° servo scan] --> B[Polar to Cartesian conversion]
+    B --> C[NodeMCU ESP8266]
+    C -- Wi-Fi --> D[Live Web Interface / map plot]
+    B --> E[Closed-loop obstacle avoidance]
+    E --> F[L298N Motor Driver]
+    F --> G[Dual DC Motors + wheel encoders]
 ```
 
 ## Key contributions

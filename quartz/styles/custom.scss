@@ -1,3 +1,17 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+// Research-graph cluster colors, grouping nodes by topic area
+// (AI/LLM, robotics/embedded, hardware/VLSI) instead of one flat color.
+:root {
+  --cluster-ai: #0f9d6e;
+  --cluster-robotics: #4a7fd9;
+  --cluster-hardware: #c9822f;
+}
+
+:root[saved-theme="dark"] {
+  --cluster-ai: #5fe0ac;
+  --cluster-robotics: #7fa8ef;
+  --cluster-hardware: #e0a35f;
+}
