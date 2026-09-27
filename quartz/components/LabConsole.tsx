@@ -16,7 +16,7 @@ const LabConsole: QuartzComponent = ({ fileData, allFiles, displayClass }: Quart
   const projectCount = countBySlugPrefix(allFiles, "work/projects/")
   const researchCount = countBySlugPrefix(allFiles, "work/research/")
   const experimentCount = countBySlugPrefix(allFiles, "work/experiments/")
-  const noteCount = countBySlugPrefix(allFiles, "knowledge/")
+  const noteCount = countBySlugPrefix(allFiles, "notes/")
 
   const tagCounts = new Map<string, number>()
   for (const file of allFiles) {
@@ -33,7 +33,7 @@ const LabConsole: QuartzComponent = ({ fileData, allFiles, displayClass }: Quart
     <div class={`lab-console ${displayClass ?? ""}`}>
       <div class="lab-console-header">
         <span class="lab-console-dot" />
-        JUBAYER LAB // SYSTEM STATUS
+        A. J. A. JUBAYER TALUKDER // STATUS
       </div>
       <div class="lab-console-body">
         <ul class="lab-console-stats">

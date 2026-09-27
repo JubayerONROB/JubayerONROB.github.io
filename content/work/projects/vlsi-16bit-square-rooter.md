@@ -45,7 +45,7 @@ flowchart TD
 
 ## Experiments
 
-No standalone lab-notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
+No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
 
 ## Results
 
@@ -74,4 +74,4 @@ Not documented yet.
 ## Related
 
 [[work/projects/vlsi-pd-handbook|Physical Design Optimization Handbook]] — broader reference material covering the same RTL-to-GDS flow used here.
-[[knowledge/vlsi/rtl-to-gds|RTL-to-GDS]]
+[[notes/rtl-to-gds|RTL-to-GDS]]

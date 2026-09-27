@@ -14,4 +14,4 @@ The Pixhawk is a widely-used open-hardware flight controller running ArduPilot o
 Related:
 
 → [[work/projects/autonomous-rescue-drone|Autonomous Rescue Drone]]
-→ [[knowledge/robotics/ros|ROS]]
+→ [[notes/ros|ROS]]

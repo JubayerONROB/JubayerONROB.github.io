@@ -44,7 +44,7 @@ flowchart TD
 
 ## Experiments
 
-No standalone lab-notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
+No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
 
 ## Results
 
@@ -66,4 +66,4 @@ Testing against varied terrain and lighting conditions, and extending detection 
 ## Related
 
 [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]] — another autonomous-navigation project, ground-based instead of aerial.
-[[knowledge/computer-vision/yolo|YOLO]] · [[knowledge/uav/pixhawk-communication|Pixhawk Communication]]
+[[notes/yolo|YOLO]] · [[notes/pixhawk-communication|Pixhawk Communication]]

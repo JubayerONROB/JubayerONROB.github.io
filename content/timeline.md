@@ -34,6 +34,6 @@ Joined BUET Robotics Society (Head of Design Team, Deputy Head of Event Manageme
 - [[work/projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]] — Jan–Apr 2026
 - [[work/projects/icml2026-agent-repro|ICML 2026 Agent Reproducibility Challenge]]
 - [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]] — Jul 2026
-- Expected graduation — June 2026
+- Graduated — June 2026
 
 See [[work/projects/index|Projects]] and [[work/research/index|Research]] for the full write-ups behind each entry.

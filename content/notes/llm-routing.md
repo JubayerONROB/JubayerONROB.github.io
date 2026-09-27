@@ -17,4 +17,4 @@ Related:
 
 → [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]]
 → [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]]
-→ [[knowledge/ai-ml/model-optimization|Model Optimization]]
+→ [[notes/model-optimization|Model Optimization]]

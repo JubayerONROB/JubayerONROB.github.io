@@ -14,6 +14,6 @@ The [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping 
 
 Related:
 
-→ [[knowledge/robotics/sensor-fusion|Sensor Fusion]]
-→ [[knowledge/control-systems/kalman-filter|Kalman Filter]]
+→ [[notes/sensor-fusion|Sensor Fusion]]
+→ [[notes/kalman-filter|Kalman Filter]]
 → [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]]

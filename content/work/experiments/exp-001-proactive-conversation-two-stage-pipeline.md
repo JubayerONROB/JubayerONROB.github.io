@@ -44,4 +44,4 @@ ONGOING
 Related:
 
 → [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]]
-→ [[knowledge/ai-ml/model-optimization|Model Optimization]]
+→ [[notes/model-optimization|Model Optimization]]
