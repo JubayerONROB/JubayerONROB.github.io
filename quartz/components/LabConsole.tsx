@@ -4,7 +4,7 @@ import style from "./styles/labConsole.scss"
 function countBySlugPrefix(allFiles: QuartzComponentProps["allFiles"], prefix: string): number {
   return allFiles.filter((f) => {
     const slug = f.slug as string | undefined
-    return slug?.startsWith(prefix) && slug !== `${prefix}index`
+    return slug?.startsWith(prefix) && !slug.endsWith("/index") && slug !== prefix.replace(/\/$/, "")
   }).length
 }
 
@@ -13,9 +13,10 @@ const LabConsole: QuartzComponent = ({ fileData, allFiles, displayClass }: Quart
     return null
   }
 
-  const projectCount = countBySlugPrefix(allFiles, "projects/")
-  const researchCount = countBySlugPrefix(allFiles, "research/")
-  const noteCount = countBySlugPrefix(allFiles, "notes/")
+  const projectCount = countBySlugPrefix(allFiles, "work/projects/")
+  const researchCount = countBySlugPrefix(allFiles, "work/research/")
+  const experimentCount = countBySlugPrefix(allFiles, "work/experiments/")
+  const noteCount = countBySlugPrefix(allFiles, "knowledge/")
 
   const tagCounts = new Map<string, number>()
   for (const file of allFiles) {
@@ -43,6 +44,10 @@ const LabConsole: QuartzComponent = ({ fileData, allFiles, displayClass }: Quart
           <li>
             <span class="lab-console-label">RESEARCH</span>
             <span class="lab-console-value">{String(researchCount).padStart(2, "0")}</span>
+          </li>
+          <li>
+            <span class="lab-console-label">EXPERIMENTS</span>
+            <span class="lab-console-value">{String(experimentCount).padStart(2, "0")}</span>
           </li>
           <li>
             <span class="lab-console-label">NOTES</span>
