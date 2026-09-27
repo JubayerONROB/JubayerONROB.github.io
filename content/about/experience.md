@@ -16,4 +16,4 @@ Coordinated industry-academia collaborations and organized technical workshops a
 
 ## Related
 
-[[timeline|Timeline]] · [[about/index|About]]
+[[timeline|Timeline]] · [[about/index|About]] · [[about/achievements|Achievements]]
