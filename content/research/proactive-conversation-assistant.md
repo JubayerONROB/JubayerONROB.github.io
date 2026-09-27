@@ -21,6 +21,16 @@ A real-time wearable assistant that decides *when* to interrupt a conversation a
 
 The pipeline separates **interruption detection** (should the assistant speak now?) from **hint generation** (what should it say?), running as two stages so the expensive generator is only invoked when the cheaper detector fires. This two-stage split is what drives the call-reduction and latency gains over a single always-on generator.
 
+```mermaid
+flowchart TD
+    A[Conversation Audio Stream] --> B[Interruption Detector<br/>lightweight, always-on]
+    B -->|no interruption needed| A
+    B -->|interruption triggered| C[Hint Generator<br/>8B, invoked on-demand]
+    C --> D[User-Memory Context]
+    D --> C
+    C --> E[Spoken Hint]
+```
+
 ## Key findings
 
 - Persistent user-memory context is the strongest contributor to hint quality — removing it causes a **24.7-point drop in exact match**.
@@ -36,6 +46,22 @@ The pipeline separates **interruption detection** (should the assistant speak no
 | Exact-match drop without user-memory context | 24.7 points |
 | Resident weights (shared-adapter 1B decoder) | 1.05 GB |
 | Compute reduction vs. two-model pipeline | 1.3–1.8× |
+
+## Experiment log
+
+**Hypothesis:** splitting interruption detection from hint generation into two stages — a cheap always-on detector gating an expensive generator — cuts unnecessary generator calls and latency without sacrificing hint quality, provided persistent user-memory context is preserved.
+
+**Setup:** 28,058 decision points, 8B generator, ablation removing persistent user-memory context, and a compact 1B-parameter decoder sharing one adapter between both stages.
+
+**Result:**
+
+| Run | Metric | Result |
+|---|---|---|
+| Two-stage vs. always-on generator | Generator call reduction | 7.62× |
+| Two-stage vs. always-on generator | Wall-clock speedup | up to 4.39× |
+| User-memory context ablation | Exact-match drop when removed | 24.7 points |
+| Shared-adapter 1B decoder vs. two-model pipeline | Resident weights | 1.05 GB |
+| Shared-adapter 1B decoder vs. two-model pipeline | Compute reduction | 1.3–1.8× |
 
 ## Future work
 

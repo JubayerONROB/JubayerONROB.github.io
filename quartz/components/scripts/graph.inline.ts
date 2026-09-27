@@ -184,6 +184,9 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     "--dark",
     "--darkgray",
     "--bodyFont",
+    "--cluster-ai",
+    "--cluster-robotics",
+    "--cluster-hardware",
   ] as const
   const computedStyleMap = cssVars.reduce(
     (acc, key) => {
@@ -193,16 +196,40 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     {} as Record<(typeof cssVars)[number], string>,
   )
 
+  // topic clusters: color nodes by the research area they belong to instead
+  // of one flat color, so the graph reads as a map of AI / robotics / hardware
+  const aiTags = new Set([
+    "ai",
+    "llm",
+    "nlp",
+    "llm-routing",
+    "machine-learning",
+    "ai-safety",
+    "llm-evaluation",
+    "reproducibility",
+    "edge-ai",
+    "computer-vision",
+    "digital-image-processing",
+  ])
+  const roboticsTags = new Set(["robotics", "uav", "embedded-systems", "iot"])
+  const hardwareTags = new Set(["vlsi", "eda", "physical-design", "asic"])
+
+  const clusterColor = (tags: string[]): string | null => {
+    if (tags.some((t) => hardwareTags.has(t))) return computedStyleMap["--cluster-hardware"]
+    if (tags.some((t) => roboticsTags.has(t))) return computedStyleMap["--cluster-robotics"]
+    if (tags.some((t) => aiTags.has(t))) return computedStyleMap["--cluster-ai"]
+    return null
+  }
+
   // calculate color
   const color = (d: NodeData) => {
     const isCurrent = d.id === slug
     if (isCurrent) {
       return computedStyleMap["--secondary"]
-    } else if (visited.has(d.id) || d.id.startsWith("tags/")) {
+    } else if (d.id.startsWith("tags/")) {
       return computedStyleMap["--tertiary"]
-    } else {
-      return computedStyleMap["--gray"]
     }
+    return clusterColor(d.tags) ?? (visited.has(d.id) ? computedStyleMap["--tertiary"] : computedStyleMap["--gray"])
   }
 
   function nodeRadius(d: NodeData) {

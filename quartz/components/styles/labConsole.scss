@@ -1,0 +1,102 @@
+@use "../../styles/variables.scss" as *;
+
+.lab-console {
+  max-width: 640px;
+  margin: 1.5rem auto 2.5rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  font-family: var(--codeFont);
+  font-size: 0.85rem;
+  overflow: hidden;
+}
+
+.lab-console-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background-color: var(--lightgray);
+  color: var(--darkgray);
+  letter-spacing: 0.05em;
+  font-weight: $semiBoldWeight;
+}
+
+.lab-console-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--secondary);
+  display: inline-block;
+}
+
+.lab-console-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0.85rem;
+
+  @media #{$mobile} {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+.lab-console-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}
+
+.lab-console-label {
+  color: var(--gray);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.lab-console-value {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  font-weight: $boldWeight;
+}
+
+.lab-console-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.4rem;
+  flex: 1;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 1px solid var(--lightgray);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+  }
+
+  a {
+    color: var(--darkgray);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+}
+
+.lab-console-tag-count {
+  color: var(--gray);
+  font-size: 0.75rem;
+}

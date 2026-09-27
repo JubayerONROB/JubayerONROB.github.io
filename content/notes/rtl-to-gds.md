@@ -11,14 +11,11 @@ tags:
 
 RTL-to-GDS is the full chip physical-design flow that turns a Verilog/SystemVerilog register-transfer-level (RTL) description into a manufacturable GDSII layout:
 
-```
-RTL (Verilog/SystemVerilog)
-    ↓ synthesis
-Gate-level netlist
-    ↓ floorplan → power plan → placement → CTS → routing
-Physical layout
-    ↓ sign-off (DRC, timing)
-GDSII
+```mermaid
+flowchart TD
+    A[RTL - Verilog/SystemVerilog] -->|synthesis| B[Gate-level netlist]
+    B -->|floorplan, power plan, placement, CTS, routing| C[Physical layout]
+    C -->|sign-off: DRC, timing| D[GDSII]
 ```
 
 Sign-off quality is judged on DRC cleanliness and timing slack (WNS/TNS on setup and hold) — a "clean" tapeout has zero violations on both.

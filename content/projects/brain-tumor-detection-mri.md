@@ -20,14 +20,11 @@ A CAD (computer-aided diagnosis) system for automated brain tumor detection on c
 
 ## Architecture
 
-```
-Raw MRI Scan
-    ↓
-Image Enhancement / Noise Reduction
-    ↓
-Segmentation
-    ↓
-Tumor Region Detection
+```mermaid
+flowchart TD
+    A[Raw MRI Scan] --> B[Image Enhancement / Noise Reduction]
+    B --> C[Segmentation]
+    C --> D[Tumor Region Detection]
 ```
 
 ## Results

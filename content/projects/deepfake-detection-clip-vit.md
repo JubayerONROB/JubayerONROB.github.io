@@ -20,14 +20,11 @@ A deepfake detection model built on OpenCLIP-ViT, achieving 98% training and 97%
 
 ## Architecture
 
-```
-Input Image
-    ↓
-OpenCLIP-ViT Feature Extraction
-    ↓
-Classification Head
-    ↓
-Real / Fake
+```mermaid
+flowchart TD
+    A[Input Image] --> B[OpenCLIP-ViT Feature Extraction]
+    B --> C[Classification Head]
+    C --> D[Real / Fake]
 ```
 
 ## Results

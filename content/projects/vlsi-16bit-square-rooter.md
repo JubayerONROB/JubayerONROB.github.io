@@ -25,14 +25,14 @@ A multiplier-free 16-bit integer square-root module in Verilog, using an 8-itera
 
 ## Architecture
 
-```
-16-bit Input
-    ↓
-Shift-and-Subtract Core (8-iteration unrolled, multiplier-free)
-    ↓
-Single-Cycle Result @ 100 MHz
-    ↓
-RTL → Synthesis (Genus) → Place & Route (Innovus) → GDS
+```mermaid
+flowchart TD
+    A[16-bit Input] --> B[Shift-and-Subtract Core<br/>8-iteration unrolled, multiplier-free]
+    B --> C[Single-Cycle Result @ 100 MHz]
+    C --> D[RTL]
+    D --> E[Synthesis - Genus]
+    E --> F[Place & Route - Innovus]
+    F --> G[GDS]
 ```
 
 ## Results
