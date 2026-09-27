@@ -70,4 +70,3 @@ Not documented yet.
 ## Related
 
 [[work/projects/vlsi-pd-handbook|Physical Design Optimization Handbook]] — broader reference material covering the same RTL-to-GDS flow used here.
-[[notes/rtl-to-gds|RTL-to-GDS]]

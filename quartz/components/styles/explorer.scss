@@ -121,19 +121,35 @@ button.desktop-explorer {
     overscroll-behavior: contain;
 
     & li {
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     }
 
     & li > a {
       color: var(--dark);
       opacity: 0.75;
       pointer-events: all;
-      display: inline-block;
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
       line-height: 1.4;
+
+      &::before {
+        content: "";
+        width: 4px;
+        height: 4px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background-color: var(--gray);
+        align-self: center;
+      }
 
       &.active {
         opacity: 1;
         color: var(--tertiary);
+
+        &::before {
+          background-color: var(--tertiary);
+        }
       }
     }
   }

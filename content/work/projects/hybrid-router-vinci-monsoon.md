@@ -64,4 +64,3 @@ Not documented yet.
 ## Related
 
 [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]] — same two-stage, cost-aware architectural pattern (cheap fast path, expensive path only when needed).
-[[notes/llm-routing|LLM Routing]] · [[notes/model-optimization|Model Optimization]]

@@ -58,4 +58,3 @@ Not documented yet.
 ## Related
 
 [[work/projects/brain-tumor-detection-mri|Brain Tumor Detection on MRI Images]] — another applied computer-vision/classification project.
-[[notes/clip|CLIP]] · [[notes/vision-transformers|Vision Transformers]]

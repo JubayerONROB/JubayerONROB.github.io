@@ -61,4 +61,3 @@ Not documented yet.
 ## Related
 
 [[work/projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]] — an applied RTL-to-GDS project using the same flow this handbook documents.
-[[notes/rtl-to-gds|RTL-to-GDS]]
