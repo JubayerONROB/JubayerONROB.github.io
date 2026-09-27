@@ -47,10 +47,6 @@ flowchart TD
 | Resident weights (shared-adapter 1B decoder) | 1.05 GB |
 | Compute reduction vs. two-model pipeline | 1.3–1.8× |
 
-## Experiment log
-
-Full hypothesis / method / result writeup: [[work/experiments/exp-001-proactive-conversation-two-stage-pipeline|EXP-001]]
-
 ## Future work
 
 Extending the shared-adapter decoder to more interruption categories and testing on-device latency on real wearable hardware.

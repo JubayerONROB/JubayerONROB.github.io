@@ -43,10 +43,6 @@ flowchart TD
 - Claude Code (Opus 5) as the autonomous agent
 - Hugging Face — logbook publishing
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 **Paper #8565 — "A Coin Flip for Safety: LLM Judges Fail to Reliably Measure Adversarial Robustness"**

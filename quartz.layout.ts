@@ -76,7 +76,6 @@ export const defaultContentPageLayout: PageLayout = {
       component: Component.ArticleTitle(),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.Hero(),
     Component.ContentMeta(),
     Component.TagList(),
     Component.LabConsole(),

@@ -43,10 +43,6 @@ flowchart TD
 - Cadence Genus (synthesis), Cadence Innovus (place & route)
 - 45 nm GPDK045 process
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 | Metric | Result |

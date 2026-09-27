@@ -2,6 +2,19 @@
 
 // put your custom CSS here!
 
+// Departure Mono is self-hosted (not distributed via Google Fonts), so it's
+// declared manually here and referenced by name from theme.typography.header
+// in quartz.config.ts. Font files + license: quartz/static/fonts/.
+@font-face {
+  font-family: "Departure Mono";
+  src:
+    url("/static/fonts/DepartureMono-Regular.woff2") format("woff2"),
+    url("/static/fonts/DepartureMono-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 // Research-graph cluster colors, grouping nodes by topic area
 // (AI/LLM, robotics/embedded, hardware/VLSI) instead of one flat color.
 :root {
@@ -22,4 +35,15 @@
 // sidebar widget. Here it's the main content, so it gets full-page height.
 body[data-slug="graph"] .graph > .graph-outer {
   height: 70vh;
+}
+
+// The sidebar site title inherits the default link color (mint accent),
+// which reads as too loud for a page header — give it the neutral text color
+// instead, with the mint accent only appearing on hover.
+.page-title a {
+  color: var(--dark);
+
+  &:hover {
+    color: var(--secondary);
+  }
 }

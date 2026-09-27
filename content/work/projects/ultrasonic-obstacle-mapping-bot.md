@@ -43,10 +43,6 @@ flowchart TD
 - NodeMCU ESP8266 (Wi-Fi streaming to web UI)
 - L298N motor driver, dual DC gear motors, wheel encoders
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 - Polar-to-Cartesian coordinate conversion for real-time map plotting.

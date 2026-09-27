@@ -40,10 +40,6 @@ flowchart TD
 - Cadence Innovus and OpenLane/OpenROAD flows, with annotated Tcl scripts
 - Licensed CC BY 4.0
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 - 32 fully worked problems across three difficulty tiers, with solutions.

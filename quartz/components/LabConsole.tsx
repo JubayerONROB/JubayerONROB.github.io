@@ -15,7 +15,6 @@ const LabConsole: QuartzComponent = ({ fileData, allFiles, displayClass }: Quart
 
   const projectCount = countBySlugPrefix(allFiles, "work/projects/")
   const researchCount = countBySlugPrefix(allFiles, "work/research/")
-  const experimentCount = countBySlugPrefix(allFiles, "work/experiments/")
   const noteCount = countBySlugPrefix(allFiles, "notes/")
 
   const tagCounts = new Map<string, number>()
@@ -44,10 +43,6 @@ const LabConsole: QuartzComponent = ({ fileData, allFiles, displayClass }: Quart
           <li>
             <span class="lab-console-label">RESEARCH</span>
             <span class="lab-console-value">{String(researchCount).padStart(2, "0")}</span>
-          </li>
-          <li>
-            <span class="lab-console-label">EXPERIMENTS</span>
-            <span class="lab-console-value">{String(experimentCount).padStart(2, "0")}</span>
           </li>
           <li>
             <span class="lab-console-label">NOTES</span>

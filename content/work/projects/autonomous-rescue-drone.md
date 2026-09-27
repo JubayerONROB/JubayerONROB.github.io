@@ -42,10 +42,6 @@ flowchart TD
 - DroneKit, ArduPilot
 - GPS-based flight control
 
-## Experiments
-
-No standalone notebook entry yet for this project — see [[work/experiments/index|Experiments]] for the ones that exist.
-
 ## Results
 
 - Real-time human detection using RGB cameras and OpenCV.
