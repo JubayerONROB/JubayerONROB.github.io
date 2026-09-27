@@ -47,3 +47,11 @@ body[data-slug="graph"] .graph > .graph-outer {
     color: var(--secondary);
   }
 }
+
+// The homepage hides Breadcrumbs/ArticleTitle (the hero diagram used to fill
+// that role), so the site-wide 6rem top margin above the header area shows up
+// as a large empty gap before any visible content. Only the homepage needs
+// this trimmed — every other page still uses a visible title there.
+body[data-slug="index"] .page-header {
+  margin-top: 1.5rem;
+}
