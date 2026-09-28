@@ -2,11 +2,6 @@
 title: Home
 ---
 
-```text
-A. J. A. JUBAYER TALUKDER
-EEE · AI/ML · ROBOTICS · RESEARCH
-```
-
 Building intelligent systems at the intersection of machines, perception, control and computation.
 
 **[STATUS]**

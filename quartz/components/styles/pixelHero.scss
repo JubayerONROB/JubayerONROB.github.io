@@ -1,0 +1,15 @@
+.pixel-hero {
+  margin: 1rem 0 1.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--lightgray);
+  overflow: hidden;
+  max-width: 100%;
+
+  & > canvas {
+    display: block;
+    width: 100%;
+    height: 260px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
