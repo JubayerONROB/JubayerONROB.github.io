@@ -1,7 +1,7 @@
 function renderPixelHero(canvas: HTMLCanvasElement, image: HTMLImageElement) {
   // Subject bounding box in the SOURCE photo's own pixel coordinates
-  // (the vendored landing-photo.jpg is 1400x1867). Everything inside this
-  // box stays sharp; everything outside is blurred.
+  // (the vendored landing-photo.jpg is 1400x1867). Used to center the
+  // crop on the subject and to keep glitch patches off the face.
   const SUBJECT_BOX = { x0: 345, y0: 885, x1: 925, y1: 1867 }
 
   function draw() {
@@ -17,30 +17,27 @@ function renderPixelHero(canvas: HTMLCanvasElement, image: HTMLImageElement) {
     const ctx = canvas.getContext("2d", { alpha: false })
     if (!ctx) return
 
-    // crop source image to match the canvas's aspect ratio
-    const imageRatio = image.naturalWidth / image.naturalHeight
+    // crop source image to match the canvas's aspect ratio, centered on
+    // the subject rather than the geometric center of the photo
     const screenRatio = W / H
-    let sx: number, sy: number, sw: number, sh: number
-    if (imageRatio > screenRatio) {
+    let sw: number, sh: number
+    if (image.naturalWidth / image.naturalHeight > screenRatio) {
       sh = image.naturalHeight
       sw = sh * screenRatio
-      sx = (image.naturalWidth - sw) / 2
-      sy = 0
     } else {
       sw = image.naturalWidth
       sh = sw / screenRatio
-      sx = 0
-      sy = (image.naturalHeight - sh) / 2
     }
 
-    // blurred background layer
-    const blurPx = Math.max(4, Math.min(W, H) * 0.02)
-    ctx.filter = `blur(${blurPx}px)`
+    const subjectCenterX = (SUBJECT_BOX.x0 + SUBJECT_BOX.x1) / 2
+    const subjectCenterY = (SUBJECT_BOX.y0 + SUBJECT_BOX.y1) / 2
+    const sx = Math.max(0, Math.min(image.naturalWidth - sw, subjectCenterX - sw / 2))
+    const sy = Math.max(0, Math.min(image.naturalHeight - sh, subjectCenterY - sh / 2))
+
     ctx.drawImage(image, sx, sy, sw, sh, 0, 0, W, H)
-    ctx.filter = "none"
 
     // map the subject box from source-photo pixel coordinates into the
-    // current crop/canvas space so it stays correct across resizes
+    // current crop/canvas space so glitch patches stay off the face
     const normX0 = Math.max(0, Math.min(1, (SUBJECT_BOX.x0 - sx) / sw))
     const normX1 = Math.max(0, Math.min(1, (SUBJECT_BOX.x1 - sx) / sw))
     const normY0 = Math.max(0, Math.min(1, (SUBJECT_BOX.y0 - sy) / sh))
@@ -51,47 +48,9 @@ function renderPixelHero(canvas: HTMLCanvasElement, image: HTMLImageElement) {
     const boxY0 = normY0 * H
     const boxY1 = normY1 * H
 
-    // overlay the subject at full sharpness, feathered into the blurred backdrop
-    if (boxX1 > boxX0 && boxY1 > boxY0) {
-      const sharpCanvas = document.createElement("canvas")
-      sharpCanvas.width = W
-      sharpCanvas.height = H
-      const sharpCtx = sharpCanvas.getContext("2d")
-
-      const maskCanvas = document.createElement("canvas")
-      maskCanvas.width = W
-      maskCanvas.height = H
-      const maskCtx = maskCanvas.getContext("2d")
-
-      if (sharpCtx && maskCtx) {
-        sharpCtx.drawImage(image, sx, sy, sw, sh, 0, 0, W, H)
-
-        // a soft-cornered shape open at the bottom (the subject extends
-        // past the frame), blurred to feather into the blurred backdrop
-        const feather = Math.max(8, Math.min(W, H) * 0.025)
-        const radius = Math.min(boxX1 - boxX0, boxY1 - boxY0) * 0.35
-        maskCtx.filter = `blur(${feather}px)`
-        maskCtx.fillStyle = "#fff"
-        maskCtx.beginPath()
-        maskCtx.moveTo(boxX0, boxY0 + radius)
-        maskCtx.arcTo(boxX0, boxY0, boxX0 + radius, boxY0, radius)
-        maskCtx.lineTo(boxX1 - radius, boxY0)
-        maskCtx.arcTo(boxX1, boxY0, boxX1, boxY0 + radius, radius)
-        maskCtx.lineTo(boxX1, H)
-        maskCtx.lineTo(boxX0, H)
-        maskCtx.closePath()
-        maskCtx.fill()
-
-        sharpCtx.globalCompositeOperation = "destination-in"
-        sharpCtx.drawImage(maskCanvas, 0, 0)
-
-        ctx.drawImage(sharpCanvas, 0, 0)
-      }
-    }
-
     // a handful of small pixelated glitch patches scattered around the
-    // frame — a static, one-off accent, not a full pixelated background.
-    // Kept out of the subject's sharp region so they never land on the face.
+    // frame — a static, one-off accent, kept out of the subject's region
+    // so they never land on the face
     const glitchCount = 5
     for (let i = 0; i < glitchCount; i++) {
       const patchSize = (Math.min(W, H) * (0.05 + Math.random() * 0.06)) | 0
@@ -111,7 +70,7 @@ function renderPixelHero(canvas: HTMLCanvasElement, image: HTMLImageElement) {
       }
       if (!placed) continue
 
-      // sample the sharp source at very low resolution for a blocky look
+      // sample the source at very low resolution for a blocky look
       const blockGrid = 5
       const blockCanvas = document.createElement("canvas")
       blockCanvas.width = blockGrid
