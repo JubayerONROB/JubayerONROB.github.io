@@ -10,6 +10,8 @@ status: complete
 
 `digital-image-processing` `matlab` · March 2024 · **Status: Complete**
 
+[GitHub →](https://github.com/DarkJ0Y/brianTumorDetectWatershed)
+
 ## Overview
 
 A CAD (computer-aided diagnosis) system for automated brain tumor detection on clinical MRI data, using advanced image processing techniques to improve MRI clarity before detection.
