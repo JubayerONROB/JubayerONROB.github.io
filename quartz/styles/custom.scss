@@ -130,8 +130,8 @@ article a:not([role="anchor"]):not(.tag-link) {
 }
 
 // Hand-cut framed photo on the homepage: a gray frame with wobbly edges on
-// every side, a differently wobbled photo inside it, and a flat shadow of the
-// same shape offset below. Hover re-cuts both shapes.
+// every side and a differently wobbled photo inside it. Hover re-cuts both
+// shapes.
 .cut-photo {
   --cut-frame-a: path("M26,-0.7 C39.8,-1.9 86.3,2.5 122,-1.4 C125.4,1.5 130.9,3.3 133.7,10 C133.0,41.1 130.1,86.4 130.0,104 C132.6,121.0 119.5,133.1 104,132.3 C83.9,134.2 40.0,129.4 12,129.4 C7.0,131.9 1.0,128.3 1.4,120 C0.8,85.3 3.1,39.4 2.4,26 C1.7,9.9 10.1,-1.2 26,2.5Z");
   --cut-frame-b: path("M11,0.3 C39.9,0.5 85.6,2.0 104,0.9 C118.0,0.1 132.6,13.9 129.7,28 C132.2,37.8 131.6,86.7 129.5,119 C134.1,128.2 126.8,132.5 119,130.0 C83.7,133.2 37.7,128.9 30,130.4 C11.4,131.8 -0.3,120.0 0.6,102 C-0.5,85.8 2.5,39.4 -0.5,11 C2.2,7.1 6.4,0.9 11,-0.3Z");
@@ -146,7 +146,6 @@ article a:not([role="anchor"]):not(.tag-link) {
   box-sizing: border-box;
   padding: 8px;
 
-  &::before,
   &::after {
     content: "";
     position: absolute;
@@ -154,11 +153,6 @@ article a:not([role="anchor"]):not(.tag-link) {
     z-index: -1;
     clip-path: var(--cut-frame-a);
     transition: clip-path 0.5s ease;
-  }
-
-  &::before {
-    background: var(--cut-shadow-ink);
-    transform: translateY(6px);
   }
 
   &::after {
@@ -176,7 +170,6 @@ article a:not([role="anchor"]):not(.tag-link) {
     transition: clip-path 0.5s ease;
   }
 
-  &:hover::before,
   &:hover::after {
     clip-path: var(--cut-frame-b);
   }
