@@ -4,4 +4,10 @@ title: Home
 
 <div class="cut-photo"><img src="static/images/home-photo.jpg" alt="Jubayer Talukder" /></div>
 
-I'm Jubayer, an electrical and electronics engineer from [BUET](https://www.buet.ac.bd), in Dhaka, building intelligent systems where machine perception, control and computation meet. My thesis is a [[work/research/proactive-conversation-assistant|wearable assistant that decides when to speak]], and lately I've been exploring [[work/projects/hybrid-router-vinci-monsoon|LLM routing]]. Earlier work spans [[work/projects/autonomous-rescue-drone|drones]], [[work/projects/ultrasonic-obstacle-mapping-bot|robots]] and [[work/projects/vlsi-16bit-square-rooter|VLSI]]. You can read more [[about/index|about me]], browse all [[work/projects/index|projects]] and [[work/research/index|research]], follow my [[notes/index|notes]], or see my [[resume|resume]]. To reach me, try [email](mailto:ajajubayertalukder@gmail.com), [GitHub](https://github.com/JubayerONROB) or [LinkedIn](https://linkedin.com/in/a-j-a-jubayer-talukder).
+I'm Jubayer. I just finished my Electrical and Electronics Engineering degree at [BUET](https://www.buet.ac.bd/) in Dhaka. I like building smart systems, and I like it most when two different fields of technology meet and make something new.
+
+I'm applying for a PhD for Fall 2027. I'm still deciding exactly what my research should be about, and I'm using this time to try different ideas and find the one I want to spend years on.
+
+Outside engineering, I like to read books and listen to music. I also love movies. I really need them to stay sane. I enjoy art and I like to follow new technology. Sometimes I cook something I have never made before, or go to a new place. Sometimes I just get curious about a topic I know nothing about and read about it for hours.
+
+This site is like my small digital journal. Please look around: my [[work/projects/index|projects]], [[work/research/index|research]], [[notes/index|notes]], or [[resume|resume]]. If you want to talk, you can [email me](mailto:ajajubayertalukder@gmail.com).
