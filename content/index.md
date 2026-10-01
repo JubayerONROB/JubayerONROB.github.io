@@ -4,6 +4,8 @@ title: Home
 
 <div class="cut-photo"><img src="static/images/home-photo.jpg" alt="Jubayer Talukder" /></div>
 
+<p class="hello">Hi,</p>
+
 I'm Jubayer. I just finished my Electrical and Electronics Engineering degree at [BUET](https://www.buet.ac.bd/) in Dhaka. I like building smart systems, and I like it most when two different fields of technology meet and make something new.
 
 I'm applying for a PhD for Fall 2027. I'm still deciding exactly what my research should be about, and I'm using this time to try different ideas and find the one I want to spend years on.
