@@ -6,7 +6,7 @@ title: Home
 
 <p class="hello" aria-label="Hi,"><span aria-hidden="true">H</span><span aria-hidden="true">i</span><span aria-hidden="true">,</span></p>
 
-I'm Jubayer. I just finished my Electrical and Electronics Engineering degree at [BUET](https://www.buet.ac.bd/) in Dhaka. I like building smart systems, and I like it most when two different fields of technology meet and make something new.
+I'm Jubayer. I just finished my Electrical and Electronics Engineering degree at [BUET](https://www.buet.ac.bd/) in Dhaka. I try building smart systems, and I like it most when two different fields of technology meet and make something new.
 
 I'm applying for a PhD for Fall 2027. I'm still deciding exactly what my research should be about, and I'm using this time to try different ideas and find the one I want to spend years on.
 
