@@ -15,6 +15,38 @@
   font-display: swap;
 }
 
+// Agave (MIT, type agaric) is the body face; self-hosted like Departure Mono.
+@font-face {
+  font-family: "Agave";
+  src: url("/static/fonts/Agave-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Agave";
+  src: url("/static/fonts/Agave-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Agave isn't on Google Fonts (needed for OG image generation), so the config
+// keeps Roboto Mono as the body font and Agave is layered in front here.
+body {
+  font-family: "Agave", var(--bodyFont);
+}
+
+// Hand-drawn wavy underline used for links, drawn in the text color.
+:root {
+  --squiggle: url("data:image/svg+xml,%3Csvg width='120' height='6' viewBox='0 0 120 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3.2 C 10 5 22 5 32 3 C 44 0.8 54 1 64 3 C 76 5.2 88 4.6 98 3 C 106 1.8 113 2 120 3.2' stroke='%231a1a1c' stroke-width='1.4' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+}
+
+:root[saved-theme="dark"] {
+  --squiggle: url("data:image/svg+xml,%3Csvg width='120' height='6' viewBox='0 0 120 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3.2 C 10 5 22 5 32 3 C 44 0.8 54 1 64 3 C 76 5.2 88 4.6 98 3 C 106 1.8 113 2 120 3.2' stroke='%23ffffff' stroke-width='1.4' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+}
+
 // Research-graph cluster colors, grouping nodes by topic area
 // (AI/LLM, robotics/embedded, hardware/VLSI) instead of one flat color.
 :root {
@@ -80,10 +112,21 @@ body[data-slug="index"] {
     }
 
     a {
-      text-decoration: underline;
-      text-decoration-color: var(--secondary);
-      text-decoration-thickness: 1.5px;
-      text-underline-offset: 4px;
+      color: var(--dark);
+      font-weight: 700;
+      text-decoration: none;
+      background-color: transparent;
+      background-image: var(--squiggle);
+      background-size: 120px 6px;
+      background-position: 0 calc(100% - 1px);
+      background-repeat: repeat-x;
+      padding: 0 0 0.3em;
+      transition: background-position 0.3s ease-in;
+
+      &:hover {
+        background-position: 60px calc(100% - 1px);
+        color: var(--dark);
+      }
     }
   }
 }
