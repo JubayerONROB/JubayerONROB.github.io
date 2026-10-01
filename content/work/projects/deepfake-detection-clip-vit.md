@@ -10,6 +10,8 @@ status: complete
 
 `openclip` `vit` `pytorch` · Oct 2024 – Jan 2025 · **Status: Complete**
 
+[GitHub →](https://github.com/DarkJ0Y/PairCLIP-SWA)
+
 ## Overview
 
 A deepfake detection model built on OpenCLIP-ViT, achieving 98% training and 97% validation accuracy. Tested on the IEEE SP Cup 2025 dataset with strict mini-batch training under significant class imbalance.

@@ -51,7 +51,52 @@ flowchart TD
 **Paper #15191 — "Who Said Neural Networks Aren't Linear?"**
 5 verified claims — plus a bug found in the authors' released code: a nesting error in the Runge-Kutta branch silently demoted it to first-order accuracy. Fixing it restored agreement between one-step and multi-step methods to 80 dB PSNR.
 
-The remaining six reproductions span pure theory papers (audited mathematically), GPU-heavy papers, survey papers (data recovered from PDF figures), and semidefinite-programming tightness verification.
+**Paper #10372 — "Ski Rental with Distributional Predictions of Unknown Quality"**
+5 verified claims. A pure theory paper, audited exactly rather than benchmarked.
+
+**Paper #29413 — "Measuring Agents in Production"**
+3 exact, 1 as-reported, 1 partial. The raw data was never released, so it was recovered from the figure PDFs (160 labels across 39 figures, all arithmetically consistent).
+
+**Paper #26468 — "A Tight Theory of Error Feedback Algorithms in Distributed Optimization"**
+6 verified claims, with 117 semidefinite programs re-solved to check tightness.
+
+**Paper #8097 — "Attention's Forward Pass and Frank-Wolfe"**
+5 verified claims; the central identity holds to 1e-15.
+
+**Paper #448 — "On Structured State Space Duality"**
+5 verified claims, running the paper's constructive proof.
+
+**Paper #2 — "Reward-Free Alignment for Conflicting Objectives"**
+2 verified, 1 partial and 2 not reproduced for lack of a GPU. The released dataset turned out to be empty.
+
+## Posters
+
+Each reproduction ends in a one-page poster. The full logbook for each paper is on Hugging Face.
+
+![Poster for A Coin Flip for Safety: LLM Judges Fail to Reliably Measure Adversarial Robustness](/attachments/projects/icml2026-agent-repro/paper-8565-llm-judges-poster.jpg)
+*A Coin Flip for Safety: LLM Judges Fail to Reliably Measure Adversarial Robustness. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-a-coin-flip-for-safety-llm-judges-fail-to-measure-adversarial-robustness)*
+
+![Poster for Who Said Neural Networks Aren't Linear?](/attachments/projects/icml2026-agent-repro/paper-15191-linearizer-poster.jpg)
+*Who Said Neural Networks Aren't Linear?. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-who-said-neural-networks-aren-t-linear)*
+
+![Poster for Ski Rental with Distributional Predictions of Unknown Quality](/attachments/projects/icml2026-agent-repro/paper-10372-ski-rental-poster.jpg)
+*Ski Rental with Distributional Predictions of Unknown Quality. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-ski-rental-with-distributional-predictions-of-unknown-quality)*
+
+![Poster for Measuring Agents in Production](/attachments/projects/icml2026-agent-repro/paper-29413-agents-in-production-poster.jpg)
+*Measuring Agents in Production. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-measuring-agents-in-production)*
+
+![Poster for A Tight Theory of Error Feedback Algorithms in Distributed Optimization](/attachments/projects/icml2026-agent-repro/paper-26468-error-feedback-poster.jpg)
+*A Tight Theory of Error Feedback Algorithms in Distributed Optimization. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-a-tight-theory-of-error-feedback-algorithms-in-distributed-optimization)*
+
+![Poster for Attention's Forward Pass and Frank-Wolfe](/attachments/projects/icml2026-agent-repro/paper-8097-attention-frank-wolfe-poster.jpg)
+*Attention's Forward Pass and Frank-Wolfe. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-attention-s-forward-pass-and-frank-wolfe)*
+
+![Poster for On Structured State Space Duality](/attachments/projects/icml2026-agent-repro/paper-448-structured-state-space-duality-poster.jpg)
+*On Structured State Space Duality. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-on-structured-state-space-duality)*
+
+![Poster for Reward-Free Alignment for Conflicting Objectives](/attachments/projects/icml2026-agent-repro/paper-2-reward-free-alignment-poster.jpg)
+*Reward-Free Alignment for Conflicting Objectives. [Logbook on Hugging Face →](https://huggingface.co/spaces/xubayer/repro-reward-free-alignment-for-conflicting-objectives)*
+
 
 ## Challenges
 

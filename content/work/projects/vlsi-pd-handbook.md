@@ -23,7 +23,7 @@ Most physical-design reference material is either scattered across vendor docume
 
 ## Approach
 
-Write the handbook in five parts moving from foundations to practice, covering both a commercial flow (Cadence Innovus) and the open-source flow (OpenLane/OpenROAD) side by side, with real timing/power/congestion report examples rather than synthetic ones.
+Write the handbook in five parts moving from foundations to practice, covering both a commercial flow (Cadence Innovus) and the open-source flow (OpenLane/OpenROAD) side by side, with annotated Tcl scripts and diagnostic tables for reading timing, power and congestion reports.
 
 ## System architecture
 
@@ -43,8 +43,14 @@ flowchart TD
 ## Results
 
 - 32 fully worked problems across three difficulty tiers, with solutions.
-- Real timing/power/congestion report examples rather than synthetic ones.
+- Diagnostic tables for reading timing, power and congestion reports. Worked numbers are illustrative technology values chosen for clean arithmetic, not parameters of a real foundry process.
+- 63 rapid-fire review questions with full solutions, checklists, a formula cheat sheet and a four-week study plan.
 - Covers both a commercial flow (Cadence Innovus) and the open-source flow (OpenLane/OpenROAD) side by side.
+
+## Media
+
+![Physical Design Optimization Handbook cover](/attachments/projects/vlsi-pd-handbook/cover.jpg)
+*Edition 1, open-source release: theory, algorithms, tool flows and worked problems from floorplan to sign-off. [Download the handbook (PDF) →](/attachments/projects/vlsi-pd-handbook/Physical-Design-Optimization-Handbook.pdf)*
 
 ## Challenges
 

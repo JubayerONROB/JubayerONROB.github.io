@@ -23,7 +23,7 @@ Indoor obstacle mapping usually needs LiDAR or depth cameras that cost far more 
 
 ## Approach
 
-A single ultrasonic sensor on a servo sweeps 180° per cycle instead of using an array of fixed sensors, trading scan speed for a large cost reduction. Each polar reading (angle, distance) is converted to Cartesian coordinates for plotting, streamed over Wi-Fi to a browser-based live map, while the same distance readings drive closed-loop obstacle avoidance locally on the bot.
+A single ultrasonic sensor on a servo sweeps 180° per cycle instead of using an array of fixed sensors, trading scan speed for a large cost reduction. Wheel encoders track the bot's position, and each polar reading (angle, distance) is converted to Cartesian obstacle points on the map. The ESP8266 runs its own Wi-Fi access point and serves a browser dashboard that receives the sensor values, robot position and mapped points as JSON, while the same distance readings drive obstacle avoidance on the bot itself.
 
 ## System architecture
 
@@ -39,15 +39,32 @@ flowchart TD
 
 ## Tech stack
 
-- HC-SR04 ultrasonic sensor + servo
-- NodeMCU ESP8266 (Wi-Fi streaming to web UI)
-- L298N motor driver, dual DC gear motors, wheel encoders
+- HC-SR04 ultrasonic sensor on an SG90 servo
+- NodeMCU ESP8266 (Wi-Fi access point, web dashboard, JSON data)
+- L298N motor driver, two DC gear motors, two wheel encoders, 7.4 V Li-ion battery
 
 ## Results
 
 - Polar-to-Cartesian coordinate conversion for real-time map plotting.
 - Closed-loop obstacle avoidance driven directly by the live sensor scan, with wheel encoders providing odometry feedback.
 - Total hardware cost held under $50.
+
+## Media
+
+![Physical prototype and the web dashboard it streams to](/attachments/projects/ultrasonic-obstacle-mapping-bot/prototype-and-dashboard.jpg)
+*The finished prototype (left) and the live control panel it serves over its own Wi-Fi access point (right), mapping obstacles as it drives.*
+
+![Sensor and actuator integration](/attachments/projects/ultrasonic-obstacle-mapping-bot/sensor-actuator-integration.jpg)
+*How the ultrasonic sensor and servo, motor driver, wheel encoders and Wi-Fi module work together.*
+
+![Real-time obstacle mapping algorithm](/attachments/projects/ultrasonic-obstacle-mapping-bot/mapping-algorithm.jpg)
+*Odometry from the wheel encoders plus each sonar reading become global obstacle points that are plotted in real time.*
+
+![IoT system working principle](/attachments/projects/ultrasonic-obstacle-mapping-bot/iot-working-principle.jpg)
+*The ESP8266 starts a local hotspot, serves the dashboard, and sends sensor values and mapped points to the browser as JSON.*
+
+![Scanning and movement state machines](/attachments/projects/ultrasonic-obstacle-mapping-bot/state-machines.jpg)
+*The scanning state machine (left) and the movement state machine (right) that drive avoidance.*
 
 ## Challenges
 
