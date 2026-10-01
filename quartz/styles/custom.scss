@@ -40,10 +40,12 @@ body {
 
 // Hand-drawn wavy underline used for links, drawn in the text color.
 :root {
+  --cut-shadow-ink: #d7d7db;
   --squiggle: url("data:image/svg+xml,%3Csvg width='120' height='6' viewBox='0 0 120 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3.2 C 10 5 22 5 32 3 C 44 0.8 54 1 64 3 C 76 5.2 88 4.6 98 3 C 106 1.8 113 2 120 3.2' stroke='%231a1a1c' stroke-width='1.4' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
 }
 
 :root[saved-theme="dark"] {
+  --cut-shadow-ink: #2e2e34;
   --squiggle: url("data:image/svg+xml,%3Csvg width='120' height='6' viewBox='0 0 120 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3.2 C 10 5 22 5 32 3 C 44 0.8 54 1 64 3 C 76 5.2 88 4.6 98 3 C 106 1.8 113 2 120 3.2' stroke='%23ffffff' stroke-width='1.4' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
 }
 
@@ -106,9 +108,16 @@ body[data-slug="index"] {
       width: 7.5rem;
       height: 7.5rem;
       object-fit: cover;
-      border-radius: 50%;
-      border: 1px solid var(--lightgray);
-      margin: 0 0 1rem 1.5rem;
+      // Hand-cut look: uneven, slightly wobbly corners plus a flat offset
+      // shadow in the same shape; the corners shift on hover.
+      border-radius: 26% 11% 30% 13% / 13% 28% 11% 26%;
+      box-shadow: 0 6px 0 var(--cut-shadow-ink);
+      margin: 0 0 1.25rem 1.5rem;
+      transition: border-radius 0.5s ease;
+
+      &:hover {
+        border-radius: 12% 28% 13% 31% / 30% 12% 27% 12%;
+      }
     }
 
   }
