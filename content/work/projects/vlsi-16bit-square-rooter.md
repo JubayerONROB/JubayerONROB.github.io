@@ -23,7 +23,7 @@ A hardware multiplier is expensive in area and power. A square-root unit that av
 
 ## Approach
 
-Implement the non-restoring shift-and-subtract square-root algorithm, fully unrolled across 8 iterations so the whole computation completes in a single clock cycle at 100 MHz instead of an iterative multi-cycle design. Verify it exhaustively with directed tests, layered SystemVerilog testbenches, and covergroups before taking it through synthesis and place-and-route.
+Implement the digit-by-digit shift-and-subtract square-root algorithm, fully unrolled across 8 iterations so the result is available one clock cycle after the input at 100 MHz, instead of an iterative multi-cycle design. Verify it with directed tests, a layered SystemVerilog testbench and functional covergroups before taking it through synthesis and place-and-route.
 
 ## System architecture
 
@@ -47,13 +47,15 @@ flowchart TD
 
 | Metric | Result |
 |---|---|
-| Functional coverage | 100% (directed + layered-SV + covergroup) |
-| Clock frequency | 100 MHz, single-cycle throughput |
-| Cell count | 197 |
-| Area | 347 sq. µm |
+| Functional coverage | 100% of defined bins (input, output and cross covergroups) |
+| Clock frequency | 100 MHz, result one clock cycle after input |
+| Cell count (high-effort synthesis) | 197 |
+| Cell area | 347 sq. µm |
+| Total power (synthesis, high effort) | 17.9 µW |
+| Die area after optimization | 528 sq. µm (24 µm × 22 µm) |
 | Setup WNS | +0.264 ns |
 | Hold WNS | +0.014 ns |
-| DRC | Clean, zero timing violations |
+| Violating paths / DRC violations | 0 / 0 |
 
 ## Media
 
@@ -62,7 +64,7 @@ flowchart TD
 
 ## Challenges
 
-Hitting single-cycle timing at 100 MHz with a fully unrolled 8-iteration shift-and-subtract datapath required getting the combinational path clean enough to close both setup and hold with positive slack — the reported +0.264 ns setup / +0.014 ns hold margins reflect how tight that hold closure was.
+Closing timing on the fully unrolled datapath: after post-route optimization the die shrank from 675 to 528 sq. µm while routing density rose from about 68% to 93.5%, and hold closed with only +0.014 ns of slack.
 
 ## What I learned
 
@@ -70,7 +72,7 @@ Not documented yet.
 
 ## Future work
 
-Not documented yet.
+Pipeline the design for higher throughput, extend it to 32-bit and 64-bit inputs, benchmark against Newton-Raphson and non-restoring square-root algorithms, integrate it into a larger arithmetic subsystem, and add formal verification alongside simulation and coverage.
 
 ## Related
 

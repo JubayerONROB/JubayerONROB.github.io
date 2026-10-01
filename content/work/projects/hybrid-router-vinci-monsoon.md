@@ -16,42 +16,46 @@ status: complete
 
 ## Overview
 
-A token-efficient LLM routing agent built for AMD Hackathon ACT II (Track 1). A grammar-constrained local GGUF classifier resolves shallow tasks at zero API cost, escalating only high-difficulty queries across 8 intent categories to a Fireworks remote backend.
+A token-efficient LLM routing agent built for AMD Hackathon ACT II (Track 1). It classifies each task into one of 8 categories locally, answers sentiment, entity-extraction and summarization tasks with a local Qwen2.5-3B model at zero scored tokens, and sends everything else to Fireworks models.
 
 ## Problem
 
-Calling a large remote LLM for every query is expensive and slow, even though most real queries are easy enough for a much smaller model to handle correctly. The hackathon track scored on task accuracy *and* token spend, so blindly routing everything to the strongest model was never going to win.
+Calling a large remote LLM for every query is expensive, even though some tasks are easy enough for a small local model. The track scored in two stages: an accuracy gate (at least 16 of 19 tasks correct), then ranking by total Fireworks tokens spent, fewest wins. Saving tokens only counts if the answers stay correct.
 
 ## Approach
 
-Put a small local classifier in front of the remote LLM: a grammar-constrained Qwen2.5-3B (GGUF, quantized) decides, per query, whether it falls into one of 8 shallow intent categories it can resolve directly, or whether it needs escalation to a larger remote model. The whole thing had to run inside a hard hardware budget — a CPU-only grading VM with 4 GB RAM and no GPU — so the local classifier's own footprint mattered as much as its accuracy.
+A deterministic keyword classifier (no tokens, instant) assigns each task to one of 8 categories: factual, math, sentiment, summarization, NER, code debugging, logical reasoning or code generation. Sentiment, NER and summarization go to a local Ollama sidecar running qwen2.5:3b, which is baked into the image. Each local answer must pass a category-specific verifier, and any timeout, malformed output or failed check escalates the task to the remote lane instead of shipping a bad answer. All other categories go to Fireworks models chosen per category, resolved at runtime from the allowed-models list. Tasks run in parallel under one global deadline.
 
 ## System architecture
 
 ```mermaid
 flowchart TD
-    A[Incoming Query] --> B[Local GGUF Classifier<br/>Qwen2.5-3B, Q4_K_M]
-    B --> C{Difficulty?}
-    C -- Shallow, 8 intent categories --> D[Resolve locally<br/>zero API cost]
-    C -- High-difficulty --> E[Escalate to Fireworks<br/>remote backend]
+    A[tasks.json] --> B[Stage 1: local keyword classifier<br/>8 categories, 0 tokens]
+    B -- sentiment, NER, summarization --> C[Local qwen2.5:3b via Ollama<br/>verifier-gated]
+    C -- passes verifier --> F[results.json]
+    C -- timeout, bad shape, reject --> D
+    B -- factual, math, logic, debug, codegen --> D[Fireworks remote models<br/>chosen per category]
+    D --> F
 ```
 
 ## Tech stack
 
-- Qwen2.5-3B (GGUF, Q4_K_M quantization) — local classifier
-- Fireworks API — remote backend for hard queries
-- Docker — CPU-only inference pipeline
-- pytest — offline evaluation harness
+- Python, with parallel dispatch through a thread pool
+- Ollama sidecar with qwen2.5:3b (local lane)
+- Fireworks API (remote lane)
+- Docker, CPU-only linux/amd64 image of about 1.9 GB compressed
+- pytest and an offline evaluation harness
 
 ## Results
 
-- Grammar-constrained local classification keeps routing decisions structured and cheap.
-- Dockerized the full inference pipeline for a constrained CPU-only grading VM (4 GB RAM, no GPU, linux/amd64), with env-driven model selection, a 25s per-request timeout, and graceful local fallback.
-- Built an offline pytest evaluation harness ensuring zero hardcoded values — the whole pipeline is verifiably driven by real classifier output.
+- Best graded run: 18 of 19 tasks correct (94.7%), clearing the 16/19 accuracy gate, at about 6,276 Fireworks tokens.
+- Local answers are verified before they ship, so the local lane can save tokens but never trade away accuracy.
+- Crash-safe output: results are written once from a single path that also runs on failure, so a run always ends with a valid results file and no blank answers.
+- Offline test suite (schema, verifiers, model resolution, output integrity, lane isolation) kept green before every submission.
 
 ## Challenges
 
-The hard constraint was the grading environment itself: 4 GB RAM, no GPU, linux/amd64 only, with a 25s per-request timeout. That ruled out anything but a heavily quantized local model, and required a graceful local fallback path for when the classifier or remote backend was unavailable.
+Timeouts dominated the work. Early versions ran a local GGUF model and kept hitting the time limit, and the lesson from the engineering log was that the local model's load and inference latency, not image size, was the real risk. The design moved to an all-remote phase and later reintroduced the local lane as a verifier-gated Ollama sidecar with fail-open escalation. A per-request timeout of 12 seconds and a global deadline keep every run bounded. A token-reduction pass that re-routed accuracy-sensitive categories once cost two gate points (16 of 19), a reminder that the accuracy gate comes first.
 
 ## What I learned
 

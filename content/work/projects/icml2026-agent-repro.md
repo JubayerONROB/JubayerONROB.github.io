@@ -51,7 +51,23 @@ flowchart TD
 **Paper #15191 — "Who Said Neural Networks Aren't Linear?"**
 5 verified claims — plus a bug found in the authors' released code: a nesting error in the Runge-Kutta branch silently demoted it to first-order accuracy. Fixing it restored agreement between one-step and multi-step methods to 80 dB PSNR.
 
-The remaining six reproductions span pure theory papers (audited mathematically), GPU-heavy papers, survey papers (data recovered from PDF figures), and semidefinite-programming tightness verification.
+**Paper #10372 — "Ski Rental with Distributional Predictions of Unknown Quality"**
+5 verified claims. A pure theory paper, audited exactly rather than benchmarked.
+
+**Paper #29413 — "Measuring Agents in Production"**
+3 exact, 1 as-reported, 1 partial. The raw data was never released, so it was recovered from the figure PDFs (160 labels across 39 figures, all arithmetically consistent).
+
+**Paper #26468 — "A Tight Theory of Error Feedback Algorithms in Distributed Optimization"**
+6 verified claims, with 117 semidefinite programs re-solved to check tightness.
+
+**Paper #8097 — "Attention's Forward Pass and Frank-Wolfe"**
+5 verified claims; the central identity holds to 1e-15.
+
+**Paper #448 — "On Structured State Space Duality"**
+5 verified claims, running the paper's constructive proof.
+
+**Paper #2 — "Reward-Free Alignment for Conflicting Objectives"**
+2 verified, 1 partial and 2 not reproduced for lack of a GPU. The released dataset turned out to be empty.
 
 ## Posters
 

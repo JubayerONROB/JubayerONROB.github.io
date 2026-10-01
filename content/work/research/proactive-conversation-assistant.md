@@ -47,26 +47,6 @@ flowchart TD
 | Resident weights (shared-adapter 1B decoder) | 1.05 GB |
 | Compute reduction vs. two-model pipeline | 1.3–1.8× |
 
-## Figures
-
-![Overview: what, how and why of the proactive assistant](/attachments/projects/proactive-conversation-assistant/overview.jpg)
-*Overview: a silence is a decision point, one decoder does both jobs, and persistent memory changes the outcome.*
-
-![Full architecture](/attachments/projects/proactive-conversation-assistant/architecture.jpg)
-*Architecture: the two-model cascade (a) versus the unified early-exit decoder (b), both reading the persistent user memory.*
-
-![End-to-end exact match against gate threshold](/attachments/projects/proactive-conversation-assistant/monotonicity.jpg)
-*End-to-end exact match as the gate threshold rises, for several gate and generator pairings.*
-
-![Gate quality across models](/attachments/projects/proactive-conversation-assistant/gate-comparison.jpg)
-*Gate quality (PA-F1 with 95% intervals) across candidate models.*
-
-## Documents
-
-- [BSc thesis (PDF) →](https://github.com/JubayerONROB/proactive-conversation-assistant/blob/main/documents/Thesis%20book%202006081.pdf)
-- Technical reports: [Dataset 2](https://github.com/JubayerONROB/proactive-conversation-assistant/blob/main/paper/dataset2_report/main.pdf) · [Tier 1](https://github.com/JubayerONROB/proactive-conversation-assistant/blob/main/paper/tier1_report/main.pdf) · [Tier 2](https://github.com/JubayerONROB/proactive-conversation-assistant/blob/main/paper/tier2_report/main.pdf) · [Tier 3](https://github.com/JubayerONROB/proactive-conversation-assistant/blob/main/paper/tier3_report/main.pdf)
-- [Source repository →](https://github.com/JubayerONROB/proactive-conversation-assistant)
-
 ## Future work
 
 Extending the shared-adapter decoder to more interruption categories and testing on-device latency on real wearable hardware.
