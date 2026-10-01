@@ -12,4 +12,4 @@ tags:
 
 ## Related
 
-[[about/index|About]] · [[about/experience|Experience]]
+[[about/index|About]] · [[about/education|Education]] · [[about/experience|Experience]]

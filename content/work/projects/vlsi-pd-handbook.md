@@ -46,6 +46,11 @@ flowchart TD
 - Real timing/power/congestion report examples rather than synthetic ones.
 - Covers both a commercial flow (Cadence Innovus) and the open-source flow (OpenLane/OpenROAD) side by side.
 
+## Media
+
+![Physical Design Optimization Handbook cover](/attachments/projects/vlsi-pd-handbook/cover.jpg)
+*Edition 1, open-source release: theory, algorithms, tool flows and worked problems from floorplan to sign-off. [Download the handbook (PDF) →](/attachments/projects/vlsi-pd-handbook/Physical-Design-Optimization-Handbook.pdf)*
+
 ## Challenges
 
 Not documented yet.

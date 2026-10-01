@@ -12,4 +12,4 @@ Major in Communication and Signal Processing (CSP) · CGPA: 3.83/4.00
 
 ## Related
 
-[[about/index|About]] · [[resume|Resume]]
+[[about/index|About]] · [[about/experience|Experience]] · [[about/achievements|Achievements]] · [[resume|Resume]]

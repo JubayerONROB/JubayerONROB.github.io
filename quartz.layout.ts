@@ -16,6 +16,14 @@ const explorerOptions = {
     a: { isFolder: boolean; slugSegment: string; displayName: string },
     b: { isFolder: boolean; slugSegment: string; displayName: string },
   ) => {
+    // Pages inside the About folder read as a CV: education, experience,
+    // then achievements (instead of alphabetical).
+    const aboutOrder = ["education", "experience", "achievements"]
+    if (!a.isFolder && !b.isFolder) {
+      const ai = aboutOrder.indexOf(a.slugSegment)
+      const bi = aboutOrder.indexOf(b.slugSegment)
+      if (ai !== -1 && bi !== -1) return ai - bi
+    }
     const topLevelOrder = ["about", "work", "notes"]
     if (a.isFolder && b.isFolder) {
       const ai = topLevelOrder.indexOf(a.slugSegment)

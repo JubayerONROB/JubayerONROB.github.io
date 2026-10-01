@@ -47,6 +47,15 @@ flowchart TD
 - Real-time human detection using RGB cameras and OpenCV.
 - GPS-based autonomous flight control for structured area coverage, so the drone systematically sweeps a search zone rather than flying ad hoc.
 
+## Media
+
+<div class="video-embed"><iframe src="https://www.youtube.com/embed/r3i4aEx2VTE" title="Autonomous Rescue Drone demo" loading="lazy" allowfullscreen></iframe></div>
+
+*Project demo. [Watch on YouTube →](https://youtu.be/r3i4aEx2VTE)*
+
+![Autonomous Rescue Drone project poster](/attachments/projects/autonomous-rescue-drone/poster.jpg)
+*Project poster: motivation, hardware and firmware, human-detection results (precision 0.717, recall 0.647, mAP50 0.689) and future work. [Download the poster as PDF →](/attachments/projects/autonomous-rescue-drone/Drone_poster.pdf)*
+
 ## Challenges
 
 Not documented yet.

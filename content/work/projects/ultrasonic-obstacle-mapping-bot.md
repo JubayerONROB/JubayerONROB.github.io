@@ -49,6 +49,23 @@ flowchart TD
 - Closed-loop obstacle avoidance driven directly by the live sensor scan, with wheel encoders providing odometry feedback.
 - Total hardware cost held under $50.
 
+## Media
+
+![Physical prototype and the web dashboard it streams to](/attachments/projects/ultrasonic-obstacle-mapping-bot/prototype-and-dashboard.jpg)
+*The finished prototype (left) and the live control panel it serves over its own Wi-Fi access point (right), mapping obstacles as it drives.*
+
+![Sensor and actuator integration](/attachments/projects/ultrasonic-obstacle-mapping-bot/sensor-actuator-integration.jpg)
+*How the ultrasonic sensor and servo, motor driver, wheel encoders and Wi-Fi module work together.*
+
+![Real-time obstacle mapping algorithm](/attachments/projects/ultrasonic-obstacle-mapping-bot/mapping-algorithm.jpg)
+*Odometry from the wheel encoders plus each sonar reading become global obstacle points that are plotted in real time.*
+
+![IoT system working principle](/attachments/projects/ultrasonic-obstacle-mapping-bot/iot-working-principle.jpg)
+*The ESP8266 starts a local hotspot, serves the dashboard, and sends sensor values and mapped points to the browser as JSON.*
+
+![Scanning and movement state machines](/attachments/projects/ultrasonic-obstacle-mapping-bot/state-machines.jpg)
+*The scanning state machine (left) and the movement state machine (right) that drive avoidance.*
+
 ## Challenges
 
 Not documented yet.

@@ -28,7 +28,7 @@ I'm currently exploring LLM routing (cheap local models handling easy queries, e
 
 ## More
 
-[[about/experience|Experience]] · [[about/education|Education]] · [[about/achievements|Achievements]] · [[resume|Resume]]
+[[about/education|Education]] · [[about/experience|Experience]] · [[about/achievements|Achievements]] · [[resume|Resume]]
 
 ## Elsewhere
 

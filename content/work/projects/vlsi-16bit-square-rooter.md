@@ -55,6 +55,11 @@ flowchart TD
 | Hold WNS | +0.014 ns |
 | DRC | Clean, zero timing violations |
 
+## Media
+
+![Final project report cover](/attachments/projects/vlsi-16bit-square-rooter/report-cover.jpg)
+*EEE468 VLSI Laboratory final report, covering the design, testbenches, synthesis and place-and-route. [Read the full report (PDF, 56 pages) →](https://github.com/JubayerONROB/vlsi-sqrt-16bit/blob/main/docs/vlsi_project.pdf)*
+
 ## Challenges
 
 Hitting single-cycle timing at 100 MHz with a fully unrolled 8-iteration shift-and-subtract datapath required getting the combinational path clean enough to close both setup and hold with positive slack — the reported +0.264 ns setup / +0.014 ns hold margins reflect how tight that hold closure was.
