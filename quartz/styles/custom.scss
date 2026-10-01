@@ -208,10 +208,67 @@ article img {
 // big greeting at the top of the homepage
 .hello {
   font-family: var(--headerFont);
+  display: flex;
+  gap: 0.04em;
   font-size: 2.2rem;
   line-height: 1;
   margin: 0 0 1rem;
   color: var(--dark);
+}
+
+// each letter drops in with a small bounce, one after the other, and bounces
+// again when hovered
+.hello span {
+  display: inline-block;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  animation: hello-pop 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) forwards;
+
+  &:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+
+  &:hover {
+    animation: hello-bounce 0.5s ease;
+  }
+}
+
+@keyframes hello-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.6em) rotate(-12deg) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hello-bounce {
+  0%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-0.25em) rotate(6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hello span {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 // on phones the framed photo shrinks so the text keeps enough width
