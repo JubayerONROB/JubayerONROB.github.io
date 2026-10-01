@@ -55,3 +55,35 @@ body[data-slug="graph"] .graph > .graph-outer {
 body[data-slug="index"] .page-header {
   margin-top: 1.5rem;
 }
+
+// Minimal homepage: a single paragraph of linked prose with the portrait
+// cropped into the top-right corner. The right sidebar (graph, backlinks)
+// is hidden on the homepage only so the page stays quiet.
+body[data-slug="index"] {
+  #quartz-body .sidebar.right,
+  .content-meta {
+    display: none;
+  }
+
+  article {
+    font-size: 1.15rem;
+    line-height: 1.8;
+
+    img {
+      float: right;
+      width: 6.5rem;
+      height: 6.5rem;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid var(--lightgray);
+      margin: 0 0 1rem 1.5rem;
+    }
+
+    a {
+      text-decoration: underline;
+      text-decoration-color: var(--secondary);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 4px;
+    }
+  }
+}

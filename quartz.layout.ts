@@ -78,8 +78,6 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ContentMeta(),
     Component.TagList(),
-    Component.LabConsole(),
-    Component.PixelHero(),
   ],
   left: [
     Component.PageTitle(),
