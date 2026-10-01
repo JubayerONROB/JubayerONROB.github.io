@@ -178,3 +178,18 @@ article a:not([role="anchor"]):not(.tag-link) {
     clip-path: var(--cut-img-b);
   }
 }
+
+// Mobile menu: the site title is a tall, multi-line header, which centers the
+// hamburger button well below the top of the bar. The open menu overlay starts
+// near the top of the screen, so its first item ("About") ended up under the
+// button. Keep the title compact and start the menu list below the button.
+@media all and (max-width: 800px) {
+  .page-title {
+    font-size: 1.3rem;
+    line-height: 1.25;
+  }
+
+  .explorer:not(.collapsed) > .explorer-content {
+    padding-top: 5.5rem;
+  }
+}
