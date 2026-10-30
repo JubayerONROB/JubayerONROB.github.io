@@ -15,8 +15,17 @@ Major in Communication and Signal Processing (CSP) · CGPA: 3.83/4.00
 ## Thesis & Ongoing Research
 
 **[[work/research/proactive-conversation-assistant|Proactive Conversation Assistant: LLM Pipeline]]** — NLP, Edge AI · Feb 2025 – Present
-- Real-time wearable assistant deciding when to interrupt a conversation and what to say, using a two-stage LLM pipeline evaluated on 28,058 decision points; reduced unnecessary generator calls by 7.62× and achieved up to 4.39× lower wall-clock time with an 8B generator.
-- Found persistent user-memory context to be the strongest contributor to hint quality (24.7-point drop in exact match when removed); designed a compact 1B-parameter decoder sharing one adapter between interruption detection and response generation, reducing resident weights to 1.05 GB with 1.3–1.8× lower compute.
+- Reimplemented a real-time wearable assistant that decides when to interrupt a conversation and what to say, using a two-stage LLM pipeline that substantially cuts unnecessary generator calls and latency.
+- Found persistent user memory to be the strongest factor in hint quality; designed a compact decoder that shares one adapter for interruption detection and response generation, lowering memory and compute over the two-model pipeline.
+
+**[[work/projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]]** — OpenCLIP, ViT, PyTorch · Oct 2024 – Jan 2025
+- Developed a deepfake detection model using OpenCLIP-ViT; achieved 98% training and 97% validation accuracy.
+- Tested on IEEE SP Cup 2025 dataset (43k real, 219k fake images) with strict mini-batch training.
+
+## Publications
+
+1. A. J. A. Jubayer Talukder and M. A. Haque, "When to Assist and What to Suggest: Joint Gating and Memory-Grounded Hint Generation in One Compact Decoder," arXiv preprint [arXiv:2610.40611](https://arxiv.org/abs/2610.40611), 2026.
+2. M. Nakib, S. Sarkar, A. J. A. Jubayer Talukder, and M. A. Haque, "PairCLIP-SWA: Similarity-Guided Balancing and Stochastic Weight Averaging for Generalized Deepfake Image Detection with OpenCLIP," arXiv preprint [arXiv:2610.37874](https://arxiv.org/abs/2610.37874), 2026.
 
 ## Projects
 
@@ -25,7 +34,6 @@ See the full [[work/projects/index|project archive]] for details on:
 - [[work/projects/ultrasonic-obstacle-mapping-bot|Ultrasonic Obstacle Mapping Bot]]
 - [[work/projects/hybrid-router-vinci-monsoon|Hybrid Router: Two-Stage Local-First LLM Agent]]
 - [[work/projects/vlsi-16bit-square-rooter|16-bit Binary Square Rooter]]
-- [[work/projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]]
 - [[work/projects/brain-tumor-detection-mri|Brain Tumor Detection on MRI Images]]
 - [[work/projects/vlsi-pd-handbook|Physical Design Optimization Handbook]]
 - [[work/projects/icml2026-agent-repro|ICML 2026 Agent Reproducibility Challenge]]
