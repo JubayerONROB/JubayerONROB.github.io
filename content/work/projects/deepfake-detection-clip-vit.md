@@ -97,4 +97,6 @@ Not documented yet.
 
 ## Related
 
+[[work/research/pairclip-swa-deepfake-detection|PairCLIP-SWA research write-up]] — the paper behind this project.
+
 [[work/projects/brain-tumor-detection-mri|Brain Tumor Detection on MRI Images]] — another applied computer-vision/classification project.
