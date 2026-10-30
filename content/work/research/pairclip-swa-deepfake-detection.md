@@ -1,5 +1,5 @@
 ---
-title: "PairCLIP-SWA: Generalized Deepfake Image Detection with OpenCLIP"
+title: "Generalized Deepfake Image Detection with OpenCLIP"
 date: 2026-10-27
 tags:
   - research
