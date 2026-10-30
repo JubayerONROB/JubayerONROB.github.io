@@ -9,43 +9,50 @@ tags:
 status: ongoing
 ---
 
-`nlp` `edge-ai` `llm` · Feb 2025 – Present · **Status: Ongoing (BSc Thesis)**
+`nlp` `edge-ai` `llm` · Feb 2025 – Present · **Status: Ongoing (BSc Thesis) · [arXiv:2610.40611](https://arxiv.org/abs/2610.40611)**
 
 [GitHub →](https://github.com/JubayerONROB/proactive-conversation-assistant)
 
 ## Abstract
 
-A real-time wearable assistant that decides *when* to interrupt a conversation and *what* to say, using a two-stage LLM pipeline evaluated on 28,058 decision points. The system reduces unnecessary generator calls by 7.62× and achieves up to 4.39× lower wall-clock time with an 8B generator.
+A proactive assistant listens to a conversation and sometimes offers a short, memory-grounded hint, like a name the person is reaching for. It has to decide both *when* to help and *what* to suggest. Current systems use a small gate model plus a larger generator model. This work tests both together on 28,058 decision points, and then asks whether one compact decoder can do both jobs. The result is described in the paper *When to Assist and What to Suggest: Joint Gating and Memory-Grounded Hint Generation in One Compact Decoder* (A. J. A. Jubayer Talukder and M. A. Haque, [arXiv:2610.40611](https://arxiv.org/abs/2610.40611)).
 
 ## Methodology
 
-The pipeline separates **interruption detection** (should the assistant speak now?) from **hint generation** (what should it say?), running as two stages so the expensive generator is only invoked when the cheaper detector fires. This two-stage split is what drives the call-reduction and latency gains over a single always-on generator.
+The two-model pipeline follows LlamaPIE (Chen et al., 2025) and was reimplemented for this study. A small gate decides whether a hint is needed, and a larger generator writes it only when the gate fires. The new design is a single 1B decoder with one shared adapter. It reads the gate decision from an intermediate layer, and when the gate fires it continues through the remaining layers in the same pass to write the hint. Both designs read a persistent user memory profile.
 
 ```mermaid
 flowchart TD
-    A[Conversation Audio Stream] --> B[Interruption Detector<br/>lightweight, always-on]
-    B -->|no interruption needed| A
-    B -->|interruption triggered| C[Hint Generator<br/>8B, invoked on-demand]
-    C --> D[User-Memory Context]
-    D --> C
-    C --> E[Spoken Hint]
+    A[Conversation + user memory profile] --> B{Gate: help now?}
+    B -- no --> C[Stay silent]
+    B -- yes --> D[Generate a short hint]
 ```
+
+In the two-model pipeline the gate and the generator are separate models. In the unified decoder the gate reads layer 6 or 10 of the same 16-layer model that then writes the hint.
 
 ## Key findings
 
-- Persistent user-memory context is the strongest contributor to hint quality — removing it causes a **24.7-point drop in exact match**.
-- A compact **1B-parameter decoder** that shares one adapter between interruption detection and response generation reduces resident weights to **1.05 GB**, with **1.3–1.8× lower compute** than the two-model pipeline — making on-device / wearable deployment realistic.
+- Scores for the generator alone are best-case numbers that assume a perfect gate. Behind a real gate, end-to-end exact match is 0.2619 against a ceiling of 0.2971, so there is a lot of room to improve.
+- A gate pays off through precision and compute. It cuts generator calls by 7.62×, which saves 4.39× wall-clock time with an 8B generator but only 1.38× with a 1B one, because the gate itself takes most of the time.
+- The memory profile drives hint quality. Removing it costs 24.7 exact-match points. A larger generator or retrieval over the profile adds nothing on exact match.
+- One 1B decoder can do both jobs. At its final checkpoint it matches or beats the two-model pipelines on automatic end-to-end measures, with 1.31–1.76× less wall-clock time than the matched 1B pipeline.
+- In a human evaluation, people rate the single model level with the matched 1B pipeline and below the 8B one. They also confirm the memory effect.
 
 ## Results
 
 | Metric | Result |
 |---|---|
-| Decision points evaluated | 28,058 |
+| Decision points evaluated | 28,058 (3,356 triggers) |
+| End-to-end exact match behind a real gate (1B generator) | 0.2619, against a ceiling of 0.2971 |
+| End-to-end precision | 0.2387 |
 | Reduction in generator calls | 7.62× |
-| Wall-clock speedup (8B generator) | up to 4.39× |
-| Exact-match drop without user-memory context | 24.7 points |
-| Resident weights (shared-adapter 1B decoder) | 1.05 GB |
-| Compute reduction vs. two-model pipeline | 1.3–1.8× |
+| Wall-clock saving from the gate | 4.39× (8B generator), 1.38× (1B generator) |
+| Exact-match drop without the memory profile | 24.7 points (BERTScore 0.57 to 0.35) |
+| Unified decoder, end-to-end exact match | 0.2929 (exit at layer 6), 0.2908 (layer 10), against 0.2619 |
+| Unified decoder, wall-clock time | 1.31–1.76× less than the matched 1B pipeline, 3.41× less than the 8B pipeline (layer 6) |
+| Resident weights, unified decoder | up to 1.05 GB (one base model plus a 42 MB adapter) |
+
+**Human evaluation.** 1,144 ratings over 32 dialogues. With the memory profile, hints from the 8B generator scored 4.01 on the 5-point uptake scale, against 3.18 without it. The unified model was level with the matched 1B pipeline and lower than the 8B pipeline. Of the automatic scores, LlamaPIE's own judge tracked human ratings best, and exact match tracked them least, so the paper reports exact match as a strict lower bound.
 
 ## Future work
 
