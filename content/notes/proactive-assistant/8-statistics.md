@@ -44,6 +44,33 @@ We often compare two systems on the **same** items. For each item, record who is
 
 Only the **disagreements** ($b$ and $c$) matter. If A and B are equally good, $b$ and $c$ should be about equal. McNemar's test asks how unlikely the observed split is. A small $p$-value means one system is really better on these items.
 
+![Bootstrap and McNemar](/attachments/notes/proactive-assistant/fig21-bootstrap-mcnemar.png)
+*Figure 18. (a) The bootstrap, step by step. (b) McNemar's test on a 2 by 2 table. The boxes show symbols only, not data. [PDF](/attachments/notes/proactive-assistant/fig21-bootstrap-mcnemar.pdf)*
+
+### The bootstrap in five steps
+
+1. Start with your test set: here, **866 dialogues**.
+2. **Resample**: draw 866 dialogues at random **with replacement**. Some dialogues appear twice or more. Some do not appear at all.
+3. Compute your score (for example the F1) on this resample. Call it $s_1$.
+4. Repeat many times ($B$ times, often 1,000 or more). You get $s_1, s_2, \ldots, s_B$.
+5. **Sort** the scores. The range from the **2.5th** to the **97.5th percentile** is the 95% confidence interval.
+
+*Why it works.* Your test set is a random sample from all possible dialogues. Resampling from it imitates "drawing a new test set" many times, so you can see how much the score moves by luck.
+
+### McNemar's test in four steps
+
+1. Run systems A and B on the **same items**.
+2. Fill the 2 by 2 table. Count $b$ (only A is right) and $c$ (only B is right). Ignore items where both are right or both are wrong, because they do not tell A and B apart.
+3. If A and B are equally good, $b$ and $c$ should be about equal. The usual form of the statistic is
+
+$$
+\chi^2 = \frac{(b - c)^2}{b + c}
+$$
+
+4. A large $\chi^2$ gives a small $p$-value. Then the gap between $b$ and $c$ is unlikely to be luck, and one system is really better on these items.
+
+> **Toy example.** A and B are tested on 100 items. $b = 12$ and $c = 4$. Then $\chi^2 = (12-4)^2/(12+4) = 4$. If $b = 9$ and $c = 7$, then $\chi^2 = 0.25$, which is tiny, so we call it a tie. (These numbers are made up to show the arithmetic. This is the textbook form; the paper does not print the formula, and exact variants exist for small counts.)
+
 ## 8.4 The $p$-value and the multiple-testing problem
 
 The **$p$-value** is the chance of seeing a difference at least this big if there were really no difference. Small ($< 0.05$) is evidence of a real effect.

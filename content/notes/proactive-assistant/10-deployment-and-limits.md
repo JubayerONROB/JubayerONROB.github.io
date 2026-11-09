@@ -44,7 +44,7 @@ We timed both final checkpoints on a **4-core cloud CPU**, batch size one, in ON
 | Ideal saving $16/k$ | 2.67× | 1.60× |
 
 ![CPU savings](/attachments/notes/proactive-assistant/fig18-cpu-savings.png)
-*Figure 20. Measured speed-up of the gate from early exit, compared with the ideal $16/k$. [PDF](/attachments/notes/proactive-assistant/fig18-cpu-savings.pdf)*
+*Figure 21. Measured speed-up of the gate from early exit, compared with the ideal $16/k$. [PDF](/attachments/notes/proactive-assistant/fig18-cpu-savings.pdf)*
 
 - ONNX Runtime delivers a saving close to the ideal $L/k$ of [[notes/proactive-assistant/5-early-exit-and-unified-decoder|the cost formula]].
 - **4-bit weights do not speed up** the gate at batch size one (1,793 ms against 1,611 ms in fp32). They save **memory** (1.65 GB against 4.99 GB).
