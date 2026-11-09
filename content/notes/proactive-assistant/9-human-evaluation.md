@@ -43,14 +43,14 @@ With the profile, the 8B generator's hints average **4.01** uptake. Without it: 
 | Unified $k=10$ vs 8B (memory) | 3.58 | 4.01 | −0.44 | $[-0.83, -0.07]$ | lower |
 
 ![Human forest plot](/attachments/notes/proactive-assistant/fig20-human-forest.png)
-*Figure 18. Paired differences in mean uptake with confidence intervals. A dashed line marks the non-inferiority margin of −0.25. [PDF](/attachments/notes/proactive-assistant/fig20-human-forest.pdf)*
+*Figure 19. Paired differences in mean uptake with confidence intervals. A dashed line marks the non-inferiority margin of −0.25. [PDF](/attachments/notes/proactive-assistant/fig20-human-forest.pdf)*
 
 So people rate the unified model **level with the matched 1B pipeline** and **below the 8B one**, although it is higher on end-to-end exact match. An exploratory (unplanned) look: the 8B generator rates +0.42 above the 1B one (4.01 vs 3.60), while the two tie on exact match.
 
 ## 9.5 Result 3: which automatic score matches people?
 
 ![Correlation with human uptake](/attachments/notes/proactive-assistant/fig10-human-correlation.png)
-*Figure 19. Pearson $r$ between human uptake and each automatic signal, over 136 hints. [PDF](/attachments/notes/proactive-assistant/fig10-human-correlation.pdf)*
+*Figure 20. Pearson $r$ between human uptake and each automatic signal, over 136 hints. [PDF](/attachments/notes/proactive-assistant/fig10-human-correlation.pdf)*
 
 | Rendering | EM | BERTScore | ROUGE-1 | native judge |
 |---|---|---|---|---|
