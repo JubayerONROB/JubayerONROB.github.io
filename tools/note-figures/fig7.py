@@ -33,36 +33,6 @@ def fig_text_to_hidden():
     label(ax, 0.08, 0.65, "Each layer rewrites every token's vector\nusing attention and an MLP.", ha="left", fs=6.0)
     save(fig, "fig11-text-to-hidden")
 
-# ---- 12: system overview ----
-def fig_overview():
-    W, H = FULL, 2.4
-    fig, ax = canvas(W, H)
-    label(ax, 0.08, H - 0.12, "The whole system on one page (adapted from Figure 1b of the paper)", ha="left", bold=True)
-    y = 1.3
-    box(ax, 0.08, y, 0.8, 0.5, "microphone\naudio", fs=5.9)
-    arrow(ax, (0.88, y + 0.25), (1.0, y + 0.25))
-    box(ax, 1.0, y, 1.0, 0.5, "streaming ASR\n+ diarization", fs=5.9)
-    arrow(ax, (2.0, y + 0.25), (2.12, y + 0.25))
-    box(ax, 2.12, y - 0.1, 1.2, 0.7, "dialogue buffer\n3–5 turn window\nsilence markers\nspeaker labels", fs=5.6)
-    box(ax, 2.12, 0.25, 1.2, 0.55, "memory store\nprofile + events", fs=5.8)
-    arrow(ax, (3.32, y + 0.25), (3.6, y + 0.25))
-    arrow(ax, (3.32, 0.52), (3.6, 0.52))
-    # dashed trained box
-    ax.add_patch(Rectangle((3.5, 0.15), 3.25, 1.85, fill=False, ec=BLK, lw=0.6, ls=(0, (3, 2)), zorder=1))
-    label(ax, 5.1, 1.9, "trained and evaluated in this paper", fs=5.8)
-    box(ax, 3.6, 0.3, 0.8, 1.2, "one prompt:\nsystem +\nprofile $M_w$ +\ndialogue\n$D_{\\leq i}$", fs=5.6)
-    arrow(ax, (4.4, 0.9), (4.6, 0.9))
-    for i in range(5):
-        block3d(ax, 4.62 + i * 0.2, 0.75, 0.15, 0.3, 0.05, RED if i == 2 else BLK)
-    label(ax, 5.1, 1.2, "layers 1 … $L$", fs=5.8)
-    label(ax, 4.62 + 2 * 0.2 + 0.08, 0.6, "exit at $k$", fs=5.6, color=RED)
-    arrow(ax, (5.7, 0.9), (5.85, 0.9), color=RED)
-    box(ax, 5.85, 0.7, 0.8, 0.4, "$p_i \\geq t$ ?", fs=5.9, color=RED)
-    label(ax, 6.25, 0.45, "yes: hint on the\nHUD display", fs=5.6, color=RED)
-    label(ax, 6.25, 1.35, "no: stay silent,\nno generation", fs=5.6)
-    arrow(ax, (6.25, 1.1), (6.25, 1.22))
-    save(fig, "fig12-system-overview")
-
 # ---- 13: focal loss curves ----
 def fig_focal():
     W, H = COL * 1.5, 2.4
@@ -242,5 +212,5 @@ def fig_forest():
     save(fig, "fig20-human-forest")
 
 if __name__ == "__main__":
-    for f in (fig_text_to_hidden, fig_overview, fig_focal, fig_gates, fig_calibration, fig_retrieval, fig_noise, fig_cpu, fig_errors, fig_forest):
+    for f in (fig_text_to_hidden, fig_focal, fig_gates, fig_calibration, fig_retrieval, fig_noise, fig_cpu, fig_errors, fig_forest):
         f()
