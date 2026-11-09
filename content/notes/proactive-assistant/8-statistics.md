@@ -18,6 +18,11 @@ In the paper, the noise floor for gate F1 is **0.0070**. It comes from a single 
 
 > **Rule of thumb in the paper.** If a gap is smaller than 0.0070 F1, call it a tie.
 
+![Noise floor](/attachments/notes/proactive-assistant/fig17-noise-floor.png)
+*Figure 17. Three-seed mean and standard deviation for the unified gate at step 21,703, the noise-floor band, the cascade gate, and the single-seed final checkpoints. [PDF](/attachments/notes/proactive-assistant/fig17-noise-floor.pdf)*
+
+> **How to read it.** The $k=10$ mean (0.8022) sits on the cascade line (0.8002): a tie. The $k=6$ mean (0.7846) is more than the noise floor below it. The final-checkpoint diamonds come from one seed each, so they carry no error bar.
+
 ## 8.2 Confidence intervals and the bootstrap
 
 A **95% confidence interval (CI)** is a range that, over many repeats of the study, would contain the true value 95% of the time. If the interval for a difference **includes zero**, we cannot say there is a real difference.

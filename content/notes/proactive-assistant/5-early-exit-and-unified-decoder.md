@@ -32,7 +32,7 @@ Use **one** 1B model for both jobs.
 - If $p_i \ge t$: **keep going** in the **same forward pass** through layers $k{+}1 \ldots L$ and write the hint.
 
 ![Cascade and unified decoder](/attachments/notes/proactive-assistant/fig6-architectures.png)
-*Figure 6. (a) The cascade. (b) The unified decoder. The red path is the one that runs only when the gate fires. [PDF](/attachments/notes/proactive-assistant/fig6-architectures.pdf)*
+*Figure 9. (a) The cascade. (b) The unified decoder. The red path is the one that runs only when the gate fires. [PDF](/attachments/notes/proactive-assistant/fig6-architectures.pdf)*
 
 We tried exit depths $k = 6$ and $k = 10$ (out of $L = 16$). One base model and **one shared LoRA adapter** serve both objectives.
 
@@ -61,7 +61,7 @@ Read them case by case:
 So a silent marker costs only $k/L$ of a pass. That gives an **ideal saving of $L/k$**: $16/6 = 2.67\times$ at $k = 6$ and $16/10 = 1.60\times$ at $k = 10$. A triggered marker costs **exactly one pass** in the unified model, not one plus the generator.
 
 ![Cost per marker](/attachments/notes/proactive-assistant/fig7-cost.png)
-*Figure 7. Cost of one marker in full passes of the 1B model. The dashed box $c_{\text{gen}}$ is a symbol, not a measured size. [PDF](/attachments/notes/proactive-assistant/fig7-cost.pdf)*
+*Figure 10. Cost of one marker in full passes of the 1B model. The dashed box $c_{\text{gen}}$ is a symbol, not a measured size. [PDF](/attachments/notes/proactive-assistant/fig7-cost.pdf)*
 
 ## 5.5 The price of the idea
 

@@ -42,12 +42,15 @@ With the profile, the 8B generator's hints average **4.01** uptake. Without it: 
 | Unified $k=6$ vs 8B (memory) | 3.64 | 4.01 | −0.38 | $[-0.69, -0.04]$ | lower |
 | Unified $k=10$ vs 8B (memory) | 3.58 | 4.01 | −0.44 | $[-0.83, -0.07]$ | lower |
 
+![Human forest plot](/attachments/notes/proactive-assistant/fig20-human-forest.png)
+*Figure 18. Paired differences in mean uptake with confidence intervals. A dashed line marks the non-inferiority margin of −0.25. [PDF](/attachments/notes/proactive-assistant/fig20-human-forest.pdf)*
+
 So people rate the unified model **level with the matched 1B pipeline** and **below the 8B one**, although it is higher on end-to-end exact match. An exploratory (unplanned) look: the 8B generator rates +0.42 above the 1B one (4.01 vs 3.60), while the two tie on exact match.
 
 ## 9.5 Result 3: which automatic score matches people?
 
 ![Correlation with human uptake](/attachments/notes/proactive-assistant/fig10-human-correlation.png)
-*Figure 10. Pearson $r$ between human uptake and each automatic signal, over 136 hints. [PDF](/attachments/notes/proactive-assistant/fig10-human-correlation.pdf)*
+*Figure 19. Pearson $r$ between human uptake and each automatic signal, over 136 hints. [PDF](/attachments/notes/proactive-assistant/fig10-human-correlation.pdf)*
 
 | Rendering | EM | BERTScore | ROUGE-1 | native judge |
 |---|---|---|---|---|
@@ -62,7 +65,17 @@ So people rate the unified model **level with the matched 1B pipeline** and **be
 
 Rating open-ended text with a strong model, without a reference, is standard (Zheng et al., 2023). Reported agreement with human preference is high enough that many people use it as a proxy. But it must be **checked on each task**. That is what this study does for ours.
 
-## 9.7 Check yourself
+## 9.7 Words used on this page
+
+- **Annotator.** A person who rates items.
+- **Rubric.** The written rules for the rating.
+- **Blinded and unblinded.** Blinded means the rater (or analyst) does not know which system made a hint. Unblinded means they do.
+- **Interim look.** Checking results before the study is finished.
+- **Pre-registered contrast (H1, H2a, H2b).** A comparison named in the plan before data existed. H1 is the main one (memory vs no memory). H2 are the unified-model tests.
+- **Renderings.** The versions of the same hints produced by different systems.
+- **Uptake.** How much the hint helped the conversation, on a 1 to 5 scale.
+
+## 9.8 Check yourself
 
 - Why does every version place hints at the same trigger markers?
 - What does "non-inferiority not shown" mean?

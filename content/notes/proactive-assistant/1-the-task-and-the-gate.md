@@ -50,10 +50,24 @@ The symbol $\mathbf{1}[\cdot]$ is the **indicator**. It is 1 if the statement in
 
 **Decision 2: the hint.** Only if $g_i = 1$, the system writes a hint $h_i$ of **one to three words** using $D_{\le i}$ and the user's memory $M_w$ (see [[notes/proactive-assistant/3-memory-and-prompt|page 3]]).
 
+### The whole system on one page
+
+![System overview](/attachments/notes/proactive-assistant/fig12-system-overview.png)
+*Figure 2. From microphone to display. Only the dashed box is trained and evaluated in the paper. [PDF](/attachments/notes/proactive-assistant/fig12-system-overview.pdf)*
+
+Words in this figure:
+
+- **Wearer.** The one person who uses the assistant (for example, someone wearing smart glasses). The memory profile belongs to this person.
+- **ASR (automatic speech recognition).** Software that turns speech audio into text. In our experiments the dialogues are **already text**, so ASR errors are **not** in any number. This is a stated limit.
+- **Diarization.** Labelling **who** is speaking in each part of the audio (User, Speaker 1, ...).
+- **Dialogue buffer.** The last 3 to 5 turns, with speaker labels and silence markers, kept ready for the model.
+- **Utterance.** One thing one person says before another person speaks or a silence starts.
+- **HUD (head-up display).** The small display in the glasses where a hint would appear.
+
 ## 1.4 Why the threshold matters
 
 ![Threshold and four outcomes](/attachments/notes/proactive-assistant/fig2-threshold.png)
-*Figure 2. (a) The threshold $t$ splits scores into "silent" and "fire". (b) Every marker lands in one of four boxes. [PDF](/attachments/notes/proactive-assistant/fig2-threshold.pdf)*
+*Figure 3. (a) The threshold $t$ splits scores into "silent" and "fire". (b) Every marker lands in one of four boxes. [PDF](/attachments/notes/proactive-assistant/fig2-threshold.pdf)*
 
 A gate can make two kinds of mistakes, and they cost different things:
 

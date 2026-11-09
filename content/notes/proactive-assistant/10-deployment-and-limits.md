@@ -43,11 +43,22 @@ We timed both final checkpoints on a **4-core cloud CPU**, batch size one, in ON
 | Early-exit saving, PyTorch eager | 1.75× | 1.35× |
 | Ideal saving $16/k$ | 2.67× | 1.60× |
 
+![CPU savings](/attachments/notes/proactive-assistant/fig18-cpu-savings.png)
+*Figure 20. Measured speed-up of the gate from early exit, compared with the ideal $16/k$. [PDF](/attachments/notes/proactive-assistant/fig18-cpu-savings.pdf)*
+
 - ONNX Runtime delivers a saving close to the ideal $L/k$ of [[notes/proactive-assistant/5-early-exit-and-unified-decoder|the cost formula]].
 - **4-bit weights do not speed up** the gate at batch size one (1,793 ms against 1,611 ms in fp32). They save **memory** (1.65 GB against 4.99 GB).
 - Half precision (bf16, fp16) is **slower** here, because these CPUs lack the instructions that make it fast.
 - The NF4 variant reproduces the GPU model: gate probabilities correlate at $r = 0.998$ ($k=6$) and $0.991$ ($k=10$), decisions agree on 100.0% and 96.7% of sampled markers.
 - Timings come from a **cloud container**, not a phone or glasses. No consumer device was measured.
+
+**Words used here.**
+
+- **ONNX Runtime.** A program that runs a model saved in the ONNX format. It is tuned for fast inference, often faster than plain PyTorch on a CPU.
+- **PyTorch eager mode.** Running the model step by step in PyTorch without special compilation. Each call has overhead that does not shrink when fewer layers run.
+- **Latency.** The time from input to output for one request, here milliseconds per marker.
+- **Cache.** Saved intermediate results that are reused. **Prefix caching** reuses the computation for a prompt beginning that does not change.
+- **Cloud container.** A rented virtual machine. Its exact CPU is hidden, so timings also depend on which host you get.
 
 ## 10.6 Limits of the paper
 

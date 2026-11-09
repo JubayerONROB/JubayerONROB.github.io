@@ -35,6 +35,9 @@ For each marker, the window is the dialogue up to that point, cut from the front
 | Prompted LLM, zero-shot | 0.1381 | 0.0710 | 0.1543 |
 | Prompted LLM, few-shot ($k=4$) | 0.1914 | 0.1164 | 0.1545 |
 
+![Gate comparison](/attachments/notes/proactive-assistant/fig14-gate-comparison.png)
+*Figure 14. Gate PA-F1 of every model we tried as a gate (Table 2). Our chosen gate is red. [PDF](/attachments/notes/proactive-assistant/fig14-gate-comparison.pdf)*
+
 **What it shows.**
 
 - The best decoder gate is **Llama-3.2-1B** (0.8002), the one the two-stage baseline uses.
@@ -44,7 +47,7 @@ For each marker, the window is the dialogue up to that point, cut from the front
 ## 7.3 Experiment 2: what does the generator need?
 
 ![Memory profile effect](/attachments/notes/proactive-assistant/fig9-memory.png)
-*Figure 9. Exact match on the 3,356 true triggers for different memory conditions. [PDF](/attachments/notes/proactive-assistant/fig9-memory.pdf)*
+*Figure 15. Exact match on the 3,356 true triggers for different memory conditions. [PDF](/attachments/notes/proactive-assistant/fig9-memory.pdf)*
 
 **The memory profile is the key.** Same adapter, same triggers:
 
@@ -61,6 +64,9 @@ For each marker, the window is the dialogue up to that point, cut from the front
 **A bigger generator does not help on exact match.** Llama-3.1-8B and Llama-3.2-1B tie at the oracle-gate stage ($p = 0.79$) and end to end ($p = 0.338$). Qwen2.5-7B scores 35.79% at the oracle stage, but it is an Instruct model compared with a base one, so family and instruction tuning change together.
 
 **Retrieval does not help.** We ranked profile units by several rankers (bm25, tfidf, embed, hybrid) and kept $k$ units. Exact match falls as $k$ shrinks (0.2935 at 20 units, 0.2864 at 10, 0.2810 at 5). The values at $k=10$ and $k=5$ are significantly below the full profile (Holm-corrected $p = 0.0022$ and $0.0013$). Across **45 configurations**, none beats the full profile. The full profile already fits, so retrieval only removes information.
+
+![Retrieval grid](/attachments/notes/proactive-assistant/fig16-retrieval-grid.png)
+*Figure 16. Exact match for every ranker and depth on a 200-marker subsample, with the full-profile control (0.305). Values are rounded to two decimals, as in the paper's figure. [PDF](/attachments/notes/proactive-assistant/fig16-retrieval-grid.pdf)*
 
 ## 7.4 Experiment 3: from ceiling to deployment
 
@@ -106,7 +112,19 @@ From Table 6 of the paper, as a share of the 3,356 true triggers:
 
 Non-matching hints split across the three error types in similar shares for every generator.
 
-## 7.7 Check yourself
+## 7.7 Words used on this page
+
+- **Baseline.** A simple or earlier system we compare against.
+- **Ablation.** Removing or changing one part to see how much it matters. Removing the memory profile is an ablation.
+- **Subsample.** A smaller random part of the data, used when a test is expensive (the retrieval tests use 200 markers).
+- **Canonical marker index.** The one fixed list of 28,058 test markers shared by every model.
+- **Source corpora (perl, soda, synthetic).** The three dialogue collections in LlamaPIE's release that our test dialogues come from. The paper thanks the creators of SODA and PerLTQA, whose public releases it uses. *Synthetic* means dialogue written by a language model.
+- **Ranker (bm25, tfidf, embed, hybrid).** Ways to order profile facts by relevance. *bm25* and *tfidf* score word overlap. *embed* compares meaning with vectors. *hybrid* mixes them.
+- **ASL recipe.** The specific training recipe that gave RoBERTa-large its best result (focal loss with full fine-tuning).
+- **Zero-shot and few-shot.** Asking a model to do the task with no examples (zero-shot) or with a few worked examples in the prompt (few-shot, here 4).
+- **Cross-family comparison.** Comparing models from different companies or designs (Llama vs Qwen). Many things differ at once.
+
+## 7.8 Check yourself
 
 - Which one change cost the most exact-match points?
 - Why was the "mismatched profile" test useful?

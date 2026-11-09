@@ -35,8 +35,11 @@ A **parameter** is one learned number. More parameters usually means more memory
 
 The hidden state **after $k$ layers** is written $h_k$. This is the key object in our paper: the gate reads $h_k$ at a middle layer $k$.
 
+![From text to a decision](/attachments/notes/proactive-assistant/fig11-text-to-hidden.png)
+*Figure 4. The path from text to the two kinds of output. The red block is layer $k$, where our gate reads. [PDF](/attachments/notes/proactive-assistant/fig11-text-to-hidden.pdf)*
+
 ![Prefill and decoding](/attachments/notes/proactive-assistant/fig3-transformer.png)
-*Figure 3. (a) Prefill reads the whole prompt in one pass. (b) Decoding writes one token at a time. [PDF](/attachments/notes/proactive-assistant/fig3-transformer.pdf)*
+*Figure 5. (a) Prefill reads the whole prompt in one pass. (b) Decoding writes one token at a time. [PDF](/attachments/notes/proactive-assistant/fig3-transformer.pdf)*
 
 ## 2.4 What happens inside a layer (short version)
 
@@ -78,7 +81,20 @@ It maps a hidden state of size $d$ to **two numbers**: one for "no hint needed" 
 
 The special part of our work is **where** the head is attached. A normal classifier reads the last layer. Ours reads layer $k$, in the middle. See [[notes/proactive-assistant/5-early-exit-and-unified-decoder|page 5]].
 
-## 2.8 Check yourself
+## 2.8 Words you will meet later
+
+- **Vocabulary.** The full list of tokens the model knows (over 100,000 for Llama). The LM head gives one logit per vocabulary entry.
+- **Parameter.** One learned number (a weight). "1B" means about one billion of them.
+- **Attention head.** A layer runs several attention computations side by side. Each one is a head. Do not confuse it with the **classifier head** (a matrix at the end).
+- **MLP.** The small feed-forward network inside each layer (see 2.4).
+- **Decoder and encoder.** A **decoder** model (Llama, Qwen, Gemma, SmolLM2) reads left to right and can write text. An **encoder** model (RoBERTa) reads the whole text in both directions and is used for classification, not writing.
+- **Base and Instruct checkpoints.** A *base* model is trained only to continue text. An *Instruct* model has extra training to follow instructions. They behave differently, so comparing them mixes two changes.
+- **Checkpoint.** A saved copy of the weights at some training step.
+- **Number precision: fp32, fp16, bf16.** The number of bits used for each weight. fp32 uses 32 bits (accurate, big). fp16 and bf16 use 16 bits (half the memory). On CPUs without special instructions, 16-bit math can be **slower** (see [[notes/proactive-assistant/10-deployment-and-limits|page 10]]).
+- **Batch size.** How many examples run through the model together. **Batch size one** means one marker at a time, like a real assistant on a device.
+- **Forward pass.** One run of the input through the layers.
+
+## 2.9 Check yourself
 
 - What is the difference between prefill and decoding?
 - What does $h_k$ mean?

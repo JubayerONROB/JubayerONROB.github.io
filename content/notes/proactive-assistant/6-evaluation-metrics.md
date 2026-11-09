@@ -12,7 +12,7 @@ A metric is a way to turn "how good is it?" into a number. This page explains ev
 
 ## 6.1 The four outcomes
 
-(See Figure 2 on [[notes/proactive-assistant/1-the-task-and-the-gate|page 1]].) For each marker, compare the gate to the reference label:
+(See Figure 3 on [[notes/proactive-assistant/1-the-task-and-the-gate|page 1]].) For each marker, compare the gate to the reference label:
 
 | | Reference: trigger | Reference: no trigger |
 |---|---|---|
@@ -63,6 +63,9 @@ $$\text{ECE} = \sum_{b} \frac{n_b}{N}\,\bigl|\,\text{acc}_b - \text{conf}_b\,\bi
 
 Result: the best-ranking gate (RoBERTa-large ASL, AUPRC 0.8902) is the **worst calibrated** (ECE 0.3036). The best-calibrated model (Gemma-3-1B, ECE 0.0425) ranks lower. ECE is 7.1 times bigger. This matters if you adapt the threshold from user feedback ([[notes/proactive-assistant/10-deployment-and-limits|page 10]]).
 
+![Ranking vs calibration](/attachments/notes/proactive-assistant/fig15-ranking-vs-calibration.png)
+*Figure 11. Left: how well each gate ranks (AUPRC). Right: how well its probabilities match reality (ECE, lower is better). Red marks the worst and the best calibrated gate. [PDF](/attachments/notes/proactive-assistant/fig15-ranking-vs-calibration.pdf)*
+
 ## 6.5 Generation metrics: is the hint right?
 
 **Exact match (EM).** The hint is correct only if it equals the reference hint exactly. Strict, but simple:
@@ -80,6 +83,19 @@ Why keep EM? It is the only metric with a clean **end-to-end** form. A suppresse
 **LLM judges.** A strong model rates the hint. LlamaPIE's **native judge** uses its own rubric. The paper tests which judges match people ([[notes/proactive-assistant/9-human-evaluation|page 9]]).
 
 **Error types.** Wrong hints are split into: **partial overlap**, **grounded but incorrect** (uses real profile facts), and **hallucination** (made up). For the 1B generator, of the 3,356 true triggers: 29.7% exact, 17.8% partial, 35.9% grounded other, 16.6% hallucinated.
+
+![Error types](/attachments/notes/proactive-assistant/fig19-error-types.png)
+*Figure 12. What the generators produce at the 3,356 true triggers, in percent (Table 6). The 'exact' share equals the oracle-gate exact match. [PDF](/attachments/notes/proactive-assistant/fig19-error-types.pdf)*
+
+**More words used above.**
+
+- **Cosine similarity.** How close in direction two vectors are. 1 means the same direction, 0 means unrelated. BERTScore uses it between word vectors.
+- **idf (inverse document frequency).** A weight that makes rare words count more. We turn it **off** (`idf=False`).
+- **Rescaling with a baseline.** Moving scores so that a random pair of texts scores near 0. The raw BERTScores sit in a narrow band, so a rescaled value is easier to read.
+- **Reference-free.** A judge that sees only the hint and the conversation, not the correct answer.
+- **Rubric.** A written list of rules a judge follows to give a score.
+- **Operating point.** One chosen threshold $t$ and the precision, recall and false-alarm rate it gives. "Deployed operating point" means the one we would actually use.
+- **Prevalence.** The share of positive cases in the data. Our trigger prevalence is 11.96% on test and 12.81% on validation.
 
 ## 6.6 Scoring both decisions together
 
@@ -107,7 +123,7 @@ $R$ is the gate's **recall**. $\text{EM}_{\text{fwd}}$ is the exact match on the
 **Worked numbers.** Deployed point, 1B generator: $R = 0.8391$ (the gate's recall). From Equation (3), $\text{EM}_{\text{fwd}} = 0.2619 / 0.8391 \approx 0.312$ (our arithmetic). That is **above** the 0.2971 ceiling. It suggests that the triggers the gate catches are a bit easier than average.
 
 ![Ceiling vs deployed](/attachments/notes/proactive-assistant/fig8-end-to-end.png)
-*Figure 8. (a) Ceilings (open) against scores behind a real gate (red). (b) Tightening to a 1% false-alarm budget gives more precision and less recall. [PDF](/attachments/notes/proactive-assistant/fig8-end-to-end.pdf)*
+*Figure 13. (a) Ceilings (open) against scores behind a real gate (red). (b) Tightening to a 1% false-alarm budget gives more precision and less recall. [PDF](/attachments/notes/proactive-assistant/fig8-end-to-end.pdf)*
 
 ## 6.7 Cost metrics
 

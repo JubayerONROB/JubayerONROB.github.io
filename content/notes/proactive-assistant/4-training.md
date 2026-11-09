@@ -32,7 +32,7 @@ $$y = W x + \frac{\alpha}{r}\, B A x$$
 In our code: rank $r = 16$, scale $\alpha = 32$, dropout 0.05, applied to every attention projection (`q`, `k`, `v`, `o`) and every MLP projection (`gate`, `up`, `down`).
 
 ![LoRA](/attachments/notes/proactive-assistant/fig5-lora.png)
-*Figure 5. The frozen path is black. The trained path is red. [PDF](/attachments/notes/proactive-assistant/fig5-lora.pdf)*
+*Figure 7. The frozen path is black. The trained path is red. [PDF](/attachments/notes/proactive-assistant/fig5-lora.pdf)*
 
 **The adapter is small.** One adapter is about **42 MB**. A second full 1B base model would be about **957 MB**. That is the core of the memory saving in [[notes/proactive-assistant/10-deployment-and-limits|page 10]].
 
@@ -68,6 +68,11 @@ $$\text{FL} = (1 - p_t)^{\gamma}\,\text{CE}$$
 
 When $p_t$ is near 1 (easy), $(1-p_t)^\gamma$ is near 0 and the loss almost disappears. When $p_t$ is small (hard), the factor is near 1. In our code $\gamma = 1.5$.
 
+![Focal loss curves](/attachments/notes/proactive-assistant/fig13-focal-loss.png)
+*Figure 8. Loss against the probability given to the true class. Both focal curves are far below cross-entropy where the model is already sure. These are plots of the formulas, not measured data. [PDF](/attachments/notes/proactive-assistant/fig13-focal-loss.pdf)*
+
+> **Worked check.** An easy example with $p_t = 0.9$: CE $= -\ln 0.9 \approx 0.105$. Focal loss with $\gamma = 1.5$ multiplies it by $(1-0.9)^{1.5} \approx 0.032$, giving about $0.0033$. The hard example $p_t = 0.1$ keeps $(0.9)^{1.5} \approx 0.85$ of its loss. So training effort goes to the hard cases.
+
 **What the paper found.** No alternative to plain cross-entropy was significantly better. Strong settings hurt: $\gamma = 2$ cost $-0.0310$ F1 and raising the trigger weight from 1 to 4 cost $-0.0278$ F1. Mild reweighting is harmless.
 
 ## 4.6 The joint loss of the unified model
@@ -84,7 +89,17 @@ In our code both $\lambda$ values are 1.
 
 The unified model trained for **2 epochs (53,772 steps)** over marker-level rows. The two-stage gate trained for **4 epochs** over dialogue-level samples. So the budgets differ and comparisons are between systems *as trained*. An **epoch** is one full pass over the training data.
 
-## 4.8 Check yourself
+## 4.8 Training words
+
+- **Adapter.** The small set of trained LoRA matrices. It sits on top of a frozen base model and can be saved and loaded separately (about 42 MB).
+- **Step.** One update of the weights from one small group of examples (a batch). The final unified checkpoint is at **step 53,772**.
+- **Epoch.** One full pass over all training examples.
+- **Seed.** A number that fixes the random choices (starting values, data order). The same configuration with different seeds gives slightly different scores. We ran three seeds at step 21,703 for the unified gate.
+- **Dropout.** Randomly switching off some values during training so the model does not rely on one path. Ours is 0.05, meaning 5%.
+- **Frozen.** Not changed by training.
+- **Overfitting.** Doing well on training data but badly on new data. This is why we choose settings on **validation** data and report on **test** data.
+
+## 4.9 Check yourself
 
 - Why does LoRA train fewer numbers than full fine-tuning?
 - If the model says "hint needed" with probability 0.2 and the truth is "hint needed", what is the cross-entropy?  (*Answer: $-\ln 0.2 \approx 1.61$.*)

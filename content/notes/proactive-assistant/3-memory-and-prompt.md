@@ -45,7 +45,7 @@ The model sees one long text, the **prompt**, with these parts in order:
 The dialogue is cut to the last **1,300 characters**. About 60.4% of training rows reach this limit, so the character cap, not the model's token limit, is what binds.
 
 ![Prompt anatomy](/attachments/notes/proactive-assistant/fig4-prompt.png)
-*Figure 4. The unified model and the generator read the profile. The gate of the cascade does not. [PDF](/attachments/notes/proactive-assistant/fig4-prompt.pdf)*
+*Figure 6. The unified model and the generator read the profile. The gate of the cascade does not. [PDF](/attachments/notes/proactive-assistant/fig4-prompt.pdf)*
 
 The profile adds **306 tokens** to every prompt. On the test split a prompt has 676 tokens with the profile and 370 without. This matters because prefill cost grows with prompt length, and the profile is not small.
 

@@ -123,3 +123,79 @@ tags:
 **Unified decoder.** Our model that gates from layer $k$ and continues to write the hint in the same pass.
 
 **Uptake.** LlamaPIE's 5-point human rating of how helpful a hint was.
+
+## More terms
+
+**Ablation.** Removing or changing one part to measure its effect.
+
+**Adapter.** The small trained LoRA matrices that sit on a frozen base model.
+
+**Annotator.** A person who rates items in a study.
+
+**ASR.** Automatic speech recognition: speech audio to text.
+
+**Attention head.** One of several parallel attention computations inside a layer.
+
+**Baseline.** An earlier or simpler system used for comparison.
+
+**Batch size.** How many examples run together. Batch size one is one at a time.
+
+**bf16 / fp16 / fp32.** Number formats with 16, 16 and 32 bits per value.
+
+**Checkpoint.** A saved copy of the model weights at some training step.
+
+**Cosine similarity.** Closeness in direction of two vectors.
+
+**Diarization.** Labelling which speaker is speaking.
+
+**Dropout.** Randomly switching off values in training to avoid overfitting (5% here).
+
+**Epoch.** One full pass over the training data.
+
+**Eager mode.** Running a PyTorch model step by step without compilation.
+
+**Forward pass.** One run of an input through the layers.
+
+**Frozen.** Not changed by training.
+
+**HUD.** Head-up display, the glasses display where the hint appears.
+
+**ICSI.** A corpus of real meeting recordings used for a check on natural data.
+
+**idf.** Inverse document frequency: weights rare words more (turned off in our BERTScore).
+
+**Latency.** Time from input to output for one request.
+
+**Left context.** The conversation before the current silence, never the future.
+
+**MLP.** The feed-forward network inside each layer.
+
+**ONNX Runtime.** A fast inference engine for exported models.
+
+**Operating point.** One chosen threshold and the precision, recall and false-alarm rate it gives.
+
+**Overfitting.** Doing well on training data but badly on new data.
+
+**Parameter.** One learned number in a model.
+
+**Prevalence.** The share of positive cases in the data.
+
+**Reference-free.** Judged without seeing the correct answer.
+
+**Rubric.** Written rules that a judge follows.
+
+**Seed.** A number that fixes the random choices in a run.
+
+**Source corpora (perl, soda, synthetic).** The three dialogue collections the test dialogues come from.
+
+**Step.** One weight update from one batch.
+
+**Subsample.** A smaller part of the data used when a test is costly.
+
+**Utterance.** One thing one person says.
+
+**Vocabulary.** The full list of tokens a model knows.
+
+**Wearer.** The person who uses the assistant and owns the memory profile.
+
+**Zero-shot / few-shot.** Doing a task with no examples, or with a few examples in the prompt.
