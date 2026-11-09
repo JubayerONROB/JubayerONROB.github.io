@@ -16,3 +16,5 @@ This is the core problem behind my thesis, [[work/research/proactive-conversatio
 Related:
 
 → [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]]
+
+→ [[notes/proactive-assistant/index|Proactive Assistant: Study Guide]] (the full paper explained from scratch)
