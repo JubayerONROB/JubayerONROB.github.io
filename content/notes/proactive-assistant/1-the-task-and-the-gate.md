@@ -52,8 +52,8 @@ The symbol $\mathbf{1}[\cdot]$ is the **indicator**. It is 1 if the statement in
 
 ### The whole system on one page
 
-![System overview](/attachments/notes/proactive-assistant/fig12-system-overview.png)
-*Figure 2. From microphone to display. Only the dashed box is trained and evaluated in the paper. [PDF](/attachments/notes/proactive-assistant/fig12-system-overview.pdf)*
+![Figure 1 of the paper: the task and the system](/attachments/notes/proactive-assistant/paper-figure1.png)
+*Figure 2 (Figure 1 of the paper). The task and the system, on one illustrative example (not a corpus item). (a) At every pause the assistant decides whether to speak. It stays quiet at most pauses (11.96% of pauses need a hint on our corpus) and otherwise shows a one-to-three-word hint drawn from what it knows about the wearer. (b) The dialogue buffer and the memory profile form one prompt. A classifier head at layer $k$ decides whether to speak (threshold $t$), and if so the same forward pass continues through layers $k{+}1 \ldots L$ to the hint. Only the dashed box is trained and evaluated. People in (a) adapted from Open Peeps (Pablo Stanley, CC0). [PDF](/attachments/notes/proactive-assistant/paper-figure1.pdf)*
 
 Words in this figure:
 
