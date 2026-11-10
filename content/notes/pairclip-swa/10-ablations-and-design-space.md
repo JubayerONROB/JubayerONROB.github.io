@@ -16,7 +16,7 @@ An **ablation** removes or changes one part of a system to see how much it matte
 ## 10.1 Preprocessing ablations (Table XI)
 
 ![Ablation gaps](/attachments/notes/pairclip-swa/pc15-ablation-gaps.png)
-*Figure 18. Training accuracy (open) and validation accuracy (filled) for alternative inputs and objectives. The gap is the memorization that a choice fails to turn into validation accuracy. [PDF](/attachments/notes/pairclip-swa/pc15-ablation-gaps.pdf)*
+*Figure 20. Training accuracy (open) and validation accuracy (filled) for alternative inputs and objectives. The gap is the memorization that a choice fails to turn into validation accuracy. [PDF](/attachments/notes/pairclip-swa/pc15-ablation-gaps.pdf)*
 
 | Variant | Train | Validation | Note |
 |---|---|---|---|
@@ -50,7 +50,7 @@ An **ablation** removes or changes one part of a system to see how much it matte
 ## 10.2 The design-space survey (Table XII, Figure 8a)
 
 ![Design space](/attachments/notes/pairclip-swa/pc16-design-space.png)
-*Figure 19. Eighteen of the 22 configurations on the identical split. The other four are the preprocessing ablations above. The dashed line is CAE-Net. [PDF](/attachments/notes/pairclip-swa/pc16-design-space.pdf)*
+*Figure 21. Eighteen of the 22 configurations on the identical split. The other four are the preprocessing ablations above. The dashed line is CAE-Net. [PDF](/attachments/notes/pairclip-swa/pc16-design-space.pdf)*
 
 The schedules, epochs and sometimes training data differ between rows, so this is a **survey** of the design space, not a controlled ablation. Four patterns are robust even so.
 

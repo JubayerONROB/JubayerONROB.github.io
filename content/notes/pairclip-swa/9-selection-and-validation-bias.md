@@ -26,7 +26,7 @@ It sounds harmless. But validation data is a **finite sample**, and the choice i
 Every validation score is **true quality plus luck**. The luck comes from which images happened to be in the validation set, and from random wobble in the weights. If you compare many candidates and keep the highest score, you tend to keep the one with the **best luck**, not only the best quality. Its reported score then **overstates** its true quality. The more variable the candidates, the bigger the overstatement.
 
 ![Selection bias](/attachments/notes/pairclip-swa/pc18-selection-bias.png)
-*Figure 17. A schematic with no data: the highest validation score includes luck that disappears on new data. [PDF](/attachments/notes/pairclip-swa/pc18-selection-bias.pdf)*
+*Figure 19. A schematic with no data: the highest validation score includes luck that disappears on new data. [PDF](/attachments/notes/pairclip-swa/pc18-selection-bias.pdf)*
 
 The paper cites three earlier observations that fit this:
 

@@ -89,9 +89,17 @@ Complete metrics at $\tau = 0.5$ (Table IX):
 
 ## 8.5 A mechanism, shown on ten images
 
-The paper also shows ten randomly drawn test images under both checkpoints. The sample spans sensor noise, low light, greyscale, motion blur, JPEG blocking, colour casts, occlusion and multi-face crops. The two images the selected checkpoint gets wrong are both **genuine** and both **severely degraded**: a heavily noised crowd scene (0.90) and a portrait with an extreme magenta colour cast (0.99). It rejects them as fake **with high confidence**. The average classifies both correctly, with low confidence.
+The paper shows ten randomly drawn test images under both checkpoints. Each tile's title gives the label, the prediction and the softmax confidence. A **green border** is a correct prediction and a **red border** is an error. The same ten images appear in a different order in the two blocks.
 
-This fits the idea that the selected checkpoint learned **"low-level degradation means synthesis"**. Preprocessing step P5, which never shows the network degraded real images, does nothing to discourage this. Ten images illustrate; the 10,905 quantify. (I do not reproduce the face photographs here. See Figure 6 of the paper.)
+![Ten random test images, from the paper](/attachments/notes/pairclip-swa/paper-figure6-test-images.png)
+*Figure 17 (Figure 6 of the paper). Ten randomly drawn OpenForensics test images under the validation-selected checkpoint (top) and the terminal average (bottom). The photographs come from the public OpenForensics-derived test set. [PDF](/attachments/notes/pairclip-swa/paper-figure6-test-images.pdf)*
+
+The sample spans sensor noise, low light, greyscale, motion blur, JPEG blocking, colour casts, occlusion and multi-face crops. The two images the selected checkpoint gets wrong are both **genuine** and both **severely degraded**: a heavily noised crowd scene (0.90) and a portrait with an extreme magenta colour cast (0.99). It rejects them as fake **with high confidence**. The average classifies both correctly, with its two lowest confidences (0.93 and 0.62).
+
+![Close-up of the two genuine photographs](/attachments/notes/pairclip-swa/pc19-degraded-genuine-photos.png)
+*Figure 18. The two genuine photographs that the selected checkpoint rejects, cropped from Figure 6 of the paper, with the verdict of each checkpoint. [PDF](/attachments/notes/pairclip-swa/pc19-degraded-genuine-photos.pdf)*
+
+This fits the idea that the selected checkpoint learned **"low-level degradation means synthesis"**. Preprocessing step P5, which never shows the network degraded real images, does nothing to discourage this. The paper treats it as a **hypothesis consistent with the evidence**, not a proven cause: **ten images illustrate; the 10,905 quantify.**
 
 ## 8.6 Check yourself
 

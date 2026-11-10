@@ -73,9 +73,8 @@ def pc16_design():
          ("ViT, full fine-tuning", 89.58, "nc"), ("ViT + LoRA", 86.75, "nc"), ("ViT + OpenCLIP + Xception fusion", 81.22, "ens"),
          ("ViT, near-linear probe", 80.70, "nc"), ("Xception, 5 epochs", 75.79, "cnn"), ("Xception, undersampled", 75.03, "cnn"),
          ("ResNet-50, gradual unfreezing", 71.70, "cnn")]
-    st = {"ours": dict(color=RED), "L14": dict(color=BLK), "B32": dict(facecolor="white", edgecolor=BLK, hatch="....", linewidth=0.6),
-          "ens": dict(facecolor="white", edgecolor=BLK, hatch="xxxx", linewidth=0.5), "nc": dict(facecolor="white", edgecolor=BLK, hatch="////", linewidth=0.5),
-          "cnn": dict(facecolor="white", edgecolor=BLK, linewidth=0.7)}
+    st = {"ours": dict(color=RED), "L14": dict(color=CAT_BLUE), "B32": dict(color=CAT_LBLUE), "ens": dict(color=CAT_PURPLE),
+          "nc": dict(color=CAT_TEAL), "cnn": dict(color=CAT_TAN)}
     n = len(R)
     for i, (nm, v, f) in enumerate(R):
         y = n - i
@@ -84,9 +83,9 @@ def pc16_design():
     ax.text(94.3, 0.1, "CAE-Net 94.46", fontsize=5.6, ha="right", rotation=90, va="bottom")
     ax.set_yticks(range(n, 0, -1)); ax.set_yticklabels([r[0] for r in R], fontsize=5.8)
     ax.set_xlim(60, 102); ax.set_xlabel("SP-Cup validation accuracy (%), identical 3,072-image split", fontsize=FS)
-    fig.legend(handles=[Patch(fc=RED, ec=RED, label="PairCLIP-SWA (reported)"), Patch(fc=BLK, ec=BLK, label="OpenCLIP ViT-L/14"),
-                       Patch(fc="white", ec=BLK, hatch="....", label="OpenCLIP ViT-B/32"), Patch(fc="white", ec=BLK, hatch="////", label="non-CLIP transformer"),
-                       Patch(fc="white", ec=BLK, hatch="xxxx", label="fusion / ensemble"), Patch(fc="white", ec=BLK, label="ImageNet CNN")],
+    fig.legend(handles=[Patch(fc=RED, label="PairCLIP-SWA (reported)"), Patch(fc=CAT_BLUE, label="OpenCLIP ViT-L/14"),
+                       Patch(fc=CAT_LBLUE, label="OpenCLIP ViT-B/32"), Patch(fc=CAT_TEAL, label="non-CLIP transformer"),
+                       Patch(fc=CAT_PURPLE, label="fusion / ensemble"), Patch(fc=CAT_TAN, label="ImageNet CNN")],
               frameon=False, fontsize=5.5, loc="lower center", ncol=3, bbox_to_anchor=(0.6, 0.0))
     title(fig, "18 of the 22 in-house configurations (the other 4 are the preprocessing ablations)", y=0.955)
     save(fig, "pc16-design-space")

@@ -94,9 +94,8 @@ def pc11_comparison():
             ("Xception + Wavelet", 87.76, "freq"), ("MobileViT", 87.04, "tr"), ("Swin-T", 86.52, "tr"), ("Inception-V3", 84.38, "cnn"),
             ("ResNet-34", 80.32, "cnn"), ("ViT-B", 78.12, "tr"), ("MobileNet-V2", 78.12, "cnn"), ("ResNet-34 + DCT", 71.48, "freq"),
             ("ResNet-50", 69.00, "cnn"), ("ResNet-34 + FFT", 66.55, "freq"), ("VGG-19", 62.25, "cnn")]
-    st = {"ours": dict(color=RED), "ours_o": dict(facecolor="white", edgecolor=RED, linewidth=0.9), "ours2": dict(color=RED, alpha=0.55),
-          "ens": dict(facecolor="white", edgecolor=BLK, hatch="xxxx", linewidth=0.5), "cnn": dict(facecolor="white", edgecolor=BLK, linewidth=0.7),
-          "tr": dict(facecolor="white", edgecolor=BLK, hatch="////", linewidth=0.5), "freq": dict(color=BLK)}
+    st = {"ours": dict(color=RED), "ours_o": dict(facecolor="white", edgecolor=RED, linewidth=1.0), "ours2": dict(color="#E08B80"),
+          "ens": dict(color=CAT_BLUE), "cnn": dict(color=CAT_TAN), "tr": dict(color=CAT_TEAL), "freq": dict(color=CAT_PURPLE)}
     n = len(rows)
     for i, (nm, v, f) in enumerate(rows):
         y = n - i
@@ -104,9 +103,9 @@ def pc11_comparison():
         ax.text(v + 0.5, y, f"{v:.2f}", va="center", fontsize=5.6)
     ax.set_yticks(range(n, 0, -1)); ax.set_yticklabels([r[0] for r in rows], fontsize=5.8)
     ax.set_xlim(50, 102); ax.set_xlabel("accuracy on the SP-Cup validation split (n = 3,072), %", fontsize=FS)
-    ax.legend(handles=[Patch(fc="white", ec=BLK, label="spatial CNN"), Patch(fc="white", ec=BLK, hatch="////", label="transformer"),
-                       Patch(fc=BLK, ec=BLK, label="frequency input"), Patch(fc="white", ec=BLK, hatch="xxxx", label="ensemble"),
-                       Patch(fc=RED, ec=RED, label="OpenCLIP (ours)")], frameon=False, fontsize=5.6, loc="lower right")
+    ax.legend(handles=[Patch(fc=CAT_TAN, label="spatial CNN"), Patch(fc=CAT_TEAL, label="transformer"),
+                       Patch(fc=CAT_PURPLE, label="frequency input"), Patch(fc=CAT_BLUE, label="ensemble"),
+                       Patch(fc=RED, label="OpenCLIP (ours)")], frameon=False, fontsize=5.6, loc="lower right")
     title(fig, "Accuracy against every baseline reported by CAE-Net (Table VII)", y=0.955)
     fig.text(0.02, 0.01, "† threshold tuned on the same split, so optimistic. Baselines as reported in the CAE-Net paper.", fontsize=5.6)
     save(fig, "pc11-comparison")
@@ -134,28 +133,28 @@ def pc12_cost():
 def pc13_openforensics():
     W, H = FULL, 2.6
     fig = plt.figure(figsize=(W, H))
-    a1 = fig.add_axes([0.08, 0.2, 0.4, 0.58]); style(a1)
-    a2 = fig.add_axes([0.58, 0.2, 0.4, 0.58]); style(a2)
+    a1 = fig.add_axes([0.08, 0.2, 0.4, 0.5]); style(a1)
+    a2 = fig.add_axes([0.58, 0.2, 0.4, 0.5]); style(a2)
     groups = ["best regular", "best SWA", "final SWA"]
     val = [98.43, 98.43, 97.67]; tes = [88.85, 88.85, 94.76]
     x = np.arange(3); w = 0.36
-    a1.bar(x - w / 2, val, w, facecolor="white", edgecolor=BLK, linewidth=0.8, label="validation (n = 39,428)")
+    a1.bar(x - w / 2, val, w, color=CAT_BLUE, label="validation (n = 39,428)")
     a1.bar(x + w / 2, tes, w, color=RED, label="held-out test (n = 10,905)")
     for i in range(3):
         a1.text(x[i] - w / 2, val[i] + 0.3, f"{val[i]:.2f}", ha="center", fontsize=5.6)
         a1.text(x[i] + w / 2, tes[i] + 0.3, f"{tes[i]:.2f}", ha="center", fontsize=5.6, color=RED)
         a1.text(x[i], 100.6, f"gap {tes[i]-val[i]:+.2f}", ha="center", fontsize=5.6)
     a1.set_xticks(x); a1.set_xticklabels(groups, fontsize=5.8); a1.set_ylim(84, 103.5)
-    a1.set_ylabel("accuracy (%)", fontsize=FS); a1.legend(frameon=False, fontsize=5.4, loc="lower right")
+    a1.set_ylabel("accuracy (%)", fontsize=FS); a1.legend(frameon=False, fontsize=5.4, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
     fr = [98.67, 98.67, 94.61]; rr = [78.88, 78.88, 94.92]
-    a2.bar(x - w / 2, fr, w, facecolor="white", edgecolor=BLK, linewidth=0.8, label="fake recall")
+    a2.bar(x - w / 2, fr, w, color=CAT_BLUE, label="fake recall")
     a2.bar(x + w / 2, rr, w, color=RED, label="real recall (specificity)")
     for i in range(3):
         a2.text(x[i] - w / 2, fr[i] + 0.4, f"{fr[i]:.2f}", ha="center", fontsize=5.6)
         a2.text(x[i] + w / 2, rr[i] + 0.4, f"{rr[i]:.2f}", ha="center", fontsize=5.6, color=RED)
     a2.set_xticks(x); a2.set_xticklabels(groups, fontsize=5.8); a2.set_ylim(70, 104)
-    a2.set_ylabel("recall on the test set (%)", fontsize=FS); a2.legend(frameon=False, fontsize=5.4, loc="lower right")
-    fig.text(0.02, 0.9, "(a) Validation accuracy vs held-out test", fontsize=FS + 0.3, fontweight="bold")
-    fig.text(0.52, 0.9, "(b) Per-class recall on the test set", fontsize=FS + 0.3, fontweight="bold")
+    a2.set_ylabel("recall on the test set (%)", fontsize=FS); a2.legend(frameon=False, fontsize=5.4, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
+    fig.text(0.02, 0.95, "(a) Validation accuracy vs held-out test", fontsize=FS + 0.3, fontweight="bold")
+    fig.text(0.52, 0.95, "(b) Per-class recall on the test set", fontsize=FS + 0.3, fontweight="bold")
     fig.text(0.02, 0.03, "On OpenForensics, best regular and best SWA are the same checkpoint.", fontsize=5.7)
     save(fig, "pc13-openforensics-gap")

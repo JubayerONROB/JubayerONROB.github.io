@@ -46,12 +46,12 @@ Subsets: DF-Wild-Cup, 1,000 validation images (493 fake, 507 real); OpenForensic
 **Check one score by hand:** best regular on DF-Wild-Cup: $43.90/(10.70 + 10.90) = 43.90/21.60 = 2.03$. ✓
 
 ![t-SNE](/attachments/notes/pairclip-swa/paper-figure7-tsne.png)
-*Figure 20 (Figure 7 of the paper). t-SNE embeddings of 1,000 DF-Wild-Cup validation images (493 fake, 507 real) for the three checkpoints. Green is real, red is fake, crosses are centroids. [PDF](/attachments/notes/pairclip-swa/paper-figure7-tsne.pdf)*
+*Figure 22 (Figure 7 of the paper). t-SNE embeddings of 1,000 DF-Wild-Cup validation images (493 fake, 507 real) for the three checkpoints. Green is real, red is fake, crosses are centroids. [PDF](/attachments/notes/pairclip-swa/paper-figure7-tsne.pdf)*
 
 ## 11.3 What it shows
 
 ![Geometry vs accuracy](/attachments/notes/pairclip-swa/pc17-geometry-vs-accuracy.png)
-*Figure 21. Separation score against accuracy for the three checkpoints on both corpora. [PDF](/attachments/notes/pairclip-swa/pc17-geometry-vs-accuracy.pdf)*
+*Figure 23. Separation score against accuracy for the three checkpoints on both corpora. [PDF](/attachments/notes/pairclip-swa/pc17-geometry-vs-accuracy.pdf)*
 
 **On DF-Wild-Cup, separation and accuracy move in opposite directions.** The best-regular checkpoint has the **highest** separation (2.033) and the **lowest** accuracy. Averaging shrinks the centre distance $\Delta$ by 11.0%, but the pooled spread by only 5.6%, so $S$ falls to 1.917. Yet the k-NN probe **removes 14 of its 35 fake-side errors** (fake recall 92.90 → 95.74%, MCC 0.922 → 0.944), and the classifier head gains 1.37 points.
 

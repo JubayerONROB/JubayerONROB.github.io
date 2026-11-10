@@ -73,3 +73,9 @@ def block3d(ax, x, y, w, h, d, color=BLK):
                     closed=True, fc=color, ec="white", lw=0.4, zorder=3)
     for p in (front, top, right):
         ax.add_patch(p)
+
+
+# Categorical colours, used only where several categories must be told apart (e.g. model families).
+# Red stays reserved for "ours" / the important item.
+CAT_BLUE, CAT_LBLUE, CAT_TEAL, CAT_TAN, CAT_PURPLE, CAT_ORANGE, CAT_GREEN = (
+    "#4E79A7", "#9DB8D6", "#76B7B2", "#C9A66B", "#B07AA1", "#F28E2B", "#59A14F")
