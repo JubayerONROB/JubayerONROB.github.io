@@ -61,4 +61,6 @@ The paper recommends choosing checkpoints with per-class selection criteria meas
 
 [[work/projects/deepfake-detection-clip-vit|Deepfake Detection using CLIP-ViT]] — the project page, with the implementation details.
 
+[[notes/pairclip-swa/index|PairCLIP-SWA: Study Guide]] — this paper explained from scratch, with figures.
+
 [[work/research/proactive-conversation-assistant|Proactive Conversation Assistant]] — the other preprint from the same research group.
