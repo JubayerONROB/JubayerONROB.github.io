@@ -131,7 +131,7 @@ Non-matching hints split across the three error types in similar shares for ever
 - Why is the cascade gate's F1 not the whole story of its cost?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

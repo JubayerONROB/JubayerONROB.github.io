@@ -89,7 +89,7 @@ A hint is useful only at a moment that needs one. And a moment deserves an inter
 *Answers: stay quiet; false alarms go down, misses go up; because it interrupts everyone in the conversation, not only the user.*
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

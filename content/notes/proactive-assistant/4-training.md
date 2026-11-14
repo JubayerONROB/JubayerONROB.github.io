@@ -106,7 +106,7 @@ The unified model trained for **2 epochs (53,772 steps)** over marker-level rows
 - Why do we use class weights?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

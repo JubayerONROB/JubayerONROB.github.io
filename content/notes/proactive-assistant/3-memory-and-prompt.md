@@ -71,7 +71,7 @@ A common idea is **retrieval**: pick only the most relevant facts and drop the r
 - Does the cascade gate see the profile?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

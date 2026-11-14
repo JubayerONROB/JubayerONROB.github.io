@@ -101,7 +101,7 @@ The special part of our work is **where** the head is attached. A normal classif
 - Why is the cost in our paper measured in "full passes" and not in seconds only?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

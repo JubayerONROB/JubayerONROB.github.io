@@ -140,7 +140,7 @@ $R$ is the gate's **recall**. $\text{EM}_{\text{fwd}}$ is the exact match on the
 - Why is exact match "a strict lower bound"?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

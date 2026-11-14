@@ -201,7 +201,7 @@ tags:
 **Zero-shot / few-shot.** Doing a task with no examples, or with a few examples in the prompt.
 
 
-Continue with the interview deep dive: [[notes/proactive-assistant/12-math-foundations|12. Math foundations]].
+Continue with the deep dive: [[notes/proactive-assistant/12-math-foundations|12. Math foundations]].
 
 ## Added in the deep-dive pages
 
@@ -239,7 +239,7 @@ Continue with the interview deep dive: [[notes/proactive-assistant/12-math-found
 
 **Rank (LoRA).** The inner size $r$ of the two thin matrices $B$ and $A$.
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 
