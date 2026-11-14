@@ -1,13 +1,12 @@
 ---
-title: "16. Interview deep dive: the model, LoRA and quantization"
+title: "16. Deep dive: the model, LoRA and quantization"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
 ---
 
-`math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/2-language-model-basics|2. Language model basics]]; [[notes/proactive-assistant/4-training|4. Training: LoRA, 4-bit, losses]]; [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]; [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]. **Previous:** [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|15. Metrics, calibration, losses]].
 
@@ -23,7 +22,7 @@ tags:
 
 **Why it matters here.** The embedding table is large and stays in higher precision when the rest is quantized (section 16.8).
 
-**Interview question.** *What is the sequence the transformer actually sees?* **Answer.** A matrix with one $d$-dimensional row per token, plus position information. Each layer maps that matrix to a new matrix of the same shape.
+**Likely question.** *What is the sequence the transformer actually sees?* **Answer.** A matrix with one $d$-dimensional row per token, plus position information. Each layer maps that matrix to a new matrix of the same shape.
 
 ## 16.2 A transformer layer, and attention
 
@@ -47,7 +46,7 @@ The query is closest to $k_1$, so most of the output comes from $v_1$.
 
 **Why it matters here.** The 16 layers of Llama-3.2-1B are stacks of these. The gate reads the result after $k$ of them.
 
-**Interview question.** *Is the cost really proportional to the number of layers?* **Answer.** For a fixed prompt, yes: every layer does the same work, so $k$ layers cost $k/L$ of $L$. Per layer the work has a part linear in the prompt length $n$ (projections and MLP, about $12nd^2$ multiply-adds) and a part quadratic in $n$ (attention scores, about $2n^2d$). Their ratio is $n/(6d)$. For $n = 676$ and $d = 2048$ that is $676/12288 = 0.055$, so attention's quadratic part is only about 5% of a layer at this prompt length. *(Rough background estimate; it ignores the key/value head sharing and the exact MLP shape.)* That is why Equation (4) can ignore it.
+**Likely question.** *Is the cost really proportional to the number of layers?* **Answer.** For a fixed prompt, yes: every layer does the same work, so $k$ layers cost $k/L$ of $L$. Per layer the work has a part linear in the prompt length $n$ (projections and MLP, about $12nd^2$ multiply-adds) and a part quadratic in $n$ (attention scores, about $2n^2d$). Their ratio is $n/(6d)$. For $n = 676$ and $d = 2048$ that is $676/12288 = 0.055$, so attention's quadratic part is only about 5% of a layer at this prompt length. *(Rough background estimate; it ignores the key/value head sharing and the exact MLP shape.)* That is why Equation (4) can ignore it.
 
 ## 16.3 Hidden state and the classifier head at layer $k$
 
@@ -65,7 +64,7 @@ $h_k$ is the hidden state **after $k$ layers** at the marker's position (the las
 
 **Why it matters here.** The head sits at layer $k$. It does not approximate the final output; it decides whether the layers $k{+}1..L$ should run at all *(paper)*. The shared trunk is trained on **two** losses, the gate loss and the hint loss, with full-depth passes in training.
 
-**Interview question.** *Why can a gate read a middle layer at all?* **Answer.** Hidden states of a pre-trained decoder already carry task-relevant information well before the last layer, and fine-tuning with the gate loss on the layer-$k$ readout shapes layers $1..k$ to make the trigger decision linearly readable. The paper measures the price: at the final checkpoint the gate F1 is 0.8022 at $k=6$ and 0.8164 at $k=10$, against 0.8002 for the separate gate; over three seeds $k=10$ ties it and $k=6$ is 0.0156 below *(paper)*.
+**Likely question.** *Why can a gate read a middle layer at all?* **Answer.** Hidden states of a pre-trained decoder already carry task-relevant information well before the last layer, and fine-tuning with the gate loss on the layer-$k$ readout shapes layers $1..k$ to make the trigger decision linearly readable. The paper measures the price: at the final checkpoint the gate F1 is 0.8022 at $k=6$ and 0.8164 at $k=10$, against 0.8002 for the separate gate; over three seeds $k=10$ ties it and $k=6$ is 0.0156 below *(paper)*.
 
 ## 16.4 Prefill, decoding and the KV cache
 
@@ -77,7 +76,7 @@ $h_k$ is the hidden state **after $k$ layers** at the marker's position (the las
 
 **Why it matters here.** Early exit saves prefill work: a silent marker never goes past layer $k$, and never starts decoding.
 
-**Interview question.** *Why does a triggered marker not pay prefill twice?* **Answer.** In the unified model the cache of layers $1..k$ from the gate readout is the same cache the continuation uses. The cascade must encode a different prompt (with the memory profile) from scratch for the separate generator.
+**Likely question.** *Why does a triggered marker not pay prefill twice?* **Answer.** In the unified model the cache of layers $1..k$ from the gate readout is the same cache the continuation uses. The cascade must encode a different prompt (with the memory profile) from scratch for the separate generator.
 
 ## 16.5 Early exit
 
@@ -87,7 +86,7 @@ $h_k$ is the hidden state **after $k$ layers** at the marker's position (the las
 
 **Why it differs from confidence-based exit** *(paper)*. In ordinary early exit an intermediate classifier **approximates** the deep output and exits when confident. Here the readout decides **whether the deep computation should run at all**. The router and the expert are the **same weights**.
 
-**Interview question.** *Is there a train/inference mismatch?* **Answer.** Yes, by design: training always runs full depth so the hint loss can shape layers $k{+}1..L$ even for examples that will be silent; only inference short-circuits. This is standard early-exit practice. *(Repo code.)*
+**Likely question.** *Is there a train/inference mismatch?* **Answer.** Yes, by design: training always runs full depth so the hint loss can shape layers $k{+}1..L$ even for examples that will be silent; only inference short-circuits. This is standard early-exit practice. *(Repo code.)*
 
 ## 16.6 LoRA: $W + BA$
 
@@ -120,7 +119,7 @@ Over 16 layers: $704{,}512\times16 = 11{,}272{,}192$ trainable parameters. A ful
 
 **Why it matters here.** One base model plus **one shared adapter** serves both objectives (gate and hint) *(paper)*.
 
-**Interview question.** *What does $\alpha/r$ do?* **Answer.** It scales the update so that changing the rank $r$ does not change the update's overall size. With $\alpha = 32$ and $r = 16$ the factor is 2. *(Background.)*
+**Likely question.** *What does $\alpha/r$ do?* **Answer.** It scales the update so that changing the rank $r$ does not change the update's overall size. With $\alpha = 32$ and $r = 16$ the factor is 2. *(Background.)*
 
 ## 16.7 Why a second adapter is 42 MB and a second base is 957 MB
 
@@ -137,7 +136,7 @@ Over 16 layers: $704{,}512\times16 = 11{,}272{,}192$ trainable parameters. A ful
 
 **How good is the estimate?** My adapter size is 45 MB (43.0 MiB) against the paper's 42 MB, and my base is 1,027 MB (980 MiB) against the paper's 957 MB. They agree within about 7%. **I cannot reproduce the paper's exact 42 and 957**: the exact figures depend on the storage dtype, what is saved and rounding, which the paper does not state. Present the derivation as an order-of-magnitude explanation, not an exact match.
 
-**Interview question.** *Why is the adapter ~23 times smaller than the second base if the parameter count ratio is ~110?* **Answer.** Because the base is stored in 4-bit while the adapter is in 32-bit: that is about 8 times more bytes per adapter parameter, so $110/8\approx14$; the remaining factor comes from the large embedding table kept in 16-bit, which my estimate gives as the 525 MB term. The point for the paper is that the second model's **weights** are the cost, and a shared trunk removes them.
+**Likely question.** *Why is the adapter ~23 times smaller than the second base if the parameter count ratio is ~110?* **Answer.** Because the base is stored in 4-bit while the adapter is in 32-bit: that is about 8 times more bytes per adapter parameter, so $110/8\approx14$; the remaining factor comes from the large embedding table kept in 16-bit, which my estimate gives as the 525 MB term. The point for the paper is that the second model's **weights** are the cost, and a shared trunk removes them.
 
 ## 16.8 Quantization: 4-bit and NF4
 
@@ -157,7 +156,7 @@ With **double quantization** the 32-bit scales $s$ are themselves stored in 8 bi
 
 **Why memory goes down only 3×, not 8×.** Paper: the 16-layer decoder is **4.99 GB** in fp32 and **1.65 GB** in NF4: $4.99/1.65 = 3.02$. The ideal for 32→4.13 bits is $32/4.127 = 7.75\times$. **My explanation** *(estimate, background config)*: only the linear layers are quantized; the embedding table (263 M weights, 1.05 GB in fp32) stays in high precision. $973\,\text{M}\times0.516 = 0.50$ GB, plus the embedding table in fp32 1.05 GB, gives 1.55 GB against the paper's 1.65 GB. Also the fp32 total, $(973+263)\,\text{M}\times4 = 4.94$ GB, matches the paper's 4.99 GB. So an unquantized embedding table explains most of the gap from 8× to 3×.
 
-**Interview question.** *Does quantization change the model's function?* **Answer.** Slightly: it adds rounding error to the weights. The paper checks the ONNX NF4 variant against the GPU model: gate probabilities correlate at $r=0.998$ ($k=6$) and $0.991$ ($k=10$), decisions agree on 100.0% and 96.7% of sampled markers, and hints are identical on 90% and 95% of 20 triggered markers *(paper)*.
+**Likely question.** *Does quantization change the model's function?* **Answer.** Slightly: it adds rounding error to the weights. The paper checks the ONNX NF4 variant against the GPU model: gate probabilities correlate at $r=0.998$ ($k=6$) and $0.991$ ($k=10$), decisions agree on 100.0% and 96.7% of sampled markers, and hints are identical on 90% and 95% of 20 triggered markers *(paper)*.
 
 ## 16.9 Why 4-bit saves memory but not CPU time
 
@@ -180,7 +179,7 @@ When the intensity is **low** (decoding), the processor waits for memory, so few
 
 **Why it matters here.** Quantization is a **memory** choice, and the paper reports its latency as unchanged or slightly worse. The speed-up comes from early exit instead (2.86× at $k=6$).
 
-**Interview question.** *When would 4-bit weights speed up inference?* **Answer.** When the workload is memory-bound, for instance decoding a long sequence token by token at small batch, where each step must read all the weights. In this paper the gate is a prefill over several hundred tokens, which is compute-bound on the CPU, so it does not.
+**Likely question.** *When would 4-bit weights speed up inference?* **Answer.** When the workload is memory-bound, for instance decoding a long sequence token by token at small batch, where each step must read all the weights. In this paper the gate is a prefill over several hundred tokens, which is compute-bound on the CPU, so it does not.
 
 ## 16.10 Check yourself
 

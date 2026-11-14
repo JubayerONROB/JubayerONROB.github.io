@@ -106,7 +106,7 @@ A **pre-registered** study writes the analysis plan, with a time stamp and hash,
 - Why do many tests need Holm?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

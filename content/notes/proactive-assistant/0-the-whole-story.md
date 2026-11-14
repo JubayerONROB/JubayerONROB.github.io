@@ -108,7 +108,7 @@ A proactive assistant must choose **when** to speak and **what** to say. Judged 
 
 Symbols and terms: [[notes/proactive-assistant/11-glossary|Glossary]]
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

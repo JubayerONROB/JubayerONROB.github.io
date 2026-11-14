@@ -82,7 +82,7 @@ Rating open-ended text with a strong model, without a reference, is standard (Zh
 - Which automatic score is the best match to people, and which is the worst?
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

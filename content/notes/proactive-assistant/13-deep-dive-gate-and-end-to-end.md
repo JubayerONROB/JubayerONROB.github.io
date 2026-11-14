@@ -1,13 +1,12 @@
 ---
-title: "13. Interview deep dive: gate and end-to-end score"
+title: "13. Deep dive: gate and end-to-end score"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
 ---
 
-`math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/1-the-task-and-the-gate|1. The task and the gate]]; [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]; [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]; [[notes/proactive-assistant/7-experiments-and-findings|7. Experiments and findings]]; [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]. **Previous:** [[notes/proactive-assistant/12-math-foundations|12. Math foundations]].
 
@@ -29,7 +28,7 @@ $i$ is the marker index. $p_i$ is the gate score. $t$ is the threshold. $g_i \in
 
 **Why it matters here.** It is the only place where a number becomes an action. A false alarm interrupts, and a miss leaves the wearer alone *(paper)*.
 
-**Interview question.** *Why a threshold and not argmax of the two softmax outputs?* **Answer.** The argmax is the special case $t = 0.5$. Triggers are only 11.96% of markers and a false alarm costs more than a miss, so the best operating point is rarely 0.5. A threshold lets you pick the point on the false-alarm budget. The paper's selected thresholds range from 0.13 to 0.60 *(paper, Table 2)*.
+**Likely question.** *Why a threshold and not argmax of the two softmax outputs?* **Answer.** The argmax is the special case $t = 0.5$. Triggers are only 11.96% of markers and a false alarm costs more than a miss, so the best operating point is rarely 0.5. A threshold lets you pick the point on the false-alarm budget. The paper's selected thresholds range from 0.13 to 0.60 *(paper, Table 2)*.
 
 ### The threshold sweep
 
@@ -41,7 +40,7 @@ $i$ is the marker index. $p_i$ is the gate score. $t$ is the threshold. $g_i \in
 
 **Why it matters here.** Selecting on validation instead of test costs a mean of 0.0016 F1 (at most 0.0041) over 21 systems *(paper)*. Validation has 26,410 markers at 12.81% trigger rate, disjoint from test by dialogue *(paper)*. The cascade's Llama-3.2-1B gate gets $t = 0.60$ and F1 0.8002 *(paper)*.
 
-**Interview question.** *Why not tune $t$ on test?* **Answer.** Then the test score would be optimistically biased: you would have picked the best of 99 noisy numbers on the data you report on. The paper audits this for RoBERTa: the optimism of its selected threshold is 0.0033 F1 on average and 0.0079 at the 95th percentile *(paper)*.
+**Likely question.** *Why not tune $t$ on test?* **Answer.** Then the test score would be optimistically biased: you would have picked the best of 99 noisy numbers on the data you report on. The paper audits this for RoBERTa: the optimism of its selected threshold is 0.0033 F1 on average and 0.0079 at the 95th percentile *(paper)*.
 
 ### Why $t$ is recalibrated per model
 
@@ -62,7 +61,7 @@ $\mathcal{N}$ is the set of silence markers. Hence the threshold for a budget $\
 
 **Why it matters here** *(paper)*. At a 2% false-alarm budget the threshold ranges over $0.205$–$0.725$ across six candidates (3.5×). Gemma-3-270M needs $t = 0.205$ and loses 28.0 F1 points if run at another model's operating point. Gemma-3-1B has selected $t = 0.24$ while Llama-3.2-1B has $0.60$.
 
-**Interview question.** *If two models have equal AUROC, why can their thresholds differ?* **Answer.** AUROC only uses the **ranking** of scores. Any increasing transform of the scores keeps the ranking and the AUROC but moves every threshold. So thresholds must be re-chosen per model on held-out data.
+**Likely question.** *If two models have equal AUROC, why can their thresholds differ?* **Answer.** AUROC only uses the **ranking** of scores. Any increasing transform of the scores keeps the ranking and the AUROC but moves every threshold. So thresholds must be re-chosen per model on held-out data.
 
 **Decision-theory extra** *(background)*. If a false alarm costs $c_{FP}$ and a miss costs $c_{FN}$, the cost-minimizing rule on a **calibrated** probability is to fire when $p \ge c_{FP}/(c_{FP}+c_{FN})$. With equal costs that is 0.5. With a miss costing 3 times a false alarm: $1/(1+3) = 0.25$. With a false alarm costing 3 times a miss: $3/4 = 0.75$. This is why the paper calls the budget "a deployment decision".
 
@@ -95,7 +94,7 @@ Step by step:
 
 **Why it matters here.** Stage-wise generation scores assume a perfect gate, so they overstate. Behind the real gate at its deployed point, $EM_{e2e} = 0.2619$ and $P_{e2e} = 0.2387$ *(paper)*. Check with counts: $P_{e2e}\times 3682 = 879$ correct hints, and $EM_{e2e}\times 3356 = 879$. Same numerator, as Equation (2) requires. ✓
 
-**Interview question.** *Why is $P_{e2e}$ so low (0.2387) when gate precision is 0.7648?* **Answer.** $P_{e2e}$ needs **two** things to hold at once: the gate fired at a true trigger (probability about 0.76) and the generator got the hint exactly right (about 0.31 of forwarded triggers). Roughly $0.7648\times 0.312 = 0.2387$. ✓ *(My arithmetic.)* The generator's exact-match rate is the bottleneck, not the gate.
+**Likely question.** *Why is $P_{e2e}$ so low (0.2387) when gate precision is 0.7648?* **Answer.** $P_{e2e}$ needs **two** things to hold at once: the gate fired at a true trigger (probability about 0.76) and the generator got the hint exactly right (about 0.31 of forwarded triggers). Roughly $0.7648\times 0.312 = 0.2387$. ✓ *(My arithmetic.)* The generator's exact-match rate is the bottleneck, not the gate.
 
 ## 13.3 Equation (3): the factorization $EM_{e2e} = R\cdot EM_{fwd}$
 
@@ -127,7 +126,7 @@ The factor $\sum_{i\in\mathcal{T}} g_i$ cancels top and bottom. If it is 0, then
 
 **Why it matters here.** It separates the two failure sources: how many triggers the gate loses ($R$) and how good the generator is on what it receives ($EM_{fwd}$).
 
-**Interview question.** *Is $EM_{fwd}$ the same as the oracle-gate score?* **Answer.** No. The oracle forwards **every** trigger. $EM_{fwd}$ averages only over the triggers the real gate forwards. They coincide only if the gate's forwarded set is a random sample of the triggers, or if $R = 1$.
+**Likely question.** *Is $EM_{fwd}$ the same as the oracle-gate score?* **Answer.** No. The oracle forwards **every** trigger. $EM_{fwd}$ averages only over the triggers the real gate forwards. They coincide only if the gate's forwarded set is a random sample of the triggers, or if $R = 1$.
 
 ## 13.4 Monotonicity: $EM_{e2e}$ cannot rise when $t$ rises
 
@@ -165,7 +164,7 @@ The factor $\sum_{i\in\mathcal{T}} g_i$ cancels top and bottom. If it is 0, then
 
 **Why it matters here.** This is the first contribution. A generator paper that reports 0.2971 is quoting a number no deployment can reach. And because $EM_{e2e}$ can only fall as $t$ rises, a gate cannot "earn" exact match. It is justified only by **precision** (fewer false alarms: at a 1% false-alarm budget, $P_{e2e}$ rises to 0.3011 while $EM_{e2e}$ falls to 0.2122) and **compute** *(paper)*.
 
-**Interview question.** *If $EM_{e2e}$ always falls with $t$, why use a gate at all?* **Answer.** Because the objective is not "serve every trigger". A false alarm interrupts the wearer and bystanders. The gate trades some recall for fewer false alarms and, more importantly, **cuts generator calls by 7.62×** ($28058/3682$) *(paper)*. EM alone would say "always fire", which is why the paper reports $P_{e2e}$ beside it and never reads $EM_{e2e}$ alone.
+**Likely question.** *If $EM_{e2e}$ always falls with $t$, why use a gate at all?* **Answer.** Because the objective is not "serve every trigger". A false alarm interrupts the wearer and bystanders. The gate trades some recall for fewer false alarms and, more importantly, **cuts generator calls by 7.62×** ($28058/3682$) *(paper)*. EM alone would say "always fire", which is why the paper reports $P_{e2e}$ beside it and never reads $EM_{e2e}$ alone.
 
 ## 13.5 Check yourself
 

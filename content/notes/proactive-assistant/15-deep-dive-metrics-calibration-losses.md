@@ -1,13 +1,12 @@
 ---
-title: "15. Interview deep dive: metrics, calibration and losses"
+title: "15. Deep dive: metrics, calibration and losses"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
 ---
 
-`math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/4-training|4. Training: LoRA, 4-bit, losses]]; [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]; [[notes/proactive-assistant/7-experiments-and-findings|7. Experiments and findings]]. **Previous:** [[notes/proactive-assistant/14-deep-dive-cost-model|14. The cost model]].
 
@@ -30,7 +29,7 @@ Basic symbols: [[notes/proactive-assistant/12-math-foundations|page 12]]. Everyt
 
 **Why it matters here.** All gate metrics are functions of these four numbers.
 
-**Interview question.** *Which of the four is most costly in the product?* **Answer.** The paper treats FP and FN as different costs: a false alarm interrupts the conversation for everyone present, a miss leaves the wearer as they would be without the system. Which is worse is a deployment choice, so it reports gate quality against a false-alarm budget.
+**Likely question.** *Which of the four is most costly in the product?* **Answer.** The paper treats FP and FN as different costs: a false alarm interrupts the conversation for everyone present, a miss leaves the wearer as they would be without the system. Which is worse is a deployment choice, so it reports gate quality against a false-alarm budget.
 
 ## 15.2 Precision, recall, false-alarm rate
 
@@ -51,7 +50,7 @@ Precision asks "of what we fired, how much was right?" Recall asks "of what need
 ![Precision against false-alarm rate](/attachments/notes/proactive-assistant/pa5-precision-prevalence.png)
 *Figure 27. The same gate (recall 0.8391, FAR 3.51%) has precision 0.7646 on our corpus but would reach 0.96 on a balanced one. The curves are from Bayes' rule. [PDF](/attachments/notes/proactive-assistant/pa5-precision-prevalence.pdf)*
 
-**Interview question.** *Why is FAR of 3.5% a lot, when it sounds small?* **Answer.** FAR divides by the 24,702 silence markers, a big denominator. 3.5% of that is 866 false alarms, compared with 2,816 correct firings. So nearly a quarter of hints are false alarms. The small-looking FAR hides a mid-size precision loss because positives are rare.
+**Likely question.** *Why is FAR of 3.5% a lot, when it sounds small?* **Answer.** FAR divides by the 24,702 silence markers, a big denominator. 3.5% of that is 866 false alarms, compared with 2,816 correct firings. So nearly a quarter of hints are false alarms. The small-looking FAR hides a mid-size precision loss because positives are rare.
 
 ## 15.3 F1 and why it is a harmonic mean
 
@@ -72,7 +71,7 @@ Dividing, the common denominator cancels and one $TP$ cancels: $F_1 = \dfrac{2TP
 
 **Why it matters here.** F1 is the criterion used to pick $t$ on validation *(paper)*; it is called PA-F1.
 
-**Interview question.** *Why not pick $t$ by accuracy?* **Answer.** With 88% silence, always saying "quiet" gives about 88% accuracy and 0 recall. F1 ignores TN, so it cannot be inflated by the large silent class.
+**Likely question.** *Why not pick $t$ by accuracy?* **Answer.** With 88% silence, always saying "quiet" gives about 88% accuracy and 0 recall. F1 ignores TN, so it cannot be inflated by the large silent class.
 
 ## 15.4 AUROC: the probability a trigger outranks a silence
 
@@ -90,7 +89,7 @@ $$
 
 **Why it matters here.** It is threshold-free. It uses only the **ranking**, so it cannot tell you the right $t$, and it does not change under a monotone rescaling of the scores. A prompted LLM gate has AUROC 0.5773 on its 2,000-marker subsample *(paper)*, where 0.5 is chance.
 
-**Interview question.** *Two models have equal AUROC. Are they equally good gates?* **Answer.** No. Equal ranking quality does not give equal calibration or equal operating points: they may need different thresholds, and one may have worse probabilities (page 13).
+**Likely question.** *Two models have equal AUROC. Are they equally good gates?* **Answer.** No. Equal ranking quality does not give equal calibration or equal operating points: they may need different thresholds, and one may have worse probabilities (page 13).
 
 ## 15.5 AUPRC and why it is used under class imbalance
 
@@ -117,7 +116,7 @@ Each trigger adds 0.25 of recall, so $\text{AP} = 0.25\,(1 + 1 + 0.75 + 0.667) =
 
 **Why imbalance matters.** AUROC divides false alarms by the **large** number of silence markers, so a flood of false alarms can look like a small FAR. In our corpus 866 false alarms are only 3.5% of 24,702 silences, yet they are 23.5% of all hints. Precision includes the false alarms in its **numerator-side** count and does not divide by the silences, so AUPRC is sensitive to exactly the cost that matters here. The paper reports AUPRC with every operating point; for the best gate, Llama-3.2-1B, it is 0.8883 *(paper, Table 2)*.
 
-**Interview question.** *Why report AUPRC and not only AUROC?* **Answer.** With 11.96% positives, AUROC can stay high while precision is low, because TN dominates FAR. AUPRC does not use TN at all, so it reflects the rare-class performance that a user feels as false alarms.
+**Likely question.** *Why report AUPRC and not only AUROC?* **Answer.** With 11.96% positives, AUROC can stay high while precision is low, because TN dominates FAR. AUPRC does not use TN at all, so it reflects the rare-class performance that a user feels as false alarms.
 
 ## 15.6 Calibration: ECE, MCE, Brier
 
@@ -152,7 +151,7 @@ ECE $= 0.2(0.10) + 0.2(0.25) + 0.1(0.40) + 0.1(0.30) + 0.4(0.125) = 0.02 + 0.05 
 
 **Why it matters here.** Deployment must "select on calibration, or calibrate post hoc and re-measure" *(paper)*.
 
-**Interview question.** *Can a model have perfect AUROC and bad ECE?* **Answer.** Yes. Take any perfect ranking and apply $p \mapsto p^{3}$: the ranking and the AUROC do not change, but the probabilities no longer match the frequencies. This is exactly why the paper separates ranking (AUPRC) from probability quality (ECE, MCE, Brier).
+**Likely question.** *Can a model have perfect AUROC and bad ECE?* **Answer.** Yes. Take any perfect ranking and apply $p \mapsto p^{3}$: the ranking and the AUROC do not change, but the probabilities no longer match the frequencies. This is exactly why the paper separates ranking (AUPRC) from probability quality (ECE, MCE, Brier).
 
 ## 15.7 Cross-entropy: derivation and gradient
 
@@ -178,7 +177,7 @@ $$
 
 **Why it matters here.** The unified model's hint tokens use CE, and the gate uses a weighted/focal variant *(code in the repo)*.
 
-**Interview question.** *Why does CE with softmax train well compared with squared error?* **Answer.** The logit gradient is $p-y$, which does not vanish when the model is confidently wrong. Squared error through a sigmoid has gradient $(p-y)\,p(1-p)$, which goes to 0 when $p$ saturates near 0 or 1 even if wrong. *(Background.)*
+**Likely question.** *Why does CE with softmax train well compared with squared error?* **Answer.** The logit gradient is $p-y$, which does not vanish when the model is confidently wrong. Squared error through a sigmoid has gradient $(p-y)\,p(1-p)$, which goes to 0 when $p$ saturates near 0 or 1 even if wrong. *(Background.)*
 
 ## 15.8 Class-weighted cross-entropy: what the optimum becomes
 
@@ -207,7 +206,7 @@ A $q = 0.5$ example sits at $p^\star = w/(w+1)$: $0.714$ for $w = 2.5$ and $0.80
 
 **Why it matters here.** The threshold sweep on validation (page 13) can absorb a pure shift like this. The paper's result, that raising the trigger weight from $\alpha = 1$ to $4$ **costs −0.0278 F1** *(paper, Qwen2.5-0.5B, $p_{holm} < 0.001$)*, is therefore not explained by the shift alone. See the next section.
 
-**Interview question.** *If weighting only shifts the scores, why does $\alpha = 4$ hurt F1 after you re-tune $t$?* **Answer.** The paper shows the effect but does not isolate the cause. A reasoned **hypothesis** (not tested in the paper): a larger weight makes the gradient on trigger examples bigger relative to silence examples, so training spends more of its capacity on fitting the (noisy, language-model-generated) trigger labels, and the ranking itself degrades. The shift part is harmless after threshold tuning; any remaining loss must come from changed training dynamics.
+**Likely question.** *If weighting only shifts the scores, why does $\alpha = 4$ hurt F1 after you re-tune $t$?* **Answer.** The paper shows the effect but does not isolate the cause. A reasoned **hypothesis** (not tested in the paper): a larger weight makes the gradient on trigger examples bigger relative to silence examples, so training spends more of its capacity on fitting the (noisy, language-model-generated) trigger labels, and the ranking itself degrades. The shift part is harmless after threshold tuning; any remaining loss must come from changed training dynamics.
 
 ## 15.9 Focal loss: derivation and why $\gamma = 2$ hurt
 
@@ -248,7 +247,7 @@ So $\gamma \in \{0, 1, 1.5\}$ are statistically the same, but $\gamma = 2$ costs
 
 **Why it matters here.** It justifies using plain or mildly weighted CE and not tuning the loss further: the recipe's lead is not from the loss.
 
-**Interview question.** *Why did you keep $\gamma = 1.5$ if plain CE was as good?* **Answer.** The ablations show no alternative to plain cross-entropy is significantly better (closest $p_{holm} = 0.117$), and the focal setting was inherited unchanged so the exit-depth sweep measures depth and not an incidental hyperparameter change *(code comment, repo)*. The honest summary is that the loss is not the mechanism.
+**Likely question.** *Why did you keep $\gamma = 1.5$ if plain CE was as good?* **Answer.** The ablations show no alternative to plain cross-entropy is significantly better (closest $p_{holm} = 0.117$), and the focal setting was inherited unchanged so the exit-depth sweep measures depth and not an incidental hyperparameter change *(code comment, repo)*. The honest summary is that the loss is not the mechanism.
 
 ## 15.10 Check yourself
 

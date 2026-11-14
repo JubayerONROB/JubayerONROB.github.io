@@ -83,7 +83,7 @@ We timed both final checkpoints on a **4-core cloud CPU**, batch size one, in ON
 We release the construction and validation code and every artifact the paper's numbers come from: the canonical marker index, per-marker gate predictions, generation outputs, all judge prompts and raw judgments, scripts, and run manifests. The derived corpus is not redistributed because its three upstream sources have different licences. The pipeline rebuilds it from those sources.
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

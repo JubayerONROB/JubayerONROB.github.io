@@ -1,14 +1,13 @@
 ---
-title: "17. Interview deep dive: generation metrics and statistics"
+title: "17. Deep dive: generation metrics and statistics"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
   - statistics
 ---
 
-`math` `statistics` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` `statistics` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]; [[notes/proactive-assistant/8-statistics|8. Statistics behind the claims]]; [[notes/proactive-assistant/9-human-evaluation|9. Human evaluation]]. **Previous:** [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]].
 
@@ -26,7 +25,7 @@ Part A covers the three text-scoring metrics. Part B covers the statistics behin
 
 **Why it matters here.** It is the primary automatic metric because it is the only one with a defensible **end-to-end form**: a suppressed trigger has no string to score, and "no hint" is unambiguously not an exact match. A BERTScore of zero would be an invented convention *(paper)*. It is a **strict lower bound** on usefulness.
 
-**Interview question.** *Why keep a metric you call a lower bound?* **Answer.** Because only EM extends cleanly to Equation (2). The paper then shows graded metrics and LlamaPIE's native judge track human uptake more closely (section 17.10), so EM is the end-to-end tool and the others are the stage-wise tools.
+**Likely question.** *Why keep a metric you call a lower bound?* **Answer.** Because only EM extends cleanly to Equation (2). The paper then shows graded metrics and LlamaPIE's native judge track human uptake more closely (section 17.10), so EM is the end-to-end tool and the others are the stage-wise tools.
 
 ## 17.2 BERTScore
 
@@ -53,7 +52,7 @@ So a near-synonym scores high on BERTScore but zero on exact match.
 
 **Why rescale** *(paper)*. Among the memory-only baselines the raw scores span only 0.012, but rescaling moves every score by about 0.70, which is 57 times that spread. Hence rescaled values are reported beside the raw ones. With the profile the rescaled BERTScore is 0.57 and without it 0.35 *(paper)*.
 
-**Interview question.** *What does BERTScore miss?* **Answer.** It rewards topical similarity, so a plausible but wrong word can score high. In the paper the "hallucination" class exists for exactly that. It also depends on the embedding model and a baseline, which is why the scale is rescaled.
+**Likely question.** *What does BERTScore miss?* **Answer.** It rewards topical similarity, so a plausible but wrong word can score high. In the paper the "hallucination" class exists for exactly that. It also depends on the embedding model and a baseline, which is why the scale is rescaled.
 
 ## 17.3 ROUGE-1
 
@@ -69,7 +68,7 @@ $$
 
 **Why it matters here.** It rewards partial overlap that exact match gives zero for. With the profile ROUGE-1 is 0.48 and without it 0.13 *(paper)*. (The paper does not say whether this is the F, P or R form; the standard $F_1$ is shown here.)
 
-**Interview question.** *Why can ROUGE-1 and EM disagree?* **Answer.** "the dance performance" has EM 0 but ROUGE-1 F 0.8. Any extra or missing word kills EM and only dents ROUGE-1.
+**Likely question.** *Why can ROUGE-1 and EM disagree?* **Answer.** "the dance performance" has EM 0 but ROUGE-1 F 0.8. Any extra or missing word kills EM and only dents ROUGE-1.
 
 # Part B. Statistics
 
@@ -81,7 +80,7 @@ $$
 
 **Why it matters here.** The paper says a single judge scoring the same items twice agrees with itself at $r = 0.672$ and "does not resolve a 6.3-point exact-match gap between two systems that a **paired test** resolves at $p < 0.001$" *(paper)*.
 
-**Interview question.** *When is paired not applicable?* **Answer.** When the two systems were not run on the same items, or when you only have aggregate scores. The paper cannot test against LlamaPIE's reported numbers because its per-marker predictions are unavailable *(paper)*.
+**Likely question.** *When is paired not applicable?* **Answer.** When the two systems were not run on the same items, or when you only have aggregate scores. The paper cannot test against LlamaPIE's reported numbers because its per-marker predictions are unavailable *(paper)*.
 
 ## 17.5 McNemar's test
 
@@ -112,7 +111,7 @@ At 5%, the chi-square form says "significant" and the exact test says "not". Wit
 
 **Why it matters here** *(paper)*. 1B-gate-plus-1B-generator against 1B-gate-plus-8B-generator end to end: $p = 0.338$ (a tie on exact match). At the oracle-gate stage: $p = 0.79$. Removing the memory profile: $p<0.001$. A mismatched profile against no profile: $p = 0.343$ (indistinguishable). The RoBERTa-large versus Llama-3.2-1B gate comparison: $p_{holm} = 0.0060$ (McNemar, corrected).
 
-**Interview question.** *Why can't I use a chi-square test of independence on the 2×2 table?* **Answer.** The two classifiers are evaluated on the same items, so the rows and columns are dependent by construction. McNemar's test conditions on that pairing and only looks at the discordant cells.
+**Likely question.** *Why can't I use a chi-square test of independence on the 2×2 table?* **Answer.** The two classifiers are evaluated on the same items, so the rows and columns are dependent by construction. McNemar's test conditions on that pairing and only looks at the discordant cells.
 
 ## 17.6 Multiple comparisons: Bonferroni and Holm
 
@@ -135,7 +134,7 @@ Holm rejects all four; Bonferroni (adjusted $p \le 0.05$) rejects only two. *(Ho
 
 **Why it matters here** *(paper)*. Holm is applied "across all pairwise comparisons in the table" for the gate comparison, and across the 45 retrieval configurations (none beats the full profile). Bonferroni is used for the four non-inferiority tests of the human study, which makes their intervals **98.75%** wide: $\alpha = 0.05/4 = 0.0125$, confidence $1 - 0.0125 = 98.75\%$, critical value $z = 2.498$ instead of 1.96.
 
-**Interview question.** *Why Holm and not Bonferroni?* **Answer.** Both control the family-wise error. Holm is uniformly more powerful because it uses the ordering of the $p$-values, and it needs no extra assumptions about dependence between tests.
+**Likely question.** *Why Holm and not Bonferroni?* **Answer.** Both control the family-wise error. Holm is uniformly more powerful because it uses the ordering of the $p$-values, and it needs no extra assumptions about dependence between tests.
 
 ## 17.7 The bootstrap and the dialogue (cluster) bootstrap
 
@@ -157,7 +156,7 @@ The spread of these rates (SD $\approx 0.095$) is the bootstrap's estimate of th
 
 **Why it matters here** *(paper)*. All intervals are "clustered by dialogue". Examples: profile effect $+0.0055\ [-0.0010,\ +0.0125]$ (includes zero); 8B with memory vs without: $+0.83\ [+0.48,\ +1.23]$ uptake; the unified $k=10$ gate over the memory-aware two-stage gate $+0.0183\ [+0.0106,\ +0.0259]$.
 
-**Interview question.** *Why does clustering widen the interval?* **Answer.** Because 100 markers from 10 dialogues are less than 100 independent observations: markers in a dialogue are correlated, so the effective sample size is smaller. Resampling dialogues keeps that correlation inside each resample, so the estimate of variance is honest.
+**Likely question.** *Why does clustering widen the interval?* **Answer.** Because 100 markers from 10 dialogues are less than 100 independent observations: markers in a dialogue are correlated, so the effective sample size is smaller. Resampling dialogues keeps that correlation inside each resample, so the estimate of variance is honest.
 
 ## 17.8 Noise floor
 
@@ -167,7 +166,7 @@ The spread of these rates (SD $\approx 0.095$) is the bootstrap's estimate of th
 
 **Worked example.** The unified $k=6$ gate beats the separate gate by $0.8022 - 0.8002 = +0.0020$, less than 0.0070, so it is a **tie**. The $k=10$ gate leads by $0.8164 - 0.8002 = +0.0162$, more than 0.0070, so it **exceeds** the noise floor *(paper)*. Consistency check *(my arithmetic)*: if two runs each have SD $\sigma\approx0.003$, their difference has SD $\sigma\sqrt2\approx0.0044$, so 0.0070 is a plausible single draw, about 1.6 SD.
 
-**Interview question.** *Is 0.0070 a reliable threshold?* **Answer.** Not strongly: it comes from one pair of runs, which the paper states. It is a reference band, not a confidence interval, and the paper backs it with the three-seed SDs.
+**Likely question.** *Is 0.0070 a reliable threshold?* **Answer.** Not strongly: it comes from one pair of runs, which the paper states. It is a reference band, not a confidence interval, and the paper backs it with the three-seed SDs.
 
 ## 17.9 Multiple seeds
 
@@ -179,7 +178,7 @@ The spread of these rates (SD $\approx 0.095$) is the bootstrap's estimate of th
 
 **Why it matters here.** Seed dispersion is measured at step 21,703 only, "since pooling it with a point estimate from another step would misstate it" *(paper)*. At the final checkpoint only one seed per depth exists, and the paper says so.
 
-**Interview question.** *Why three seeds and not more?* **Answer.** The paper lists "most configurations were trained once" and no second-family or further-seed run as limitations. Three seeds give a rough SD, not a precise one, so conclusions rest on gaps being large against that SD.
+**Likely question.** *Why three seeds and not more?* **Answer.** The paper lists "most configurations were trained once" and no second-family or further-seed run as limitations. Three seeds give a rough SD, not a precise one, so conclusions rest on gaps being large against that SD.
 
 ## 17.10 Pearson correlation
 
@@ -208,7 +207,7 @@ So two LLM judges barely agree with each other ($r = 0.127$), while one judge ag
 
 **Human correlation** *(Table 7b, 136 hints)*: native judge $r = 0.55$ (8B) and $0.67$ (1B); ROUGE-1 0.51 and 0.62; BERTScore 0.47 and 0.61; exact match 0.31 and 0.43. Only the orders matter: the native judge tracks people best, exact match worst. Some entries have $n<60$ and are marked with an asterisk in the paper.
 
-**Interview question.** *What does a correlation of 0.31 between exact match and human uptake tell you?* **Answer.** $r^2 = 0.096$, so EM explains about 10% of the variance of human uptake. It carries signal but is a weak proxy, which is why EM is called a strict lower bound and the native judge is recommended.
+**Likely question.** *What does a correlation of 0.31 between exact match and human uptake tell you?* **Answer.** $r^2 = 0.096$, so EM explains about 10% of the variance of human uptake. It carries signal but is a weak proxy, which is why EM is called a strict lower bound and the native judge is recommended.
 
 ## 17.11 Cohen's kappa (and Krippendorff's alpha)
 
@@ -228,7 +227,7 @@ $\kappa = 1$ is perfect, $0$ is chance level.
 
 **For the main human study** the paper uses **Krippendorff's ordinal $\alpha = 0.72$** on the 196 hints both annotators rated, because the rating scale is ordered 1 to 5. Its general form is $\alpha = 1 - D_o/D_e$, the observed disagreement over the disagreement expected by chance. *(Background.)*
 
-**Interview question.** *Why kappa and not plain percent agreement?* **Answer.** If 90% of items are "no", two raters who always say "no" agree 90% of the time with no skill. Kappa subtracts that chance agreement.
+**Likely question.** *Why kappa and not plain percent agreement?* **Answer.** If 90% of items are "no", two raters who always say "no" agree 90% of the time with no skill. Kappa subtracts that chance agreement.
 
 ## 17.12 Non-inferiority
 
@@ -240,7 +239,7 @@ $\kappa = 1$ is perfect, $0$ is chance level.
 
 **Why it matters here.** The correct statement is "level, but non-inferiority at the planned margin is not shown": the intervals are too wide (1,144 ratings over 32 dialogues, mostly one rater).
 
-**Interview question.** *The point estimate is +0.04. Why not claim non-inferiority?* **Answer.** Non-inferiority is a claim about the **interval**, not the point estimate. The interval reaches $-0.31$, so a true difference worse than $-0.25$ cannot be ruled out.
+**Likely question.** *The point estimate is +0.04. Why not claim non-inferiority?* **Answer.** Non-inferiority is a claim about the **interval**, not the point estimate. The interval reaches $-0.31$, so a true difference worse than $-0.25$ cannot be ruled out.
 
 ## 17.13 Reading "level", "tie" and "lower"
 

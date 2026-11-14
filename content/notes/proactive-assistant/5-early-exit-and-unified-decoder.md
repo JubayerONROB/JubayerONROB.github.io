@@ -82,7 +82,7 @@ The unified model needs one base and one adapter. A probe with one 4-bit 1B base
 - At $k = 10$, what is the ideal saving?  (*Answer: $16/10 = 1.60\times$.*)
 
 
-## Go deeper (interview deep dive)
+## Go deeper (derivations)
 
 For the derivations behind this page:
 

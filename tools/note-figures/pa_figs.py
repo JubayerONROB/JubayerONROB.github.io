@@ -1,4 +1,4 @@
-"""Figures for the interview deep-dive pages of the Proactive Assistant guide."""
+"""Figures for the deep-dive pages of the Proactive Assistant guide."""
 from common import *
 from fig6 import style
 import numpy as np

@@ -1,18 +1,17 @@
 ---
-title: "18. Interview deep dive: optimization"
+title: "18. Deep dive: optimization"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
   - optimization
 ---
 
-`math` `optimization` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` `optimization` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/4-training|4. Training: LoRA, 4-bit, losses]]; [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]. **Previous:** [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|17. Generation metrics and statistics]].
 
-**Read this first.** The paper says only that the unified model trained for **2 epochs (53,772 steps)** on marker-level rows with one shared LoRA adapter, and that the two-stage gate trained for 4 epochs *(paper)*. It does **not** list the optimizer settings. Everything below about AdamW, the schedule, the batch size, mixed precision and clipping comes from **your code repository** (`experiments/train_joint.py`) and is marked *(repo)*. The repo values are **defaults of the script**. Confirm them against the exact configuration of the run before you quote them in the interview. Other statements are **background** or **derived**.
+**Read this first.** The paper says only that the unified model trained for **2 epochs (53,772 steps)** on marker-level rows with one shared LoRA adapter, and that the two-stage gate trained for 4 epochs *(paper)*. It does **not** list the optimizer settings. Everything below about AdamW, the schedule, the batch size, mixed precision and clipping comes from **your code repository** (`experiments/train_joint.py`) and is marked *(repo)*. The repo values are **defaults of the script**. Confirm them against the exact configuration of the run before you quote them. Other statements are **background** or **derived**.
 
 ## 18.1 What is being optimized, and which layers receive which gradient
 
@@ -44,7 +43,7 @@ The gate loss depends on the input only through $h_k$, which is computed by laye
 
 **Why it matters here.** This is why training runs **full depth** even for markers that will be silent at inference: only then can the hint loss shape layers $k{+}1..L$ *(repo)*. It also explains why the exit depth is a real design choice: a deeper $k$ makes more layers serve both objectives.
 
-**Interview question.** *Do the two losses interfere?* **Answer.** They can: layers $1..k$ receive both gradients, so the gate objective constrains what those layers represent, and the hint objective does the same. The paper shows the cost is small at the final checkpoint: the gate F1 is 0.8022 ($k=6$) and 0.8164 ($k=10$) against 0.8002 for the separate gate, and generation exact match is 0.3299 and 0.3218 against 0.2971 for the 1B generator alone *(paper, Table 4)*. A caution from the repo itself: the hint loss is supervised only on trigger markers, so many batches have **no** hint supervision at all.
+**Likely question.** *Do the two losses interfere?* **Answer.** They can: layers $1..k$ receive both gradients, so the gate objective constrains what those layers represent, and the hint objective does the same. The paper shows the cost is small at the final checkpoint: the gate F1 is 0.8022 ($k=6$) and 0.8164 ($k=10$) against 0.8002 for the separate gate, and generation exact match is 0.3299 and 0.3218 against 0.2971 for the 1B generator alone *(paper, Table 4)*. A caution from the repo itself: the hint loss is supervised only on trigger markers, so many batches have **no** hint supervision at all.
 
 ## 18.2 Gradient descent, Adam and AdamW
 
@@ -85,7 +84,7 @@ Observation: the **first step is exactly $\eta$** whatever the size of the gradi
 
 **Why it matters here** *(repo)*. The joint training uses AdamW with $\eta = 2\times10^{-5}$ and weight decay 0.01, over the LoRA parameters and the classifier head only (the 4-bit base is frozen).
 
-**Interview question.** *Why Adam and not SGD for a transformer?* **Answer.** The gradients of different parameters have very different scales (embeddings, attention, MLP, a freshly initialized head). Adam normalizes each parameter's step by its own gradient history, so one learning rate works for all of them. SGD would need per-layer learning rates. This is common practice for transformers, though not a theorem. *(Background.)*
+**Likely question.** *Why Adam and not SGD for a transformer?* **Answer.** The gradients of different parameters have very different scales (embeddings, attention, MLP, a freshly initialized head). Adam normalizes each parameter's step by its own gradient history, so one learning rate works for all of them. SGD would need per-layer learning rates. This is common practice for transformers, though not a theorem. *(Background.)*
 
 ## 18.3 The learning-rate schedule: OneCycle
 
@@ -109,7 +108,7 @@ Observation: the **first step is exactly $\eta$** whatever the size of the gradi
 
 **Why it matters here** *(repo comments)*. The schedule is defined over the **whole run**. The script has two options for short debugging runs: `--max-steps` also shortens the schedule, while `--stop-after-steps` stops early but keeps the full schedule. A short run with the first option "never sat at peak learning rate". See section 18.9.
 
-**Interview question.** *What would happen with a constant learning rate?* **Answer.** The weights would keep jumping by roughly $\eta$ per step at the end of training, so the final model would be a noisy point. Annealing lets the weights settle into a minimum. (The deepfake paper handles the same noise with weight averaging; here annealing does the job.) *(Background.)*
+**Likely question.** *What would happen with a constant learning rate?* **Answer.** The weights would keep jumping by roughly $\eta$ per step at the end of training, so the final model would be a noisy point. Annealing lets the weights settle into a minimum. (The deepfake paper handles the same noise with weight averaging; here annealing does the job.) *(Background.)*
 
 ## 18.4 Batch size, gradient accumulation and steps
 
@@ -125,7 +124,7 @@ which is the gradient of the loss over the combined batch. (This works because t
 
 **Worked example.** The paper reports 53,772 steps for 2 epochs, so 26,886 steps per epoch. *If* the run used the repo defaults (effective batch 8) that would mean about $26{,}886\times8 \approx 215{,}000$ marker rows per epoch. This is an **inference from the defaults**, not a number in the paper.
 
-**Interview question.** *Is accumulation identical to a bigger batch?* **Answer.** For the gradient, yes if the loss is normalized the same way. It differs for layers that use batch statistics (batch normalization), which a transformer with layer normalization does not, so here it is equivalent. *(Background.)*
+**Likely question.** *Is accumulation identical to a bigger batch?* **Answer.** For the gradient, yes if the loss is normalized the same way. It differs for layers that use batch statistics (batch normalization), which a transformer with layer normalization does not, so here it is equivalent. *(Background.)*
 
 ## 18.5 Mixed precision and loss scaling
 
@@ -139,7 +138,7 @@ which is the gradient of the loss over the combined batch. (This works because t
 
 **Why it matters here** *(repo)*. The script uses `autocast` in float16 with a `GradScaler`. (A repo comment mentions a 14.56 GB T4 GPU, which has no native bfloat16 support, so float16 is the natural choice there.) The base weights are 4-bit NF4 ([[notes/proactive-assistant/16-deep-dive-model-lora-quantization|page 16]]).
 
-**Interview question.** *Why must clipping come after unscaling?* **Answer.** The clip threshold refers to the true gradient norm. If you clipped before dividing by $S$, you would compare an inflated norm with the threshold and clip almost always. The repo unscales first (`scaler.unscale_`) and then clips *(repo)*.
+**Likely question.** *Why must clipping come after unscaling?* **Answer.** The clip threshold refers to the true gradient norm. If you clipped before dividing by $S$, you would compare an inflated norm with the threshold and clip almost always. The repo unscales first (`scaler.unscale_`) and then clips *(repo)*.
 
 ## 18.6 Gradient clipping
 
@@ -151,7 +150,7 @@ which is the gradient of the loss over the combined batch. (This works because t
 
 **Why it matters here.** A few noisy batches (for instance, ones where only a few markers carry hint supervision) can produce large gradients; clipping prevents one batch from throwing the adapters far off.
 
-**Interview question.** *With Adam, does clipping still matter, since Adam normalizes the step?* **Answer.** It matters through the moment estimates: one huge gradient inflates $v$ for many steps and shrinks the later steps, or inflates $m$ and causes a jump. Clipping limits that. *(Background.)*
+**Likely question.** *With Adam, does clipping still matter, since Adam normalizes the step?* **Answer.** It matters through the moment estimates: one huge gradient inflates $v$ for many steps and shrinks the later steps, or inflates $m$ and causes a jump. Clipping limits that. *(Background.)*
 
 ## 18.7 LoRA and its optimization: why $B$ starts at zero
 
@@ -174,7 +173,7 @@ At $B = 0$ the second gradient is **zero**: $A$ does not move at the first step,
 
 **Why it matters here.** The zero start guarantees that fine-tuning begins from the pre-trained function, which keeps early training stable.
 
-**Interview question.** *Why not initialize both $A$ and $B$ at zero?* **Answer.** Then both gradients are zero (the gradient of each factor is proportional to the other), so nothing would ever train. One factor is random, the other zero. *(Background.)*
+**Likely question.** *Why not initialize both $A$ and $B$ at zero?* **Answer.** Then both gradients are zero (the gradient of each factor is proportional to the other), so nothing would ever train. One factor is random, the other zero. *(Background.)*
 
 ## 18.8 Training through a 4-bit base
 
@@ -182,7 +181,7 @@ At $B = 0$ the second gradient is **zero**: $A$ does not move at the first step,
 
 **Why it matters here.** The trainable part is 11.27 million parameters (my estimate, page 16) out of about 1.2 billion; the optimizer state (two numbers per trainable parameter for Adam) is tiny. For 11.27 M parameters in float32 that is $11.27\times10^6\times(4 + 4 + 4)$ bytes (weights, $m$, $v$) $\approx 135$ MB. *(My arithmetic.)*
 
-**Interview question.** *Is the training problem convex?* **Answer.** No. A transformer's loss is non-convex in the weights, so Adam finds a good local solution, not the global minimum. The low-rank constraint restricts the search to a smaller space, which helps stability, but it does not make the problem convex. *(Background.)*
+**Likely question.** *Is the training problem convex?* **Answer.** No. A transformer's loss is non-convex in the weights, so Adam finds a good local solution, not the global minimum. The low-rank constraint restricts the search to a smaller space, which helps stability, but it does not make the problem convex. *(Background.)*
 
 ## 18.9 An optimization failure recorded in the repo (not in the paper)
 
@@ -194,9 +193,9 @@ At $B = 0$ the second gradient is **zero**: $A$ does not move at the first step,
 2. **Measure during training, not only at the end.** An endpoint number cannot tell you when a collapse happened.
 3. **Two heads, two learning-rate needs.** A learning rate suited to token generation can destroy a classifier head. *(Hypothesis consistent with the comments, not tested in the paper.)*
 
-**Interview question.** *Tell me about something that went wrong in training.* **Answer.** Use this. State the symptom (gate at chance, AUROC 0.4995, generation fine), the cause (a learning rate 10× too high for the gate, inherited from another stage), why a quick test missed it (the schedule annealed inside the test), and the fix (the published gate rate, a schedule that spans the full run, and mid-training evaluation).
+**Likely question.** *Tell me about something that went wrong in training.* **Answer.** Use this. State the symptom (gate at chance, AUROC 0.4995, generation fine), the cause (a learning rate 10× too high for the gate, inherited from another stage), why a quick test missed it (the schedule annealed inside the test), and the fix (the published gate rate, a schedule that spans the full run, and mid-training evaluation).
 
-## 18.10 Questions a professor of optimization might ask
+## 18.10 More questions on optimization
 
 - **Why does Adam's first step have size $\eta$?** Bias-corrected $\hat m/\sqrt{\hat v}$ equals $g/|g| = \pm1$ at $t=1$ (table in 18.2).
 - **What does weight decay do in AdamW and why is it decoupled?** It shrinks the weights by a factor $(1-\eta\lambda)$ per step independently of the gradient statistics. With $\eta = 2\times10^{-5}$ and $\lambda = 0.01$ that factor is $1 - 2\times10^{-7}$ per step at peak rate. *(Derived from the repo values.)*

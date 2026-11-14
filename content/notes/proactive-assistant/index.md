@@ -41,7 +41,7 @@ If you want everything in one straight line, read the first page. If you only ne
 | 17 | [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics\|Deep dive: generation metrics and statistics]] | EM, BERTScore, ROUGE, McNemar, Holm, bootstrap, noise floor, Pearson, kappa, non-inferiority |
 | 18 | [[notes/proactive-assistant/18-deep-dive-optimization\|Deep dive: optimization]] | Gradient flow through the shared trunk, Adam and AdamW, OneCycle, accumulation, mixed precision, clipping, LoRA's zero start |
 
-**Interview preparation (pages 12–18).** These pages re-derive every formula, with five parts per concept: meaning, formula, worked example, why it matters here, and a likely interview question with a model answer. Numbers are from the paper unless marked *background*, *derived* or *toy*.
+**Derivation pages (pages 12–18).** These pages re-derive every formula, with five parts per concept: meaning, formula, worked example, why it matters here, and a likely question with a model answer. Numbers are from the paper unless marked *background*, *derived* or *toy*.
 
 ## Concept map: where each idea is explained
 

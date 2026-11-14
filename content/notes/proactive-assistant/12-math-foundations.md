@@ -1,19 +1,18 @@
 ---
-title: "12. Interview deep dive: math foundations"
+title: "12. Deep dive: math foundations"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
 ---
 
-`math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/1-the-task-and-the-gate|1. The task and the gate]]; [[notes/proactive-assistant/2-language-model-basics|2. Language model basics]]; [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]].
 
-**How the deep-dive pages 12–17 work.** Every concept has five parts: **Meaning** (plain English), **Formula** (every symbol defined), **Worked example** (real numbers, step by step), **Why it matters here** (my paper), and **Interview question** (with a model answer). Numbers from the paper are marked *(paper)*. Toy examples use made-up numbers and say so. Anything the paper does not contain is marked **background**. I checked every calculation by computer.
+**How the deep-dive pages 12–18 work.** Every concept has five parts: **Meaning** (plain English), **Formula** (every symbol defined), **Worked example** (real numbers, step by step), **Why it matters here** (my paper), and **Likely question** (with a model answer). Numbers from the paper are marked *(paper)*. Toy examples use made-up numbers and say so. Anything the paper does not contain is marked **background**. I checked every calculation by computer.
 
-This first page defines the small symbols that everything else uses. Skip nothing: a professor can start from any of them.
+This first page defines the small symbols that everything else uses. Nothing is skipped, so any later page can be read on its own.
 
 ## 12.1 Sum: $\sum$
 
@@ -25,7 +24,7 @@ This first page defines the small symbols that everything else uses. Skip nothin
 
 **Why it matters here.** Every metric in the paper is a sum over markers, for example $\sum_{i \in \mathcal{T}} g_i m_i$ in Equation (2).
 
-**Interview question.** *What does $\sum_{i\in\mathcal{T}}$ mean, with a set and not a range?* **Answer.** Add the term only for the $i$ that belong to the set $\mathcal{T}$ (the reference triggers). It is the same as summing over all $i$ and multiplying each term by $\mathbf{1}[i \in \mathcal{T}]$.
+**Likely question.** *What does $\sum_{i\in\mathcal{T}}$ mean, with a set and not a range?* **Answer.** Add the term only for the $i$ that belong to the set $\mathcal{T}$ (the reference triggers). It is the same as summing over all $i$ and multiplying each term by $\mathbf{1}[i \in \mathcal{T}]$.
 
 ## 12.2 Set, element and size $|\cdot|$
 
@@ -37,7 +36,7 @@ This first page defines the small symbols that everything else uses. Skip nothin
 
 **Why it matters here.** $\mathcal{T}$ is the set of reference triggers, $|\mathcal{T}| = 3{,}356$ *(paper)* out of $N = 28{,}058$ markers. The trigger rate is $3356/28058 = 0.1196$, so 11.96% *(paper)*.
 
-**Interview question.** *Why divide by $|\mathcal{T}|$ in $EM_{e2e}$ and not by the number of emitted hints?* **Answer.** Dividing by $|\mathcal{T}|$ asks "of all the moments that needed a hint, what fraction did we serve correctly?" (recall type). Dividing by emitted hints asks "of what we showed, what fraction was right?" (precision type). The paper reports both, as $EM_{e2e}$ and $P_{e2e}$.
+**Likely question.** *Why divide by $|\mathcal{T}|$ in $EM_{e2e}$ and not by the number of emitted hints?* **Answer.** Dividing by $|\mathcal{T}|$ asks "of all the moments that needed a hint, what fraction did we serve correctly?" (recall type). Dividing by emitted hints asks "of what we showed, what fraction was right?" (precision type). The paper reports both, as $EM_{e2e}$ and $P_{e2e}$.
 
 ## 12.3 The indicator $\mathbf{1}[\cdot]$
 
@@ -49,7 +48,7 @@ This first page defines the small symbols that everything else uses. Skip nothin
 
 **Why it matters here.** Equation (1), $g_i(t) = \mathbf{1}[p_i \ge t]$, is the gate. And $m_i = \mathbf{1}[h_i = h_i^*]$ is exact match.
 
-**Interview question.** *Is $\mathbf{1}[p \ge t]$ differentiable in $p$?* **Answer.** No. It is a step: flat everywhere and jumps at $t$, so its gradient is zero or undefined. That is why we **train** with a smooth loss on the score $p_i$ (cross-entropy) and only apply the step **after** training, at inference. *(Background reasoning.)*
+**Likely question.** *Is $\mathbf{1}[p \ge t]$ differentiable in $p$?* **Answer.** No. It is a step: flat everywhere and jumps at $t$, so its gradient is zero or undefined. That is why we **train** with a smooth loss on the score $p_i$ (cross-entropy) and only apply the step **after** training, at inference. *(Background reasoning.)*
 
 ## 12.4 Probability, conditional probability, Bayes' rule
 
@@ -78,7 +77,7 @@ The paper reports gate precision 0.7648 *(paper)*; the small difference is round
 
 **Why it matters here.** It explains why precision depends on how rare triggers are (Figure 27 on [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|page 15]]).
 
-**Interview question.** *Same recall and false-alarm rate, but the corpus had 50% triggers. What is the precision?* **Answer.** $0.8391\cdot0.5 / (0.8391\cdot0.5 + 0.0351\cdot0.5) = 0.8391/0.8742 = 0.96$. Rare positives are the reason precision is only 0.76 here.
+**Likely question.** *Same recall and false-alarm rate, but the corpus had 50% triggers. What is the precision?* **Answer.** $0.8391\cdot0.5 / (0.8391\cdot0.5 + 0.0351\cdot0.5) = 0.8391/0.8742 = 0.96$. Rare positives are the reason precision is only 0.76 here.
 
 ## 12.5 Expectation, variance, standard deviation
 
@@ -90,7 +89,7 @@ The paper reports gate precision 0.7648 *(paper)*; the small difference is round
 
 **Why it matters here.** The seed SDs 0.0033 ($k=6$) and 0.0029 ($k=10$) *(paper)* measure run-to-run noise.
 
-**Interview question.** *Why can the expected cost per marker be written $k/L + \pi(1-k/L)$?* **Answer.** Cost is a random variable: $k/L$ if silent, $1$ if fired. Its expectation is the sum of value times probability: $(1-\pi)\cdot k/L + \pi\cdot 1 = k/L + \pi(1 - k/L)$.
+**Likely question.** *Why can the expected cost per marker be written $k/L + \pi(1-k/L)$?* **Answer.** Cost is a random variable: $k/L$ if silent, $1$ if fired. Its expectation is the sum of value times probability: $(1-\pi)\cdot k/L + \pi\cdot 1 = k/L + \pi(1 - k/L)$.
 
 ## 12.6 Vectors, matrices, dot product
 
@@ -102,7 +101,7 @@ The paper reports gate precision 0.7648 *(paper)*; the small difference is round
 
 **Why it matters here.** The classifier head $W_c \in \mathbb{R}^{2\times d}$ turns a hidden state into two scores ("no hint", "hint").
 
-**Interview question.** *What does "$\in \mathbb{R}^{2\times d}$" say?* **Answer.** The matrix has 2 rows and $d$ columns of real numbers. It maps a $d$-number vector to 2 numbers.
+**Likely question.** *What does "$\in \mathbb{R}^{2\times d}$" say?* **Answer.** The matrix has 2 rows and $d$ columns of real numbers. It maps a $d$-number vector to 2 numbers.
 
 ## 12.7 $\log$, $\exp$ and the argmax
 
@@ -112,7 +111,7 @@ The paper reports gate precision 0.7648 *(paper)*; the small difference is round
 
 **Why it matters here.** Cross-entropy is $-\log p_t$; softmax uses $\exp$; greedy decoding picks the token with the $\arg\max$ probability.
 
-**Interview question.** *Why do we use $\log$ probabilities in the loss?* **Answer.** The probability of a whole dataset is a product of per-example probabilities. The log turns that product into a sum, which is numerically stable and easy to differentiate. Maximizing the log-likelihood is the same as minimizing cross-entropy. *(Background.)*
+**Likely question.** *Why do we use $\log$ probabilities in the loss?* **Answer.** The probability of a whole dataset is a product of per-example probabilities. The log turns that product into a sum, which is numerically stable and easy to differentiate. Maximizing the log-likelihood is the same as minimizing cross-entropy. *(Background.)*
 
 ## 12.8 Softmax and sigmoid
 
@@ -130,7 +129,7 @@ For two classes, softmax equals a sigmoid of the **difference** of the logits: $
 
 **Why it matters here.** The gate head has two outputs, so $p_i$ is a two-class softmax, equal to a sigmoid of the logit difference.
 
-**Interview question.** *Is $p_i$ a calibrated probability?* **Answer.** Not automatically. Softmax guarantees a number in $[0,1]$, not that it matches the true frequency. The paper measures this with ECE and finds the best-ranking gate is the worst calibrated (ECE 0.3036 vs 0.0425) *(paper, Table S4)*.
+**Likely question.** *Is $p_i$ a calibrated probability?* **Answer.** Not automatically. Softmax guarantees a number in $[0,1]$, not that it matches the true frequency. The paper measures this with ECE and finds the best-ranking gate is the worst calibrated (ECE 0.3036 vs 0.0425) *(paper, Table S4)*.
 
 ## 12.9 Check yourself
 

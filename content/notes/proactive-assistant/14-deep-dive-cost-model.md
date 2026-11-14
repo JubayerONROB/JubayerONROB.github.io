@@ -1,13 +1,12 @@
 ---
-title: "14. Interview deep dive: the cost model"
+title: "14. Deep dive: the cost model"
 date: 2026-11-14
 tags:
   - notes
   - math
-  - interview
 ---
 
-`math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
+`math` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
 **Builds on:** [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]; [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]; [[notes/proactive-assistant/3-memory-and-prompt|3. Memory profile and prompt]]. **Previous:** [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]].
 
@@ -52,7 +51,7 @@ $k$ is the exit layer (6 or 10). $L = 16$ is the number of layers. $c_{gen}$ is 
 
 **Why it matters here.** A silent marker costs $k/L$ of a pass, and a triggered one costs exactly one pass instead of $1 + c_{gen}$. Both savings come from the same idea: the router and the expert are the same weights *(paper)*.
 
-**Interview question.** *Why is the triggered cost exactly 1 and not more?* **Answer.** Layers $1..k$ are computed once and their output is the input of layer $k{+}1$. Nothing is recomputed. The only extra work is layers $k{+}1..L$, which together with the first $k$ layers equals one full pass. (During training the model always runs full depth so the generation loss can shape layers $k{+}1..L$. Only inference short-circuits.)
+**Likely question.** *Why is the triggered cost exactly 1 and not more?* **Answer.** Layers $1..k$ are computed once and their output is the input of layer $k{+}1$. Nothing is recomputed. The only extra work is layers $k{+}1..L$, which together with the first $k$ layers equals one full pass. (During training the model always runs full depth so the generation loss can shape layers $k{+}1..L$. Only inference short-circuits.)
 
 ## 14.3 The ideal saving $L/k$
 
@@ -69,7 +68,7 @@ $k$ is the exit layer (6 or 10). $L = 16$ is the number of layers. $c_{gen}$ is 
 
 **Why it matters here.** It is the upper bound on what early exit can save on silent markers, and about 88% of markers are silent.
 
-**Interview question.** *Why is the ideal saving not a function of the trigger rate?* **Answer.** $L/k$ is the saving on **silent** markers only, which cost $k/L$ against 1. The trigger rate enters when you average over all markers (next section).
+**Likely question.** *Why is the ideal saving not a function of the trigger rate?* **Answer.** $L/k$ is the saving on **silent** markers only, which cost $k/L$ against 1. The trigger rate enters when you average over all markers (next section).
 
 ## 14.4 Expected cost at the real trigger rate
 
@@ -96,7 +95,7 @@ At the deployed gate the fire rate is $\pi = 3682/28058 = 0.1312$ *(paper: 3,682
 
 **Why it matters here.** The expected gain is slightly **below** the silent-only $L/k$ (2.49 against 2.67), because triggered markers cost the full pass.
 
-**Interview question.** *The gain depends on $c_{gen}$. How would you state the result without assuming it?* **Answer.** Write the cascade cost as $1 + \pi c_{gen}$ and say the unified model costs $\frac{k}{L} + \pi(1-\frac kL)$. The unified cost is always lower than the cascade cost as long as $c_{gen} \ge 0$, because $\frac{k}{L} + \pi(1 - \frac kL) < 1 \le 1 + \pi c_{gen}$ whenever $\pi < 1$ and $k < L$. The size of the gap then depends on $c_{gen}$, which the paper measures with wall-clock time.
+**Likely question.** *The gain depends on $c_{gen}$. How would you state the result without assuming it?* **Answer.** Write the cascade cost as $1 + \pi c_{gen}$ and say the unified model costs $\frac{k}{L} + \pi(1-\frac kL)$. The unified cost is always lower than the cascade cost as long as $c_{gen} \ge 0$, because $\frac{k}{L} + \pi(1 - \frac kL) < 1 \le 1 + \pi c_{gen}$ whenever $\pi < 1$ and $k < L$. The size of the gap then depends on $c_{gen}$, which the paper measures with wall-clock time.
 
 ## 14.5 Compared with what was measured
 
@@ -123,7 +122,7 @@ $$
 
 **Why it is below the ideal 2.49×.** The wall clock includes costs outside the prefill-layer model, such as decoding the 1 to 3 hint tokens and per-marker overheads. The paper does not break these down, so I cannot say how much each contributes.
 
-**Interview question.** *Your formula predicts 2.49× but you report 1.76×. Is the formula wrong?* **Answer.** The formula is an ideal for prefill layer cost only. The measured wall clock also pays for decoding the hint and per-call overhead, and the wall clock is on an early-exit-only basis. The formula correctly predicts the **direction** and the **ordering** ($k=6$ cheaper than $k=10$). The ONNX gate-only measurement, 2.86× and 1.51×, matches the ideal 2.67× and 1.60× to within the noted variance.
+**Likely question.** *Your formula predicts 2.49× but you report 1.76×. Is the formula wrong?* **Answer.** The formula is an ideal for prefill layer cost only. The measured wall clock also pays for decoding the hint and per-call overhead, and the wall clock is on an early-exit-only basis. The formula correctly predicts the **direction** and the **ordering** ($k=6$ cheaper than $k=10$). The ONNX gate-only measurement, 2.86× and 1.51×, matches the ideal 2.67× and 1.60× to within the noted variance.
 
 ## 14.6 Why a gate saves less when the generator is small (Amdahl-style derivation)
 
@@ -151,7 +150,7 @@ Two limits: if the gate is free ($r \to 0$), $S \to 1/\pi = 28058/3682 = 7.62$ (
 
 **Why it matters here.** It explains why the paper motivates one model instead of two: with a 1B generator the gate eats most of the runtime, so the remaining saving comes from making the gate cheaper, which early exit does.
 
-**Interview question.** *When does a gate not pay off?* **Answer.** When $r + \pi \ge 1$, i.e. the gate costs as much as the generator would on the fraction you filter out. With $\pi = 0.13$ that needs $r \ge 0.87$. In the paper's setting $r = 0.59$ for a 1B generator, so gating still wins but only by 1.38×.
+**Likely question.** *When does a gate not pay off?* **Answer.** When $r + \pi \ge 1$, i.e. the gate costs as much as the generator would on the fraction you filter out. With $\pi = 0.13$ that needs $r \ge 0.87$. In the paper's setting $r = 0.59$ for a 1B generator, so gating still wins but only by 1.38×.
 
 ## 14.7 Check yourself
 
