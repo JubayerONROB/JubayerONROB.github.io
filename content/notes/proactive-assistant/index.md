@@ -33,6 +33,14 @@ If you want everything in one straight line, read the first page. If you only ne
 | 9 | [[notes/proactive-assistant/9-human-evaluation\|Human evaluation]] | How people rated the hints and which scores match them |
 | 10 | [[notes/proactive-assistant/10-deployment-and-limits\|Deployment and limits]] | Calibration, CPU cost, memory, ethics, what we did not do |
 | 11 | [[notes/proactive-assistant/11-glossary\|Glossary]] | Every symbol and term on one page |
+| 12 | [[notes/proactive-assistant/12-math-foundations\|Deep dive: math foundations]] | Sum, set, indicator, probability, Bayes, expectation, softmax, from zero |
+| 13 | [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end\|Deep dive: gate and end-to-end score]] | Eq. (1)–(3), threshold sweep, factorization proof, monotonicity proof, oracle ceiling |
+| 14 | [[notes/proactive-assistant/14-deep-dive-cost-model\|Deep dive: the cost model]] | Eq. (4), ideal $L/k$, expected cost at 12% triggers, measured vs ideal, why a gate saves less with a small generator |
+| 15 | [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses\|Deep dive: metrics, calibration, losses]] | Confusion matrix, F1 proof, AUROC, AUPRC, ECE/MCE/Brier, cross-entropy, weighted CE, focal loss |
+| 16 | [[notes/proactive-assistant/16-deep-dive-model-lora-quantization\|Deep dive: model, LoRA, quantization]] | Attention, layer-$k$ head, prefill vs decoding, LoRA parameter count, NF4, why 4-bit saves memory not time |
+| 17 | [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics\|Deep dive: generation metrics and statistics]] | EM, BERTScore, ROUGE, McNemar, Holm, bootstrap, noise floor, Pearson, kappa, non-inferiority |
+
+**Interview preparation (pages 12–17).** These pages re-derive every formula, with five parts per concept: meaning, formula, worked example, why it matters here, and a likely interview question with a model answer. Numbers are from the paper unless marked *background*, *derived* or *toy*.
 
 ## The paper in five lines
 
