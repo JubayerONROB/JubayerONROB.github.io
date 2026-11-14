@@ -70,4 +70,12 @@ A common idea is **retrieval**: pick only the most relevant facts and drop the r
 - Why does the prompt cost matter more than the hint length?
 - Does the cascade gate see the profile?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]]: prefill, prompt length and the attention cost share.
+- [[notes/proactive-assistant/14-deep-dive-cost-model|14. The cost model]]: why the profile makes the gate more expensive.
+
 Next: [[notes/proactive-assistant/4-training|4. Training: LoRA, 4-bit, losses]]

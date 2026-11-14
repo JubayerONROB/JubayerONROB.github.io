@@ -9,6 +9,8 @@ tags:
 
 `math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
+**Builds on:** [[notes/proactive-assistant/1-the-task-and-the-gate|1. The task and the gate]]; [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]; [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]; [[notes/proactive-assistant/7-experiments-and-findings|7. Experiments and findings]]; [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]. **Previous:** [[notes/proactive-assistant/12-math-foundations|12. Math foundations]].
+
 Symbols: see [[notes/proactive-assistant/12-math-foundations|page 12]]. This page derives Equations (1), (2), (3) and the monotonicity result.
 
 ## 13.1 Equation (1): the gate

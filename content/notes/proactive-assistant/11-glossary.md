@@ -238,3 +238,10 @@ Continue with the interview deep dive: [[notes/proactive-assistant/12-math-found
 **Quantile.** The value below which a given share of data falls; a threshold for a false-alarm budget is a quantile of the negative scores.
 
 **Rank (LoRA).** The inner size $r$ of the two thin matrices $B$ and $A$.
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/12-math-foundations|12. Math foundations]]: the math foundations.
+- [[notes/proactive-assistant/18-deep-dive-optimization|18. Optimization]]: the optimization terms.

@@ -130,4 +130,13 @@ Non-matching hints split across the three error types in similar shares for ever
 - Why was the "mismatched profile" test useful?
 - Why is the cascade gate's F1 not the whole story of its cost?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]]: why behind-the-gate scores are lower than the ceiling.
+- [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|15. Metrics, calibration, losses]]: the loss ablation explained.
+- [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|17. Generation metrics and statistics]]: McNemar, Holm and the noise floor behind the verdicts.
+
 Next: [[notes/proactive-assistant/8-statistics|8. Statistics behind the claims]]

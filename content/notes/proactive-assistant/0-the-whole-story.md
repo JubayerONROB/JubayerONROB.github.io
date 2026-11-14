@@ -107,3 +107,15 @@ Recalibrate the threshold for every new gate. Pick the false-alarm budget on pur
 A proactive assistant must choose **when** to speak and **what** to say. Judged together, a perfect-gate score overstates the real result, and a gate pays off through precision and compute. Hint quality comes from the **user's memory profile**, not from a bigger model or retrieval. One compact 1B decoder can read its gate from a middle layer and **continue the same pass** to write the hint. It matches the two-model pipeline on automatic scores, runs faster, and people rate it level with the matched 1B pipeline.
 
 Symbols and terms: [[notes/proactive-assistant/11-glossary|Glossary]]
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/12-math-foundations|12. Math foundations]]: every basic symbol, from zero.
+- [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]]: Equations (1)–(3) and the proofs.
+- [[notes/proactive-assistant/14-deep-dive-cost-model|14. The cost model]]: Equation (4) and the cost derivations.
+- [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|15. Metrics, calibration, losses]]: metrics, calibration and losses.
+- [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]]: attention, LoRA and quantization.
+- [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|17. Generation metrics and statistics]]: generation metrics and statistics.
+- [[notes/proactive-assistant/18-deep-dive-optimization|18. Optimization]]: the optimizer and training dynamics.

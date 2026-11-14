@@ -9,6 +9,8 @@ tags:
 
 `math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
+**Builds on:** [[notes/proactive-assistant/2-language-model-basics|2. Language model basics]]; [[notes/proactive-assistant/4-training|4. Training: LoRA, 4-bit, losses]]; [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]; [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]. **Previous:** [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|15. Metrics, calibration, losses]].
+
 **What is from where.** From the paper: $L = 16$ layers, the head $W_c\in\mathbb{R}^{2\times d}$, exit depths $k\in\{6,10\}$, one shared LoRA adapter, 42 MB vs 957 MB, 4.99 GB vs 1.65 GB. **Background** (public model configuration of Llama-3.2-1B, not in the paper): $d = 2048$, 32 attention heads of width 64, 8 key/value heads, feed-forward width 8192, vocabulary 128,256. **Code** (your repository): LoRA rank $r = 16$, scale $\alpha = 32$, adapters on the seven projections `q,k,v,o,gate,up,down`. Parameter counts below are **my estimates** from those numbers.
 
 ## 16.1 Tokens and embeddings

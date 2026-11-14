@@ -9,6 +9,8 @@ tags:
 
 `math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
+**Builds on:** [[notes/proactive-assistant/1-the-task-and-the-gate|1. The task and the gate]]; [[notes/proactive-assistant/2-language-model-basics|2. Language model basics]]; [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]].
+
 **How the deep-dive pages 12–17 work.** Every concept has five parts: **Meaning** (plain English), **Formula** (every symbol defined), **Worked example** (real numbers, step by step), **Why it matters here** (my paper), and **Interview question** (with a model answer). Numbers from the paper are marked *(paper)*. Toy examples use made-up numbers and say so. Anything the paper does not contain is marked **background**. I checked every calculation by computer.
 
 This first page defines the small symbols that everything else uses. Skip nothing: a professor can start from any of them.

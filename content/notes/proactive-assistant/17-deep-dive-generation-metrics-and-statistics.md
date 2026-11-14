@@ -10,6 +10,8 @@ tags:
 
 `math` `statistics` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
+**Builds on:** [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]; [[notes/proactive-assistant/8-statistics|8. Statistics behind the claims]]; [[notes/proactive-assistant/9-human-evaluation|9. Human evaluation]]. **Previous:** [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]].
+
 Part A covers the three text-scoring metrics. Part B covers the statistics behind every "significant", "tie" and "level" in the paper. Definitions are standard **background**; numbers marked *(paper)* are from the paper; toy examples are made up.
 
 # Part A. Generation metrics
@@ -253,4 +255,4 @@ $\kappa = 1$ is perfect, $0$ is chance level.
 - Is the chance of at least one false positive at 5% with 4 independent tests larger or smaller than 5%? *(Larger: $1-0.95^4 = 0.185$.)*
 - If $r = 0.55$, what share of variance is shared? *($0.3025$, about 30%.)*
 
-Back to the [[notes/proactive-assistant/index|study guide index]].
+Next: [[notes/proactive-assistant/18-deep-dive-optimization|18. Deep dive: optimization]]

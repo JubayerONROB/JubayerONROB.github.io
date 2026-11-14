@@ -9,6 +9,8 @@ tags:
 
 `math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
+**Builds on:** [[notes/proactive-assistant/4-training|4. Training: LoRA, 4-bit, losses]]; [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]; [[notes/proactive-assistant/7-experiments-and-findings|7. Experiments and findings]]. **Previous:** [[notes/proactive-assistant/14-deep-dive-cost-model|14. The cost model]].
+
 Basic symbols: [[notes/proactive-assistant/12-math-foundations|page 12]]. Everything marked *(paper)* comes from the paper. Definitions of ECE, MCE, Brier and AP are standard **background**; the paper reports the values but not the bin count.
 
 ## 15.1 Confusion matrix and the four counts

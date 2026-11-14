@@ -139,4 +139,13 @@ $R$ is the gate's **recall**. $\text{EM}_{\text{fwd}}$ is the exact match on the
 - What does end-to-end precision charge that end-to-end exact match does not?
 - Why is exact match "a strict lower bound"?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]]: Equations (2) and (3), the factorization proof and the monotonicity proof.
+- [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|15. Metrics, calibration, losses]]: F1, AUROC, AUPRC and calibration with worked numbers.
+- [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|17. Generation metrics and statistics]]: exact match, BERTScore and ROUGE with examples.
+
 Next: [[notes/proactive-assistant/7-experiments-and-findings|7. Experiments and findings]]

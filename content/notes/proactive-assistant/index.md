@@ -39,8 +39,26 @@ If you want everything in one straight line, read the first page. If you only ne
 | 15 | [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses\|Deep dive: metrics, calibration, losses]] | Confusion matrix, F1 proof, AUROC, AUPRC, ECE/MCE/Brier, cross-entropy, weighted CE, focal loss |
 | 16 | [[notes/proactive-assistant/16-deep-dive-model-lora-quantization\|Deep dive: model, LoRA, quantization]] | Attention, layer-$k$ head, prefill vs decoding, LoRA parameter count, NF4, why 4-bit saves memory not time |
 | 17 | [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics\|Deep dive: generation metrics and statistics]] | EM, BERTScore, ROUGE, McNemar, Holm, bootstrap, noise floor, Pearson, kappa, non-inferiority |
+| 18 | [[notes/proactive-assistant/18-deep-dive-optimization\|Deep dive: optimization]] | Gradient flow through the shared trunk, Adam and AdamW, OneCycle, accumulation, mixed precision, clipping, LoRA's zero start |
 
-**Interview preparation (pages 12–17).** These pages re-derive every formula, with five parts per concept: meaning, formula, worked example, why it matters here, and a likely interview question with a model answer. Numbers are from the paper unless marked *background*, *derived* or *toy*.
+**Interview preparation (pages 12–18).** These pages re-derive every formula, with five parts per concept: meaning, formula, worked example, why it matters here, and a likely interview question with a model answer. Numbers are from the paper unless marked *background*, *derived* or *toy*.
+
+## Concept map: where each idea is explained
+
+| Idea | First explained | Derived in the deep dive |
+|---|---|---|
+| Gate $g_i(t)$, threshold | [[notes/proactive-assistant/1-the-task-and-the-gate\|1]] | [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end\|13]] |
+| End-to-end EM and precision, ceiling | [[notes/proactive-assistant/6-evaluation-metrics\|6]], [[notes/proactive-assistant/7-experiments-and-findings\|7]] | [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end\|13]] |
+| Cost model, early exit | [[notes/proactive-assistant/5-early-exit-and-unified-decoder\|5]] | [[notes/proactive-assistant/14-deep-dive-cost-model\|14]], [[notes/proactive-assistant/16-deep-dive-model-lora-quantization\|16]] |
+| Precision, recall, F1, AUROC, AUPRC, calibration | [[notes/proactive-assistant/6-evaluation-metrics\|6]] | [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses\|15]] |
+| Cross-entropy, focal loss, weights | [[notes/proactive-assistant/4-training\|4]] | [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses\|15]] |
+| Transformer, attention, prefill/decode | [[notes/proactive-assistant/2-language-model-basics\|2]] | [[notes/proactive-assistant/16-deep-dive-model-lora-quantization\|16]] |
+| LoRA, 4-bit quantization | [[notes/proactive-assistant/4-training\|4]] | [[notes/proactive-assistant/16-deep-dive-model-lora-quantization\|16]], [[notes/proactive-assistant/18-deep-dive-optimization\|18]] |
+| Optimizer, schedule, clipping | not in 0–11 | [[notes/proactive-assistant/18-deep-dive-optimization\|18]] |
+| EM, BERTScore, ROUGE | [[notes/proactive-assistant/6-evaluation-metrics\|6]] | [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics\|17]] |
+| McNemar, Holm, bootstrap, noise floor | [[notes/proactive-assistant/8-statistics\|8]] | [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics\|17]] |
+| Human study, kappa, non-inferiority | [[notes/proactive-assistant/9-human-evaluation\|9]] | [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics\|17]] |
+| Deployment: calibration, CPU, memory | [[notes/proactive-assistant/10-deployment-and-limits\|10]] | [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end\|13]], [[notes/proactive-assistant/14-deep-dive-cost-model\|14]], [[notes/proactive-assistant/16-deep-dive-model-lora-quantization\|16]] |
 
 ## The paper in five lines
 

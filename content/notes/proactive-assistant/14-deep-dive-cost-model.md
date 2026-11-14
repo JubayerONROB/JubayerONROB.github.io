@@ -9,6 +9,8 @@ tags:
 
 `math` `interview` · Part of the [[notes/proactive-assistant/index|Proactive Assistant study guide]]
 
+**Builds on:** [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]; [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]; [[notes/proactive-assistant/3-memory-and-prompt|3. Memory profile and prompt]]. **Previous:** [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]].
+
 This page derives Equation (4), the ideal $L/k$ saving, the expected cost at the real trigger rate, and why the measured numbers differ from the ideal. Basic symbols: [[notes/proactive-assistant/12-math-foundations|page 12]].
 
 ## 14.1 What is being counted
