@@ -100,4 +100,12 @@ The special part of our work is **where** the head is attached. A normal classif
 - What does $h_k$ mean?
 - Why is the cost in our paper measured in "full passes" and not in seconds only?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/12-math-foundations|12. Math foundations]]: softmax and sigmoid from scratch.
+- [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]]: attention with numbers, the layer-$k$ head, prefill vs decoding, early exit.
+
 Next: [[notes/proactive-assistant/3-memory-and-prompt|3. Memory profile and prompt]]

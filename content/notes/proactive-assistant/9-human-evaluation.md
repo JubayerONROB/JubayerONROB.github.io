@@ -81,4 +81,11 @@ Rating open-ended text with a strong model, without a reference, is standard (Zh
 - What does "non-inferiority not shown" mean?
 - Which automatic score is the best match to people, and which is the worst?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|17. Generation metrics and statistics]]: Pearson, kappa, Krippendorff and non-inferiority with the paper's numbers.
+
 Next: [[notes/proactive-assistant/10-deployment-and-limits|10. Deployment and limits]]

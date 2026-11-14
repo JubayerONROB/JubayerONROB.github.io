@@ -199,3 +199,49 @@ tags:
 **Wearer.** The person who uses the assistant and owns the memory profile.
 
 **Zero-shot / few-shot.** Doing a task with no examples, or with a few examples in the prompt.
+
+
+Continue with the interview deep dive: [[notes/proactive-assistant/12-math-foundations|12. Math foundations]].
+
+## Added in the deep-dive pages
+
+**Amdahl-style saving.** $S = 1/(r+\pi)$ with $r$ the gate-to-generator cost ratio and $\pi$ the fire rate ([[notes/proactive-assistant/14-deep-dive-cost-model|page 14]]).
+
+**Bonferroni / Holm.** Corrections for many tests; Holm is uniformly more powerful ([[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|page 17]]).
+
+**Causal mask.** Hides later tokens so each token reads only earlier ones.
+
+**Cluster (dialogue) bootstrap.** Resampling whole dialogues to get honest intervals.
+
+**Cohen's kappa.** Agreement beyond chance between two raters.
+
+**Design effect.** Variance inflation $1+(m-1)\rho$ from correlated items in a cluster.
+
+**Double quantization.** Quantizing the quantization scales too.
+
+**Family-wise error rate.** The chance of at least one false positive among many tests.
+
+**Harmonic mean.** The mean of reciprocals; pulled toward the smaller value (F1).
+
+**Logit.** The raw score before softmax or sigmoid.
+
+**Maximum likelihood.** Choosing parameters that make the observed labels most probable; same as minimizing cross-entropy.
+
+**Mann–Whitney identity.** AUROC equals the probability that a positive outranks a negative.
+
+**NF4.** NormalFloat 4-bit: a 16-value codebook at normal quantiles.
+
+**Non-inferiority.** Showing a system is not worse than another by more than a margin.
+
+**Prevalence.** The share of positives (trigger rate 11.96%).
+
+**Quantile.** The value below which a given share of data falls; a threshold for a false-alarm budget is a quantile of the negative scores.
+
+**Rank (LoRA).** The inner size $r$ of the two thin matrices $B$ and $A$.
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/12-math-foundations|12. Math foundations]]: the math foundations.
+- [[notes/proactive-assistant/18-deep-dive-optimization|18. Optimization]]: the optimization terms.

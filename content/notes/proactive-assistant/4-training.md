@@ -105,4 +105,13 @@ The unified model trained for **2 epochs (53,772 steps)** over marker-level rows
 - If the model says "hint needed" with probability 0.2 and the truth is "hint needed", what is the cross-entropy?  (*Answer: $-\ln 0.2 \approx 1.61$.*)
 - Why do we use class weights?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/15-deep-dive-metrics-calibration-losses|15. Metrics, calibration, losses]]: cross-entropy, weighted CE and focal loss with derivations.
+- [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]]: LoRA parameter count and NF4 quantization.
+- [[notes/proactive-assistant/18-deep-dive-optimization|18. Optimization]]: AdamW, the schedule, mixed precision and clipping.
+
 Next: [[notes/proactive-assistant/5-early-exit-and-unified-decoder|5. Early exit and the unified decoder]]

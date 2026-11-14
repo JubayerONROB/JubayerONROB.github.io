@@ -105,4 +105,11 @@ A **pre-registered** study writes the analysis plan, with a time stamp and hash,
 - A CI for a difference is $[-0.02, +0.30]$. What do you conclude?  (*Answer: no clear difference; it includes zero.*)
 - Why do many tests need Holm?
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/17-deep-dive-generation-metrics-and-statistics|17. Generation metrics and statistics]]: every statistical tool with a worked example and a proof where one exists.
+
 Next: [[notes/proactive-assistant/9-human-evaluation|9. Human evaluation]]

@@ -81,4 +81,13 @@ The unified model needs one base and one adapter. A probe with one 4-bit 1B base
 - What does "same forward pass" mean, and why does it save work?
 - At $k = 10$, what is the ideal saving?  (*Answer: $16/10 = 1.60\times$.*)
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/14-deep-dive-cost-model|14. The cost model]]: Equation (4), the ideal $L/k$ saving and the measured numbers.
+- [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]]: the layer-$k$ head and early exit.
+- [[notes/proactive-assistant/18-deep-dive-optimization|18. Optimization]]: which layers receive which gradient.
+
 Next: [[notes/proactive-assistant/6-evaluation-metrics|6. Evaluation metrics]]

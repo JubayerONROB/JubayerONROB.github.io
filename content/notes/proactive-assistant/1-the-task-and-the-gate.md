@@ -88,4 +88,12 @@ A hint is useful only at a moment that needs one. And a moment deserves an inter
 
 *Answers: stay quiet; false alarms go down, misses go up; because it interrupts everyone in the conversation, not only the user.*
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/12-math-foundations|12. Math foundations]]: sum, set, indicator, probability, Bayes' rule.
+- [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]]: Equation (1), the threshold sweep and why $t$ is recalibrated per model.
+
 Next: [[notes/proactive-assistant/2-language-model-basics|2. Language model basics]]

@@ -82,4 +82,13 @@ We timed both final checkpoints on a **4-core cloud CPU**, batch size one, in ON
 
 We release the construction and validation code and every artifact the paper's numbers come from: the canonical marker index, per-marker gate predictions, generation outputs, all judge prompts and raw judgments, scripts, and run manifests. The derived corpus is not redistributed because its three upstream sources have different licences. The pipeline rebuilds it from those sources.
 
+
+## Go deeper (interview deep dive)
+
+For the derivations behind this page:
+
+- [[notes/proactive-assistant/13-deep-dive-gate-and-end-to-end|13. Gate and end-to-end score]]: per-model threshold recalibration.
+- [[notes/proactive-assistant/14-deep-dive-cost-model|14. The cost model]]: measured vs ideal speed-up.
+- [[notes/proactive-assistant/16-deep-dive-model-lora-quantization|16. Model, LoRA, quantization]]: why 4-bit saves memory but not CPU time.
+
 Next: [[notes/proactive-assistant/11-glossary|11. Glossary]]
